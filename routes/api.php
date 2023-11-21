@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Users\Auth\UserLoginController;
+use App\Http\Controllers\Api\Users\Auth\UserRegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Api'], function () {
 
-    Route::get('sssss',[UserLoginController::class,'test']);
-
+    Route::post('register',[UserRegisterController::class,'register']);
     Route::post('login', [UserLoginController::class, 'login']);
    
 
