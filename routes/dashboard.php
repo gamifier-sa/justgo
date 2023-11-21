@@ -62,19 +62,9 @@ Route::group(
                     Route::get('role/{id}/admins', 'admins');
                 });
 
-                Route::controller(CompanyController::class)->prefix('companies')->name('companies.')->group(function () {
-                    Route::get('/', 'index')->name('index');
-                    Route::get('/create', 'create')->name('create');
-                    Route::post('/store', 'store')->name('store');
-                    Route::get('/{id}/edit', 'edit')->name('edit');
-                    Route::put('/{id}/update', 'update')->name('update');
-                    Route::delete('/{id}/', 'destroy')->name('delete');
-                });
+          
 
-                Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
-                    Route::get('/', 'index')->name('index');
-                    Route::put('/update', 'update')->name('update');
-                });
+   
 
 
 
