@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements  JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,14 +20,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'first_name',
-        'last_name',
-        'image',
+        'name',
+        'profile_image',
         'email',
-        'password',
         'phone',
-        'point',
-        'active'
+        'whatsapp_number',
+        'gender',
+        'status',
+        'password'
+
     ];
 
     /**
@@ -48,38 +50,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function activity_user()
+    public function getJWTIdentifier()
     {
-        return $this->belongsToMany(Activity::class, 'activity_user');
+        return $this->getKey();
     }
 
-    public function assignCategory($category)
+    public function getJWTCustomClaims()
     {
-        return $this->categories()->save($category);
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class,'category_user');
-    }
-
-    public function orders(){
-        return $this->hasMany(Order::class);
-    }
-
-    public function regionsOrdersArray(){
-        return $this->orders()->pluck('region_id')->toArray();
-    }
-
-    public function favoritRegions(){
-        return $this->hasMany(FavoritRegion::class);
-    }
-
-    public function favoritRegionsIdsArray(){
-        return $this->favoritRegions()->pluck('region_id')->toArray();
-    }
-
-    public function awards(){
-        return $this->belongsToMany(Award::class);
+        return [];
     }
 }

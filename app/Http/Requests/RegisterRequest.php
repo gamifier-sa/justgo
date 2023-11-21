@@ -24,10 +24,12 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => ['required', 'string', 'max:50', 'min:5'],
-            'logo' => ['nullable', 'mimes:jpeg,png,jpg,gif' . 'svg|max:4096'],
-            'email'    => ['required', 'string', 'max:125', 'min:9', "email:rfc,dns", 'unique:companies'],
-            'phone'    => ['required', 'unique:companies'],
+            'name'     => ['required', 'string', 'max:50', 'min:3'],
+            'profile_image' => ['sometimes','nullable', 'mimes:jpeg,png,jpg,gif' . 'svg|max:4096'],
+            'email'    => ['required', 'string', 'max:125', 'min:9', "email:rfc,dns", 'unique:users'],
+            'phone'    => ['required', 'numeric','unique:users'],
+            'whatsapp_number'    => ['sometimes','nullable','numeric', 'unique:users'],
+            'gender'=>['required','in:male,female'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
         ];
     }
