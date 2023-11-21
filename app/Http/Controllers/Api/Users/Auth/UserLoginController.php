@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Users\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,9 @@ class UserLoginController extends Controller
     {
         $request->validate([
             'phone' => 'required|numeric',
-            'password' => 'required|min:6|max:60'
+            'password' => 'required|min:6|max:60',
+            'device_token'=>'sometimes|nullable'
+
 
         ]);
        $data = $this->getDataForLogin($request);
@@ -23,6 +26,8 @@ class UserLoginController extends Controller
         if ($token = auth('api')->attempt(array_merge($data, ['status' => 'active']))) {
 
             $user = Auth::guard('api')->user();
+            $user->update(['device_token' => $request->device_token]);
+
             return response()->success([
                 'token' => $token,
                 'user' =>  new  UserResource($user)
@@ -32,9 +37,7 @@ class UserLoginController extends Controller
 
          }elseif($token = auth('api')->attempt(array_merge($data, ['status' => 'inactive']))){
             $user = Auth::guard('api')->user();
-            $usersend=User::where(["phone"=>$request->phone])->first();
-            // $usersend->send_reset_code();
-
+    
             return response()->success([
                 'user' =>  new  UserResource($user)
 

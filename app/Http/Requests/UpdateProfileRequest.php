@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
@@ -22,14 +24,14 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules(): array
     {
+       $id = Auth::guard('api')->user()->id;
         return [
-            'name' => ['required', 'string', 'max:50', 'min:5'],
-            'email' => 'required|email',
-            'phone' => 'required|numeric|digits:11',
-            'status' => ['nullable', 'in:active,notactive'],
-            'profile_image' => ['nullable', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
-            'department' => ['required', 'string', 'max:50', 'min:5'],
-            'position' => ['required', 'string', 'max:50', 'min:5'],
+            'name' => ['required', 'string', 'max:50', 'min:3'],
+            'profile_image' => ['sometimes', 'nullable', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+            'email' => 'required|email|unique:users,email,' . $id,
+            'phone' => 'required|numeric|unique:users,phone,' .  $id,
+            'whatsapp_number' => ['sometimes', 'nullable', 'numeric', 'unique:users,whatsapp_number,'.  $id],
+            'gender' => ['required', 'in:male,female'],
         ];
     }
 }
