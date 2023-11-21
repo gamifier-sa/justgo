@@ -1,38 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\Api\Employees\Auth;
+namespace App\Http\Controllers\Api\users\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\userRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Http\Resources\EmployeeResource;
+use App\Http\Resources\userResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class EmployeeProfileController extends Controller
+class UserProfileController extends Controller
 {
     public function myprofile()
     {
-        $employee = Auth::guard('employee')->user();
+        $user = Auth::guard('api')->user();
         return response()->success([
-            'employee' =>  new  EmployeeResource($employee)
+            'user' =>  new  UserResource($user)
         ]);
     }
 
     public function updateProfile(UpdateProfileRequest $request)
     {
-        $employee = Auth::guard('employee')->user();
-
+        $user = Auth::guard('api')->user();
         $data = $request->validated();
 
         if (isset($request['profile_image'])) {
-            $data['profile_image'] = storeImage('Employees', $data['profile_image']) ?? $employee->profile_image;
-            deleteImage('Employees', $employee['profile_image']);
+            $data['profile_image'] = storeImage('Users', $data['profile_image']) ?? $user->profile_image;
+            deleteImage('Users', $user['profile_image']);
         }
-        $employee->update($data);
+        $user->update($data);
 
         return response()->success([
-            'employee' => new EmployeeResource($employee)
+            'user' => new userResource($user)
         ]);
     }
 

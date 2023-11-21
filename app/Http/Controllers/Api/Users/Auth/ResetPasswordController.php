@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api\Employees\Auth;
+namespace App\Http\Controllers\Api\Users\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
@@ -14,18 +13,19 @@ class ResetPasswordController extends Controller
 
 
 
-    public function resetEmployeePassword(Request $request)
+    public function resetUserPassword(Request $request)
     {
 
         $request->validate($this->rules());
-        $employee = Employee::where('phone', $request->email)
-        ->orWhere('email', $request->email)
+        $user = User::where('phone', $request->phone)
+        ->orWhere('email', $request->phone)
         ->first();
-        if ($employee) {
-
-            $employee->password = bcrypt($request->password);
-            $employee->save();
-            return $this->sendResetResponse();
+        if ($user) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return response()->success([
+                'message' => __('admin.your_password_had_been_reset')
+            ]);
         }
     }
 
@@ -43,7 +43,7 @@ class ResetPasswordController extends Controller
     protected function rules()
     {
         return [
-            'email' => 'required|min:4|max:120',
+            'phone' => 'required',
             'password' => 'required|confirmed|min:6|max:60',
         ];
     }
