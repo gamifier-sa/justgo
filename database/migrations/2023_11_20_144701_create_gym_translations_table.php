@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('gym_translations', function (Blueprint $table) {
             $table->id();
+            $table->biginteger('gym_id', false, true);
+            $table->string('locale')->index();
+            $table->string('name');
+            $table->text('description');
+            $table->unique(['gym_id','locale']);
+            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('cascade');
             $table->timestamps();
         });
     }

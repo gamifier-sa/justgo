@@ -12,9 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gym_images', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
             $table->id();
-            $table->string('image');
+            $table->string('address')->nullable();
+            $table->decimal('lat', 8, 6)->nullable();
+            $table->decimal('lng', 9, 6)->nullable();
             $table->foreignIdFor(Gym::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gym_images');
+        Schema::dropIfExists('branches');
     }
 };

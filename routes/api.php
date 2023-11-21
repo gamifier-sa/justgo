@@ -1,14 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\Employees\Auth\EmployeeProfileController;
-use App\Http\Controllers\Api\Employees\Auth\EmployeeLoginController;
-use App\Http\Controllers\Api\Employees\Auth\ForgotPasswordController;
-use App\Http\Controllers\Api\Employees\Auth\ResetPasswordController;
-use App\Http\Controllers\Api\Employees\EmployeeJoinController;
-use App\Http\Controllers\Api\Employees\NotificationController;
-use App\Http\Controllers\Api\EventController;
-use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\Users\Auth\UserLoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Api'], function () {
 
+    Route::get('sssss',[UserLoginController::class,'test']);
 
-    Route::post('login', [EmployeeLoginController::class, 'login']);
-    Route::post('forgotpassword', [ForgotPasswordController::class, 'forgotpassword']);
-    Route::post('password/reset', [ResetPasswordController::class, 'resetEmployeePassword']);
+    Route::post('login', [UserLoginController::class, 'login']);
+   
 
 
     Route::group(['middleware' => 'auth:api'], function () {
