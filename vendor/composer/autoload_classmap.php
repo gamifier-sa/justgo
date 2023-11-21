@@ -9,6 +9,7 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Api\\CategoryController' => $baseDir . '/app/Http/Controllers/Api/CategoryController.php',
+
     'App\\Http\\Controllers\\Api\\EventController' => $baseDir . '/app/Http/Controllers/Api/EventController.php',
     'App\\Http\\Controllers\\Api\\HomeController' => $baseDir . '/app/Http/Controllers/Api/HomeController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
@@ -42,10 +43,7 @@ return array(
     'App\\Http\\Requests\\UpdateProfileRequest' => $baseDir . '/app/Http/Requests/UpdateProfileRequest.php',
     'App\\Http\\Requests\\UserRequest' => $baseDir . '/app/Http/Requests/UserRequest.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
-    'App\\Models\\Branch' => $baseDir . '/app/Models/Branch.php',
-    'App\\Models\\Gym' => $baseDir . '/app/Models/Gym.php',
-    'App\\Models\\GymImage' => $baseDir . '/app/Models/GymImage.php',
-    'App\\Models\\GymTime' => $baseDir . '/app/Models/GymTime.php',
+
     'App\\Models\\GymTranslation' => $baseDir . '/app/Models/GymTranslation.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
@@ -197,11 +195,7 @@ return array(
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
     'Database\\Seeders\\AdminSeeder' => $baseDir . '/database/seeders/AdminSeeder.php',
-    'Database\\Seeders\\BranchSeeder' => $baseDir . '/database/seeders/BranchSeeder.php',
-    'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
-    'Database\\Seeders\\GymImageSeeder' => $baseDir . '/database/seeders/GymImageSeeder.php',
-    'Database\\Seeders\\GymSeeder' => $baseDir . '/database/seeders/GymSeeder.php',
-    'Database\\Seeders\\GymTimeSeeder' => $baseDir . '/database/seeders/GymTimeSeeder.php',
+
     'Database\\Seeders\\PermissionSeeder' => $baseDir . '/database/seeders/PermissionSeeder.php',
     'Database\\Seeders\\RoleSeeder' => $baseDir . '/database/seeders/RoleSeeder.php',
     'Database\\Seeders\\UserSeeder' => $baseDir . '/database/seeders/UserSeeder.php',

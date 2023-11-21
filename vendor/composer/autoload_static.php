@@ -541,6 +541,7 @@ class ComposerStaticInit554b009d5f11b3ff8ecf3da36ce2cd5a
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Api\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CategoryController.php',
+
         'App\\Http\\Controllers\\Api\\EventController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/EventController.php',
         'App\\Http\\Controllers\\Api\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/HomeController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -574,10 +575,7 @@ class ComposerStaticInit554b009d5f11b3ff8ecf3da36ce2cd5a
         'App\\Http\\Requests\\UpdateProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateProfileRequest.php',
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
-        'App\\Models\\Branch' => __DIR__ . '/../..' . '/app/Models/Branch.php',
-        'App\\Models\\Gym' => __DIR__ . '/../..' . '/app/Models/Gym.php',
-        'App\\Models\\GymImage' => __DIR__ . '/../..' . '/app/Models/GymImage.php',
-        'App\\Models\\GymTime' => __DIR__ . '/../..' . '/app/Models/GymTime.php',
+
         'App\\Models\\GymTranslation' => __DIR__ . '/../..' . '/app/Models/GymTranslation.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
@@ -729,11 +727,7 @@ class ComposerStaticInit554b009d5f11b3ff8ecf3da36ce2cd5a
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\AdminSeeder' => __DIR__ . '/../..' . '/database/seeders/AdminSeeder.php',
-        'Database\\Seeders\\BranchSeeder' => __DIR__ . '/../..' . '/database/seeders/BranchSeeder.php',
-        'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
-        'Database\\Seeders\\GymImageSeeder' => __DIR__ . '/../..' . '/database/seeders/GymImageSeeder.php',
-        'Database\\Seeders\\GymSeeder' => __DIR__ . '/../..' . '/database/seeders/GymSeeder.php',
-        'Database\\Seeders\\GymTimeSeeder' => __DIR__ . '/../..' . '/database/seeders/GymTimeSeeder.php',
+
         'Database\\Seeders\\PermissionSeeder' => __DIR__ . '/../..' . '/database/seeders/PermissionSeeder.php',
         'Database\\Seeders\\RoleSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleSeeder.php',
         'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
