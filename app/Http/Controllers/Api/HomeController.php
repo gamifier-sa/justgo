@@ -7,6 +7,9 @@ use App\Http\Resources\AboutUsResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\FooterResource;
+use App\Http\Resources\GiftUserResource;
+use App\Http\Resources\GymResource;
+use App\Http\Resources\PackageResource;
 use App\Http\Resources\PackagesResource;
 use App\Http\Resources\SignUpResource;
 use App\Http\Resources\SliderResource;
@@ -16,6 +19,8 @@ use App\Models\AboutUs;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\Footer;
+use App\Models\GiftUser;
+use App\Models\Gym;
 use App\Models\Package;
 use App\Models\SignUp;
 use App\Models\Slider;
@@ -26,11 +31,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $events = Event::where('company_id', '=', auth()->guard('employee')->user()->company_id)->with('employee')->orderBy('id', 'DESC')->limit(5)->get();
-        $categories = Category::where('company_id', '=', auth()->guard('employee')->user()->company_id)->orderBy('id', 'DESC')->limit(4)->get();
+        $gifts =GiftUser::orderBy('id', 'DESC')->limit(3)->get();
+        $packages =Package::orderBy('id', 'DESC')->limit(3)->get();
+        $gyms = Gym::with('packages')->orderBy('id', 'DESC')->limit(5)->get();
+
         return response()->success([
-            'events' =>  EventResource::collection($events),
-            'categories' =>  CategoryResource::collection($categories),
+            'gifts' =>  GiftUserResource::collection($gifts),
+            'packages' =>  PackageResource::collection($packages),
+            'gyms' =>  GymResource::collection($gyms),
+
         ]);
     }
 }

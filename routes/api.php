@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\Users\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Users\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Users\Auth\UserLoginController;
@@ -28,7 +28,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::post('forgotpassword',[ForgotPasswordController::class,'forgotpassword']);
     Route::post('password/reset', [ResetPasswordController::class,'resetUserPassword']);
-
+    Route::get('home',[HomeController::class,'index']);
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('myprofile',[UserProfileController::class,'myprofile']);
         Route::post('updateProfile',[UserProfileController::class,'updateProfile']);

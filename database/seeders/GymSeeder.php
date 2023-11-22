@@ -28,7 +28,7 @@ class GymSeeder extends Seeder
                 'address' => 'Riyadh',
                 'lat' => '21.492500',
                 'lng' => '39.177570',
-                'logo' => 'logo1.jpg',
+                'cover_image' => 'logo1.jpg',
                 'subscription_rate' => 10,
                 'expected_number_customers' => 1500,
             ], [
@@ -44,7 +44,7 @@ class GymSeeder extends Seeder
                 'address' => 'Riyadh',
                 'lat' => '21.492500',
                 'lng' => '39.177570',
-                'logo' => 'logo2.jpg',
+                'cover_image' => 'logo2.jpg',
                 'subscription_rate' => 20,
                 'expected_number_customers' => 2500,
             ], [
@@ -60,7 +60,7 @@ class GymSeeder extends Seeder
                 'address' => 'Riyadh',
                 'lat' => '21.492500',
                 'lng' => '39.177570',
-                'logo' => 'logo3.jpg',
+                'cover_image' => 'logo3.jpg',
                 'subscription_rate' => 30,
                 'expected_number_customers' => 2900,
             ]

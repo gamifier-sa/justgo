@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
             GymSeeder::class,
             BranchSeeder::class,
             GymTimeSeeder::class,
-            GymImageSeeder::class
+            GymImageSeeder::class,
+            GiftUserSeeder::class,
+            PackageGymSeeder::class
 
 
         ]);

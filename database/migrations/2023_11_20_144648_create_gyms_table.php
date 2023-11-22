@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->decimal('lat', 8, 6)->nullable();
             $table->decimal('lng', 9, 6)->nullable();
-            $table->string('logo')->nullable();
+            $table->string('cover_image')->nullable();
             $table->integer('subscription_rate')->default(0);
             $table->integer('expected_number_customers')->default(0);
             $table->timestamps();
