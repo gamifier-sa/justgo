@@ -7,10 +7,11 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserRegisterController extends Controller
 {
-    public function register(RegisterRequest $request) 
+    public function register(RegisterRequest $request)
     {
         $data = $request->validated();
         $data['status']= 'active';
@@ -20,11 +21,11 @@ class UserRegisterController extends Controller
             $data['profile_image']  = storeImage('Users', $data['profile_image']);
         }
         $user=User::create($data);
-        $tokenResult = $user->createToken($user);
-        $token = $tokenResult->plainTextToken;
+        $token = JWTAuth::fromUser($user);
+
         return response()->success([
+            'token'=>$token,
             'user' =>  new  UserResource($user),
-            'accessToken'=> $token,
         ]);
 
     }

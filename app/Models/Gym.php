@@ -21,4 +21,45 @@ class Gym extends Model implements TranslatableContract
     {
         return $this->hasMany(PackageGym::class);
     }
+    public function images()
+    {
+        return $this->hasMany(GymImage::class);
+    }
+    public function times()
+    {
+        return $this->hasMany(GymTime::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'gym_id', 'id');
+    }
+    public function getUserRateAttribute()
+    {
+        return $this->reviews->where('user_id', auth('api')->user()->id)->first();
+    }
+    public function getAvgReviewsAttribute()
+    {
+        return (int) $this->reviews()->selectRaw('AVG(rating) review')->first()->review ?? 0;
+    }
+
+    public function Favourites()
+    {
+        return $this->belongsToMany(FavouriteGym::class);
+    }
+    public function getisUserFavouritesAttribute()
+    {
+        $isFavorite = false;
+
+        if (auth('api')->user()) {
+            $favouritbles =  FavouriteGym::where([
+                ['user_id', '=', auth('api')->user()->id],
+                ['gym_id', '=', $this->id]
+            ])->get();
+            if (count($favouritbles) > 0) {
+                $isFavorite =  true;
+            }
+            return $isFavorite;
+        }
+    }
 }
