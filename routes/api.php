@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\GymController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\Users\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Users\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Users\Auth\UserLoginController;
@@ -46,7 +47,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('updateProfile',[UserProfileController::class,'updateProfile']);
         Route::post('review/store',[ReviewController::class,'store']);
         Route::post('Addfavourit',[FavouriteGymController::class,'Addfavourit']);
-
+        Route::post('subscription/store',[SubscriptionController::class,'store']);
 
 
     });

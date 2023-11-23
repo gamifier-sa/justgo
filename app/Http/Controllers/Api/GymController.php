@@ -19,10 +19,10 @@ class GymController extends Controller
         $query = Gym::with('packages');
         // dd($latitude , $longitude);
 
-if ($latitude && $longitude) {
-    $query->whereRaw("6371 * acos(cos(radians($latitude)) * cos(radians(gyms.lat)) * cos(radians(gyms.lng) - radians($longitude)) + sin(radians($latitude)) * sin(radians(gyms.lat))) < 5")
-        ->get();
-}
+        if ($latitude && $longitude) {
+            $query->whereRaw("6371 * acos(cos(radians($latitude)) * cos(radians(gyms.lat)) * cos(radians(gyms.lng) - radians($longitude)) + sin(radians($latitude)) * sin(radians(gyms.lat))) < 5")
+                ->get();
+        }
 
         $gyms = $query->orderBy('id', 'DESC')->paginate();
         // $gyms = Gym::with('packages')->orderBy('id', 'DESC')->paginate();
@@ -44,10 +44,23 @@ if ($latitude && $longitude) {
     public function gymbypackage(Request $request)
     {
         $packageId = $request->package_id;
-        $gyms = Gym::with('packages')
-            ->whereHas('packages', function ($query) use ($packageId) {
-                $query->where('package_id', $packageId);
-            })
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+
+        $query = Gym::with('packages');
+
+
+        if ($latitude && $longitude) {
+
+            $query->whereRaw("6371 * acos(cos(radians($latitude)) * cos(radians(gyms.lat)) * cos(radians(gyms.lng) - radians($longitude)) + sin(radians($latitude)) * sin(radians(gyms.lat))) < 5")
+                ->get();
+        }
+
+
+
+        $gyms = $query->whereHas('packages', function ($query) use ($packageId) {
+            $query->where('package_id', $packageId);
+        })
             ->orderBy('id', 'DESC')
             ->paginate();
         return response()->success([

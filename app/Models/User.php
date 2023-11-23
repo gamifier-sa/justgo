@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements  JWTSubject
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -58,5 +58,10 @@ class User extends Authenticatable implements  JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class,'id');
     }
 }
