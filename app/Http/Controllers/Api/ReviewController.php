@@ -19,8 +19,9 @@ class ReviewController extends Controller
             ['user_id', '=', auth('api')->user()->id],
             ['gym_id', '=', $request->gym_id],
         ])->first();
+
         if (!$Review) {
-             Review::create($data);
+            $Review = Review::create($data);
         }
 
         return response()->success([
