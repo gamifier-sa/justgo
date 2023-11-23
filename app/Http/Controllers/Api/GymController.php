@@ -22,8 +22,7 @@ class GymController extends Controller
     public function show(Request $request)
     {
 
-        $gym = Gym::with('packages', 'times', 'images')->findOrFail($request->id);
-
+        $gym = Gym::with('packagesGym', 'times', 'images')->findOrFail($request->id);
         return response()->success([
             'gym' => new GymDetailsResource($gym),
 

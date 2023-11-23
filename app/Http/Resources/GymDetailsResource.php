@@ -21,7 +21,7 @@ class GymDetailsResource extends JsonResource
             'lat'=>$this->lat,
             'lng'=>$this->lng,
             'images'=>GymImageResource::collection($this->images),
-            'packages'=> PackageGymResource::collection($this->packages),
+            'packages'=> PackageGymResource::collection($this->packagesGym),
             'description'=>$this->description,
             'Worktime'=> GymTimeResource::collection($this->times),
             'Reviews'=>ReviewResource::collection($this->reviews),

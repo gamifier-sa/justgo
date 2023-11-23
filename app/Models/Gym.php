@@ -21,6 +21,13 @@ class Gym extends Model implements TranslatableContract
     {
         return $this->hasMany(PackageGym::class);
     }
+
+    public function packagesGym()
+    {
+        return $this->belongsToMany(Package::class, 'package_gyms', 'gym_id', 'package_id')
+            ->as('pivot');
+    }
+
     public function images()
     {
         return $this->hasMany(GymImage::class);
