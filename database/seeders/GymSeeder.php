@@ -29,6 +29,8 @@ class GymSeeder extends Seeder
                 'lat' => '21.492500',
                 'lng' => '39.177570',
                 'cover_image' => 'logo1.jpg',
+                'logo' => 'logo1.jpg',
+
                 'subscription_rate' => 10,
                 'expected_number_customers' => 1500,
             ], [
@@ -45,6 +47,8 @@ class GymSeeder extends Seeder
                 'lat' => '21.492500',
                 'lng' => '39.177570',
                 'cover_image' => 'logo2.jpg',
+                'logo' => 'logo2.jpg',
+
                 'subscription_rate' => 20,
                 'expected_number_customers' => 2500,
             ], [
@@ -61,6 +65,7 @@ class GymSeeder extends Seeder
                 'lat' => '21.492500',
                 'lng' => '39.177570',
                 'cover_image' => 'logo3.jpg',
+                'logo' => 'logo3.jpg',
                 'subscription_rate' => 30,
                 'expected_number_customers' => 2900,
             ]

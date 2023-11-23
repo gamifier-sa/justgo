@@ -18,6 +18,8 @@ class GymResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'cover_image'=>getImage('Gyms',$this->cover_image),
+            'logo'=>getImage('Gyms',$this->logo),
+
             'lat'=>$this->lat,
             'lng'=>$this->lng,
             'numbers_package'=> $this->packages->count() == 1 ? $this->packages->first()->package->name :  $this->packages->count(),
