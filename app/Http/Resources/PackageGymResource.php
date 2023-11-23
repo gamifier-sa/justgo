@@ -17,6 +17,7 @@ class PackageGymResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
+            'bg_color'=>$this->bg_color,
         ];
     }
 }
