@@ -20,12 +20,15 @@ class GymDetailsResource extends JsonResource
             'address'=>$this->address,
             'lat'=>$this->lat,
             'lng'=>$this->lng,
+            'cover_image'=>getImage('Gyms',$this->cover_image),
             'images'=>GymImageResource::collection($this->images),
             'packages'=> PackageGymResource::collection($this->packagesGym),
             'description'=>$this->description,
             'Worktime'=> GymTimeResource::collection($this->times),
             'Reviews'=>ReviewResource::collection($this->reviews),
             'UserFavourites'=>$this->isUserFavourites,
+            'numbers_package'=> $this->packages->count() == 1 ? $this->packages->first()->package->name :  $this->packages->count(),
+            'AvgReviews'=>$this->AvgReviews,
 
         ];
     }
