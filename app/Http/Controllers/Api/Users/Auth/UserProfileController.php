@@ -15,7 +15,7 @@ class UserProfileController extends Controller
     {
         $user = Auth::guard('api')->user();
         return response()->success([
-            'user' =>  new  UserResource($user)
+            'user' =>  new  userResource($user)
         ]);
     }
 

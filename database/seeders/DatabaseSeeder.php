@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             PackageSeeder::class,
             // UserSeeder::class,
+            CitySeeder::class,
             GymSeeder::class,
             BranchSeeder::class,
             GymTimeSeeder::class,
             GymImageSeeder::class,
             GiftUserSeeder::class,
-            PackageGymSeeder::class
-
+            PackageGymSeeder::class,
 
         ]);
     }

@@ -3,11 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FavouriteGymResource;
+use App\Http\Resources\GymResource;
 use App\Models\FavouriteGym;
 use Illuminate\Http\Request;
 
 class FavouriteGymController extends Controller
 {
+
+    function myfavorites()
+    {
+        $user_id = auth('api')->user()->id;
+        $Favourites = FavouriteGym::with('gyms')->where('user_id', '=', $user_id)->get();
+
+        // Iterate over each FavouriteGym to access the related gym
+        $gyms = $Favourites->map(function ($favourite) {
+            return $favourite->gyms;
+        })->flatten();
+
+
+        return response()->success([
+            'gyms' => GymResource::collection($gyms),
+        ]);
+
+    }
     public function Addfavourit(Request $request)
     {
         $data = $request->validate([
@@ -37,4 +56,7 @@ class FavouriteGymController extends Controller
             ]);
         }
     }
+
+
+
 }

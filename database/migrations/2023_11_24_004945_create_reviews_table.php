@@ -2,6 +2,7 @@
 
 use App\Models\Gym;
 use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Gym::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->decimal('rating',8, 6);
             $table->text('comment')->nullable();
+            $table->foreignIdFor(Visit::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

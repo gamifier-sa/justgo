@@ -48,7 +48,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('review/store',[ReviewController::class,'store']);
         Route::post('Addfavourit',[FavouriteGymController::class,'Addfavourit']);
         Route::post('subscription/store',[SubscriptionController::class,'store']);
-
+        Route::get('myfavorites',[FavouriteGymController::class,'myfavorites']);
 
     });
 });
