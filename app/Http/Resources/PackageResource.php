@@ -20,7 +20,8 @@ class PackageResource extends JsonResource
             'name'=>$this->name,
             'bg_color'=>$this->bg_color,
             'monthly_price'=>$this->monthly_price,
-            'description'=>$this->description
+            'description'=>$this->description,
+            'number_gyms'=>$this->gyms->count(),
 
         ];
     }

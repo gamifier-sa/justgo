@@ -23,7 +23,7 @@ class GymDetailsResource extends JsonResource
             'cover_image'=>getImage('Gyms',$this->cover_image),
             'logo'=>getImage('Gyms',$this->logo),
             'images'=>GymImageResource::collection($this->images),
-            'packages'=> PackageGymResource::collection($this->packagesGym),
+            'packages'=> PackageResource::collection($this->packagesGym),
             'description'=>$this->description,
             'Worktime'=> GymTimeResource::collection($this->times),
             'Reviews'=>ReviewResource::collection($this->reviews),

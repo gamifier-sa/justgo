@@ -31,25 +31,19 @@ function getImage($model, $imageName)
  * @param $model => Model Name
  */
 
+
  function storeImage($modelName, $image)
  {
      if ($image instanceof \Illuminate\Http\UploadedFile) {
-         // Get the file name and extension.
-         $fileName = $image->getClientOriginalName();
-         $extension = $image->getClientOriginalExtension();
-         $additionalName = uniqid();
          // Generate a unique file name.
-         $fileName = $additionalName . '.' . $fileName;
+         $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
 
          // Create a directory for the model.
-         $modelDirectory = storage_path('app/public/' . $modelName);
-
-         if (!file_exists($modelDirectory)) {
-             mkdir($modelDirectory, 0777, true);
-         }
+         $modelDirectory = 'public/' . $modelName;
 
          // Save the image to the directory.
-         $image->move($modelDirectory, $fileName);
+         Storage::makeDirectory($modelDirectory);
+         $image->storeAs($modelDirectory, $fileName);
 
          // Return the file name.
          return $fileName;
@@ -57,6 +51,8 @@ function getImage($model, $imageName)
 
      return null; // Return null if the image is not an instance of UploadedFile
  }
+
+
 
 function deleteImage($model, $imageName)
 {

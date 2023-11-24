@@ -9,8 +9,13 @@ use Astrotomic\Translatable\Translatable;
 
 class Package extends Model implements TranslatableContract
 {
-    use HasFactory,Translatable;
+    use HasFactory, Translatable;
     protected $guarded = [];
-    public $translatedAttributes = ['name','description'];
+    public $translatedAttributes = ['name', 'description'];
 
+    public function gyms()
+    {
+        return $this->belongsToMany(Package::class, 'package_gyms', 'gym_id', 'package_id')
+            ->as('pivot');
+    }
 }

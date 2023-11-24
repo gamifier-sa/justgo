@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\users\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\userRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Http\Resources\userResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,7 +15,7 @@ class UserProfileController extends Controller
     {
         $user = Auth::guard('api')->user();
         return response()->success([
-            'user' =>  new  userResource($user)
+            'user' =>  new  UserResource($user)
         ]);
     }
 
@@ -24,14 +24,14 @@ class UserProfileController extends Controller
         $user = Auth::guard('api')->user();
         $data = $request->validated();
 
-        if (isset($request['profile_image'])) {
+        if (isset($data['profile_image'])) {
             $data['profile_image'] = storeImage('Users', $data['profile_image']) ?? $user->profile_image;
-            deleteImage('Users', $user['profile_image']);
+            deleteImage('Users', $user->profile_image);
         }
         $user->update($data);
 
         return response()->success([
-            'user' => new userResource($user)
+            'user' => new UserResource($user)
         ]);
     }
 
