@@ -23,7 +23,7 @@ class UserResource extends JsonResource
             'whatsapp_number'=>$this->whatsapp_number,
             'gender'=>$this->gender,
             'status'=>$this->status,
-            'subscription'=>new subscriptionResource($this->subscription)
+            'subscription'=>new SubscriptionResource($this->subscription)
         ];
     }
 }
