@@ -22,204 +22,289 @@ class CitySeeder extends Seeder
                     'name' => 'الرياض',
 
                 ],
+            ], [
                 'en' => [
                     'name' => 'Jeddah',
                 ],
                 'ar' => [
                     'name' => 'جدة',
-
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Makkah',
                 ],
                 'ar' => [
                     'name' => 'مكة المكرمة',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'AL Madinah AL Munawwarah',
                 ],
                 'ar' => [
                     'name' => 'المدينة المنورة',
 
-                ], 'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Dammam',
                 ],
                 'ar' => [
                     'name' => 'الدمام',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Al-Hofuf',
                 ],
                 'ar' => [
                     'name' => 'الهفوف',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Hafar Al-Batin',
                 ],
                 'ar' => [
                     'name' => 'حفر الباطن',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Hilla',
                 ],
                 'ar' => [
                     'name' => 'الحلة',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Taif',
                 ],
                 'ar' => [
                     'name' => 'الطائف',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Tabuk',
                 ],
                 'ar' => [
                     'name' => 'تبوك',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Qatif',
                 ],
                 'ar' => [
                     'name' => 'القطيف',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Buraidah',
                 ],
                 'ar' => [
                     'name' => 'بريدة',
 
-                ], 'en' => [
+                ],
+
+            ], [
+                'en' => [
                     'name' => 'Jubail',
                 ],
                 'ar' => [
                     'name' => 'الجبيل',
 
-                ], 'en' => [
+                ],
+            ], [
+                'en' => [
                     'name' => 'Yashid',
                 ],
                 'ar' => [
                     'name' => 'يشيد',
 
-                ], 'en' => [
+                ],
+
+            ], [
+                'en' => [
                     'name' => 'Al Kharj',
                 ],
                 'ar' => [
                     'name' => 'الخرج',
 
-                ], 'en' => [
+                ],
+
+            ], [
+                'en' => [
                     'name' => 'Qunfudhah',
                 ],
                 'ar' => [
                     'name' => 'القنفذة',
 
-                ], 'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Al Mubarraz',
                 ],
                 'ar' => [
                     'name' => 'المبرز',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Yanbu',
                 ],
                 'ar' => [
                     'name' => 'ينبع',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Sakaka',
                 ],
                 'ar' => [
                     'name' => 'سكاكا',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Abha',
                 ],
                 'ar' => [
                     'name' => 'أبها',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Sabya',
                 ],
                 'ar' => [
                     'name' => 'صبيا',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Al Khobar',
                 ],
                 'ar' => [
                     'name' => 'الخبر',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Bisha Castle',
                 ],
                 'ar' => [
                     'name' => 'قلعة بيشة',
 
-                ],'en' => [
+                ],
+
+            ], [
+
+                'en' => [
                     'name' => 'Unayzah',
                 ],
                 'ar' => [
                     'name' => 'عنيزة',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Ras Tanura',
                 ],
                 'ar' => [
                     'name' => 'رأس تنورة',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Hawiyah',
                 ],
                 'ar' => [
                     'name' => 'الحوية',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Qurayyat',
                 ],
                 'ar' => [
                     'name' => 'القريات',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Al Eras',
                 ],
                 'ar' => [
                     'name' => 'ع الرأس',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Jazan',
                 ],
                 'ar' => [
                     'name' => 'جازان',
 
-                ],'en' => [
+                ],
+
+            ], [
+
+                'en' => [
                     'name' => 'Zulfi',
                 ],
                 'ar' => [
                     'name' => 'الزلفي',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Saihat',
                 ],
                 'ar' => [
                     'name' => 'سيهات',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Haradhar',
                 ],
                 'ar' => [
                     'name' => 'حراض',
 
-                ],'en' => [
+                ],
+            ], [
+
+                'en' => [
                     'name' => 'Al-Ahad Al-Musarrhah',
                 ],
                 'ar' => [
                     'name' => 'الأحد المسارحه',
 
                 ],
+
             ]
         ];
 
-        foreach($cities as $city)
-        {
+        foreach ($cities as $city) {
             City::create($city);
         }
     }
