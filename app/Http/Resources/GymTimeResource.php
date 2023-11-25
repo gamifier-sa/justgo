@@ -27,8 +27,9 @@ class GymTimeResource extends JsonResource
                     $day => $times->groupBy('shift')->map(function ($timeGroup) use($day, $index){
                         return [
                             'shift' => $timeGroup->first()->shift,
-                            'open_at' => $timeGroup->where('type','open')->first()->$day,
-                            'close_at' => $timeGroup->where('type','closed')->first()->$day
+                            'day' => $day,
+                            'open_at' => $timeGroup->where('type','open')->first()? $timeGroup->where('type','open')->first()->$day : '00:00:00',
+                            'close_at' => $timeGroup->where('type','closed')->first() ? $timeGroup->where('type','closed')->first()->$day : '23:59:59'
                         ];
                     })->values()->all(),
                 ];
