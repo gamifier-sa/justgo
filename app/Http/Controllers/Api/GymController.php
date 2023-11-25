@@ -25,7 +25,6 @@ class GymController extends Controller
         }
 
         $gyms = $query->orderBy('id', 'DESC')->paginate();
-        // $gyms = Gym::with('packages')->orderBy('id', 'DESC')->paginate();
         return response()->success([
             'gyms' =>  GymResource::collection($gyms),
 
