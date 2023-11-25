@@ -40,6 +40,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     // PackageRoute
     Route::get('packages',[PackageController::class,'index']);
+    Route::get('packages/{id}',[PackageController::class,'show']);
 
     Route::get('home',[HomeController::class,'index']);
     Route::group(['middleware' => 'auth:api'], function () {
@@ -49,6 +50,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('Addfavourit',[FavouriteGymController::class,'Addfavourit']);
         Route::post('subscription/store',[SubscriptionController::class,'store']);
         Route::get('myfavorites',[FavouriteGymController::class,'myfavorites']);
+        Route::get('mypackage',[UserProfileController::class,'mypackage']);
 
     });
 });
