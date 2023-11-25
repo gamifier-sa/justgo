@@ -41,6 +41,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     // PackageRoute
     Route::get('packages',[PackageController::class,'index']);
+    Route::get('packages/{id}',[PackageController::class,'show']);
 
     Route::get('home',[HomeController::class,'index']);
     Route::group(['middleware' => 'auth:api'], function () {
@@ -52,6 +53,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('myfavorites',[FavouriteGymController::class,'myfavorites']);
         Route::get('uservisits',[VisitController::class,'index']);
         Route::post('visit/store',[VisitController::class,'store']);
+        Route::get('mypackage',[UserProfileController::class,'mypackage']);
 
     });
 });

@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use App\Http\Resources\SubscriptionResource;
 class UserProfileController extends Controller
 {
     public function myprofile()
@@ -32,6 +32,15 @@ class UserProfileController extends Controller
 
         return response()->success([
             'user' => new UserResource($user)
+        ]);
+    }
+
+
+    public function mypackage()
+    {
+        $user = Auth::guard('api')->user();
+        return response()->success([
+            'package' =>  new  SubscriptionResource($user->subscription)
         ]);
     }
 
