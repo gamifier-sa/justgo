@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignIdFor(Gym::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(Gym::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->decimal('rating',8, 6);
             $table->text('comment')->nullable();
             $table->foreignIdFor(Visit::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();

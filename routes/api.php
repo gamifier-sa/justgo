@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Users\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Users\Auth\UserLoginController;
 use App\Http\Controllers\Api\Users\Auth\UserRegisterController;
 use App\Http\Controllers\Api\Users\Auth\UserProfileController;
+use App\Http\Controllers\Api\VisitController;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('Addfavourit',[FavouriteGymController::class,'Addfavourit']);
         Route::post('subscription/store',[SubscriptionController::class,'store']);
         Route::get('myfavorites',[FavouriteGymController::class,'myfavorites']);
+        Route::get('uservisits',[VisitController::class,'index']);
+        Route::post('visit/store',[VisitController::class,'store']);
 
     });
 });

@@ -287,6 +287,13 @@ return [
     'white_title_color'=>'لون العنوان أبيض ',
     'companies'=>'الشركات',
     'company'=>'شركة',
+    'Saturday'=>'السبت',
+    'Sunday'=>'الأحد',
+    'Monday'=>'الاثنين',
+    'Tuesday'=>'الثلاثاء',
+    'Wednesday'=>'الأربعاء',
+    'Thursday'=>'الخميس',
+    'Friday'=>'الجمعة'
 
 
 ];
