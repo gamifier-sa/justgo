@@ -30,7 +30,6 @@ class GymDetailsResource extends JsonResource
             'UserFavourites'=>$this->isUserFavourites,
             'numbers_package'=> $this->packages->count() == 1 ? $this->packages->first()->package->name :  $this->packages->count(),
             'AvgReviews'=>$this->AvgReviews,
-
         ];
     }
 }

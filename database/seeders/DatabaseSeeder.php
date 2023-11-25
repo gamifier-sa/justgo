@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PermissionSeeder::class,
             PackageSeeder::class,
-            // UserSeeder::class,
+            UserSeeder::class,
             CitySeeder::class,
             GymSeeder::class,
             BranchSeeder::class,

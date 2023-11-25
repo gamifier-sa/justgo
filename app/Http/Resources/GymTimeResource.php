@@ -14,17 +14,31 @@ class GymTimeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'id'=>$this->id,
-            'Saturday'=>$this->Saturday,
-            'Sunday'=>$this->Sunday,
-            'Monday'=>$this->Monday,
-            'Tuesday'=>$this->Tuesday,
-            'Wednesday'=>$this->Wednesday,
-            'Thursday'=>$this->Thursday,
-            'Friday'=>$this->Friday,
-            'shift'=>$this->shift,
-            'type'=>$this->type
+        $days = [
+            'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
         ];
+
+        $transformedData = [];
+
+        foreach ($days as $index => $day) {
+            $times = $this->get();
+            if ($times->isNotEmpty()) {
+                $transformedData[] = [
+                    $day => $times->groupBy('shift')->map(function ($timeGroup) use($day, $index){
+                        return [
+                            'index' => $index,
+                            'shift' => $timeGroup->first()->shift,
+                            'open_at' => $timeGroup->where('type','open')->first()->$day,
+                            'close_at' => $timeGroup->where('type','closed')->first()->$day
+                        ];
+                    })->values()->all(),
+                ];
+
+
+                
+            }
+        }
+
+        return $transformedData;
     }
 }

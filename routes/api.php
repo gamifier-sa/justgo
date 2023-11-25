@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\Users\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Users\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Users\Auth\UserLoginController;
@@ -27,7 +28,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api'], function () {
-
+    // Payment webhook 
+    Route::controller(TransactionController::class)->group(function () {
+        Route::get('transaction/webhook', 'webhook');
+    });
     Route::post('register',[UserRegisterController::class,'register']);
     Route::post('login', [UserLoginController::class, 'login']);
 
