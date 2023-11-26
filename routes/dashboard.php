@@ -109,7 +109,13 @@ Route::group(
                 });
 
           
+                Route::get('gifts', function(){
+                    return view('dashboard.gifts');
+                })->name('gifts');
 
+                Route::get('settings', function(){
+                    return view('dashboard.settings');
+                })->name('settings');
    
 
 

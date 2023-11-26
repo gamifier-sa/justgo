@@ -64,7 +64,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="pakages.html">
+          <a href="{{ route('dashboard.packages.index') }}" class="{{ prefixActive('packages') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/reports.svg" alt="" />
             </div>
@@ -73,7 +73,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="gifts.html">
+          <a href="{{ route('dashboard.gifts') }}" class="{{ prefixActive('gifts') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/gifts.svg" alt="" />
             </div>
@@ -84,7 +84,7 @@
 
       <ul class="menu-links">
         <li class="nav-link">
-          <a href="settings.html">
+          <a href="{{ route('dashboard.settings') }}" class="{{ prefixActive('settings') }}">
             <div class="icon">
               <img src="{{ asset('dashboard/') }}/assets/icons/settings.svg" alt="" />
             </div>
