@@ -11,7 +11,8 @@ use App\Http\Controllers\Dashboard\{
     SalesController,
     ContactUsController,
     GymController,
-    PackageController
+    PackageController,
+    OfferController
 };
 
 
@@ -92,6 +93,12 @@ Route::group(
                     Route::delete('/{id}/', 'destroy')->name('delete');
                 });
 
+                Route::controller(OfferController::class)->prefix('offers')->name('offers.')->group(function () {
+                    Route::get('/create', 'create')->name('create');
+                    Route::post('/store', 'store')->name('store');
+                    Route::put('/{id}/update', 'update')->name('update');
+                });
+
                 Route::controller(RoleController::class)->prefix('roles')->name('roles.')->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::post('/store', 'store')->name('store');
@@ -102,7 +109,13 @@ Route::group(
                 });
 
           
+                Route::get('gifts', function(){
+                    return view('dashboard.gifts');
+                })->name('gifts');
 
+                Route::get('settings', function(){
+                    return view('dashboard.settings');
+                })->name('settings');
    
 
 
