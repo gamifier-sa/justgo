@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Visit;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,7 +28,12 @@ class DatabaseSeeder extends Seeder
             GymImageSeeder::class,
             GiftUserSeeder::class,
             PackageGymSeeder::class,
-            SettingSeeder::class
+            SettingSeeder::class,
+            NotificationSeeder::class,
+            SubscriptionSeeder::class,
+            VisitSeeder::class,
+            ReviewSeeder::class
+
 
         ]);
     }

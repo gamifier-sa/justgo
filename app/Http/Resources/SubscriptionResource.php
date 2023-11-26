@@ -23,8 +23,7 @@ class SubscriptionResource extends JsonResource
             'price'=>$this->price,
             'end_date'=>$this->EndDate,
             'gyms'=>SubscriptionGymResource::collection($this->package->gymssubcription),
-
-
+            'type_subscription'=>$this->type_subscription
         ];
     }
 }

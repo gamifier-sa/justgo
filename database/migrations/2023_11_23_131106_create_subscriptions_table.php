@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('StartDate');
             $table->date('EndDate');
             $table->double('price');
+            $table->string('type_subscription');
             $table->timestamps();
         });
     }

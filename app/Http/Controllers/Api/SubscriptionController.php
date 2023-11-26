@@ -36,6 +36,7 @@ class SubscriptionController extends Controller
             'price' => $package->{$data['type_price']},
             'StartDate' => $data['StartDate'],
             'EndDate' => $data['EndDate'],
+            'type_subscription' => $data['type_subscription']
         ]);
         return response()->success([
             'subscription' => new SubscriptionResource($subscription)
