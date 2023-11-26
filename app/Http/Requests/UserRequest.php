@@ -22,14 +22,16 @@ class UserRequest extends FormRequest
     protected function store(): array
     {
         return [
-            'first_name' => ['required', 'string', 'max:50', 'min:5'],
-            'last_name' => ['required', 'string', 'max:50', 'min:5'],
-            'email' => ['required', 'string', 'max:125', 'min:9', "email:rfc,dns", Rule::unique('users')->ignore($this->id)],
-            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', Rule::unique('users')->ignore($this->id)],
-            'image' => ['nullable', 'mimes:jpeg,png,jpg,gif' . 'svg|max:4096'],
+            'name'     => ['required', 'string', 'max:50', 'min:3'],
+            'profile_image' => ['sometimes','nullable', 'mimes:jpeg,png,jpg,gif' . 'svg|max:4096'],
+            'email'    => ['required', 'string', 'max:125', 'min:9', "email:rfc,dns", 'unique:users'],
+            'phone'    => ['required', 'numeric','unique:users'],
+            'whatsapp_number'    => ['sometimes','nullable','numeric', 'unique:users'],
+            'gender'=>['required','in:male,female'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
-            'active'   => ['nullable', 'in:active,pending'],
-            'categories'    => ['nullable', 'array', 'min:1'],
+            'device_token'=>'sometimes|nullable',
+            'status'   => ['nullable', 'in:active,pending'],
+
 
         ];
     }
@@ -42,16 +44,17 @@ class UserRequest extends FormRequest
     {
 
         return [
-            'first_name' => ['required', 'string', 'max:50', 'min:5'],
-            'last_name' => ['required', 'string', 'max:50', 'min:5'],
+            'name'     => ['required', 'string', 'max:50', 'min:3'],
+            'profile_image' => ['sometimes','nullable', 'mimes:jpeg,png,jpg,gif' . 'svg|max:4096'],
             'email' => ['required', 'string', 'max:125', 'min:9', "email:rfc,dns", Rule::unique('users')->ignore($this->id)],
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', Rule::unique('users')->ignore($this->id)],
-            'image' => ['nullable', 'mimes:jpeg,png,jpg,gif' . 'svg|max:4096'],
-            'password' => ['nullable', 'string', 'min:8', 'max:255', 'confirmed'],
-            'active'   => ['nullable', 'in:active,pending'],
-            'categories'    => ['nullable', 'array', 'min:1'],
+            'whatsapp_number'    => ['sometimes','nullable','numeric', Rule::unique('users')->ignore($this->id)],
+            'gender'=>['required','in:male,female'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'device_token'=>'sometimes|nullable',
+            'status'   => ['nullable', 'in:active,pending'],
 
-          
+
 
         ];
     }

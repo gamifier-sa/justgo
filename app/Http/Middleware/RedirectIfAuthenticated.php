@@ -20,9 +20,6 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             if($guard == 'admin'){
                 return route('admin.login');
-            }else{
-                return route('gym.login');
-
             }
         }
 

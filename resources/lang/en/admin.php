@@ -88,6 +88,8 @@ return [
     'wrong_user_account' => 'This account does not exist',
     'delete-from-favourit'=>'deleted from favorites Successfully',
     'add-to-favourit'=>' added to favorites Successfully',
+    'complaint_suggestion'=>'Your complaint and suggestion have been successfully registered and will be replied to as soon as possible.',
+
     'ar' => [
         'Title' => 'Title in Arabic ',
         'name'   => 'Name in Arabic',

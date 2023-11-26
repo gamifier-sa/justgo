@@ -27,7 +27,7 @@ class UserController extends Controller
     public function index(Request $request): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Contracts\Foundation\Application
     {
         // $this->authorize('view_users');
-        $users = $this->userService->findBy($request);    
+        $users = $this->userService->findBy($request);
         return view(checkView('dashboard.users'), get_defined_vars());
     }
 
@@ -37,8 +37,7 @@ class UserController extends Controller
     public function create()
     {
         // $this->authorize('create_users');
-        $categories = $this->categoryService->findByType('users');
-        return view(checkView('dashboard.users.create'), compact('categories'));
+        return view(checkView('dashboard.new-user'));
     }
     /**
      * @param UserRequest $request

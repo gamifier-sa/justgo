@@ -19,10 +19,10 @@
     <div class="layout">
       @include('dashboard.layouts.navbar')
       <main>
-         @include('dashboard.layouts.header')
+         {{-- @include('dashboard.layouts.header') --}}
 
          @yield('content')
-        
+
       </main>
 
     </div>

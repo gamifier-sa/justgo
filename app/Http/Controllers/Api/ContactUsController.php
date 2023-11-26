@@ -16,6 +16,6 @@ class ContactUsController extends Controller
         ]);
         $data['user_id'] =auth('api')->user()->id;
         ContactUs::create($data);
-        return response()->success();
+        return response()->success(['message'=>__('admin.complaint_suggestion')]);
     }
 }

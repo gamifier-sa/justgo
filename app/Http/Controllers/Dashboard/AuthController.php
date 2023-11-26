@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function loginForm()
     {
         if (Auth::guard('admins')->user()) {
-            return redirect()->route('index');
+            return redirect()->route('dashboard.index');
         }
         return view('dashboard.login');
     }
@@ -36,7 +36,7 @@ class AuthController extends Controller
 
         if (Auth::guard('admins')->attempt($request->only(['email', 'password']))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('index'));
+            return redirect()->intended(route('dashboard.index'));
         }
 
         return redirect()->back()->withErrors(['error' => 'Invalid Email Or Password!']);

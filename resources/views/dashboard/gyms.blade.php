@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/partners.css" />
 @endpush
 @section('content')
+
         <section>
 
           <div class="contentS2">
@@ -62,7 +63,7 @@
                       </td>
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
