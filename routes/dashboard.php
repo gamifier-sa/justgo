@@ -7,7 +7,11 @@ use App\Http\Controllers\Dashboard\{
     DashboardController,
     RoleController,
     SettingController,
-    UserController
+    UserController,
+    SalesController,
+    ContactUsController,
+    GymController,
+    PackageController
 };
 
 
@@ -17,8 +21,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+        'as' => 'dashboard.'
     ],
     function () {
 
@@ -39,12 +43,47 @@ Route::group(
                     Route::get('logout', 'logout')->name('logout');
                 });
 
+                Route::controller(SalesController::class)->group(function () {
+                    Route::get('sales', 'sales')->name('sales');
+                });
+
+                Route::controller(ContactUsController::class)->group(function () {
+                    Route::get('contactus', 'contactus')->name('contactus');
+                });
+
                 Route::controller(DashboardController::class)->group(function () {
                     Route::get('/index', 'index')->name('index');
                     Route::get('/dashboard', 'dashboard')->name('dashboard');
                 });
 
                 Route::controller(AdminController::class)->prefix('admins')->name('admins.')->group(function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::get('/create', 'create')->name('create');
+                    Route::post('/store', 'store')->name('store');
+                    Route::get('/{id}/edit', 'edit')->name('edit');
+                    Route::put('/{id}/update', 'update')->name('update');
+                    Route::delete('/{id}/', 'destroy')->name('delete');
+                });
+
+                Route::controller(UserController::class)->prefix('users')->name('users.')->group(function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::get('/create', 'create')->name('create');
+                    Route::post('/store', 'store')->name('store');
+                    Route::get('/{id}/edit', 'edit')->name('edit');
+                    Route::put('/{id}/update', 'update')->name('update');
+                    Route::delete('/{id}/', 'destroy')->name('delete');
+                });
+
+                Route::controller(GymController::class)->prefix('gyms')->name('gyms.')->group(function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::get('/create', 'create')->name('create');
+                    Route::post('/store', 'store')->name('store');
+                    Route::get('/{id}/edit', 'edit')->name('edit');
+                    Route::put('/{id}/update', 'update')->name('update');
+                    Route::delete('/{id}/', 'destroy')->name('delete');
+                });
+
+                Route::controller(PackageController::class)->prefix('packages')->name('packages.')->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::get('/create', 'create')->name('create');
                     Route::post('/store', 'store')->name('store');

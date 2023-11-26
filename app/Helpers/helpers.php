@@ -81,7 +81,7 @@ if (!function_exists('prefixShow')) {
 if (!function_exists('setActiveLink')) {
     function prefixActive($prefixName): string
     {
-        return request()->segment(2)  == $prefixName ? 'active' : '';
+        return (request()->segment(2) == 'dashboard' && request()->segment(3) == $prefixName) ? 'active' : '';
     }
 }
 
@@ -90,7 +90,7 @@ if (!function_exists('settings')) {
     {
 
         return Cache::remember('settings', 99999999, function () {
-            return DB::table('settings')->pluck('value_'.app()->getLocale(), 'key')->toArray();
+            return DB::table('settings')->pluck('value_' . app()->getLocale(), 'key')->toArray();
         });
     }
 }
@@ -125,53 +125,66 @@ if (!function_exists('shortenNumber')) {
     }
 
 
-    function sendNotification($title,$body,$token = null,$event=null)
-        {
-            $firebaseToken = [$token];
-            if(!$token) {
-                $firebaseToken = Employee::whereNotNull('device_token')->get()->pluck('device_token');
-            }
-
-
-            $SERVER_API_KEY = 'AIzaSyDznKCzwITPbiCK4oO6zFFjOchmfpqsaGg';
-            $data = [
-                "registration_ids" => $firebaseToken,
-                "notification" => [
-                    "title" => $title,
-                    "body" => $body,
-                    "event_id"=>$event
-                ],
-                "data" => [
-                    "title" => $title,
-                    "body" => $body,
-                    "event_id"=>$event,
-                    "click_action" => "FISH_ACTION"
-
-                ],
-            ];
-
-            $dataString = json_encode($data);
-
-            $headers = [
-                'Authorization: key=' . $SERVER_API_KEY,
-                'Content-Type: application/json',
-            ];
-
-
-
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-
-            $response = curl_exec($ch);
-
-
+    function sendNotification($title, $body, $token = null, $event = null)
+    {
+        $firebaseToken = [$token];
+        if (!$token) {
+            $firebaseToken = Employee::whereNotNull('device_token')->get()->pluck('device_token');
         }
 
 
+        $SERVER_API_KEY = 'AIzaSyDznKCzwITPbiCK4oO6zFFjOchmfpqsaGg';
+        $data = [
+            "registration_ids" => $firebaseToken,
+            "notification" => [
+                "title" => $title,
+                "body" => $body,
+                "event_id" => $event
+            ],
+            "data" => [
+                "title" => $title,
+                "body" => $body,
+                "event_id" => $event,
+                "click_action" => "FISH_ACTION"
+
+            ],
+        ];
+
+        $dataString = json_encode($data);
+
+        $headers = [
+            'Authorization: key=' . $SERVER_API_KEY,
+            'Content-Type: application/json',
+        ];
+
+
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+        $response = curl_exec($ch);
+
+
+    }
+
+
+}
+
+if (!function_exists('contactUsStatus')) {
+    function contactUsStatus($status)
+    {
+
+        $className = 'notAnswer';
+        
+        if($status == 'solved'){
+            $className = 'finished';
+        }
+        return $className;
+    }
 }

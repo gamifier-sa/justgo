@@ -1,0 +1,153 @@
+.settingsPage .content {
+  padding: 20px;
+  overflow: hidden;
+}
+.settingsPage .content .nav-tabs {
+  overflow: hidden;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  scrollbar-width: none;
+}
+.settingsPage .content .nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+.settingsPage .content .nav-tabs .nav-link {
+  background: transparent;
+  border: none;
+  color: #717b8c;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: 150px;
+}
+.settingsPage .content .nav-tabs .nav-link.active {
+  border-bottom: 2px solid #2611e5;
+}
+.settingsPage .content form label {
+  color: #4c535f;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px;
+  display: block;
+}
+.settingsPage .content form .inputS1 {
+  height: 52px;
+  border-radius: 8px;
+  border: 1px solid #e0e4ec;
+  background: linear-gradient(0deg, #edf2f6 0%, #edf2f6 100%), #fff;
+}
+.settingsPage .content form .inputS1 input,
+.settingsPage .content form .inputS1 select {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 5px 15px;
+  color: #4c535f;
+  font-size: 16px;
+  font-weight: 500;
+}
+.settingsPage .content form .inputS1 input:focus,
+.settingsPage .content form .inputS1 select:focus {
+  outline: none;
+}
+.settingsPage .content form .inputS1 select {
+  text-align: center;
+  background-image: url(/assets/icons/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: 60px center;
+  appearance: none;
+}
+.settingsPage .content form .inputS1.phone {
+  display: flex;
+  align-items: center;
+}
+.settingsPage .content form .inputS1.phone span {
+  padding: 5px 15px;
+  color: #8d98aa;
+  font-weight: 500;
+  border-inline-start: 2px solid #e0e4ec;
+}
+.settingsPage .content form .imgSec {
+  padding-bottom: 32px;
+  border-bottom: 1px solid #e0e4ec;
+}
+.settingsPage .content form .imgSec .inputImg {
+  width: 130px;
+  height: 132px;
+  border-radius: 18px;
+  border: 1px dashed #4c535f;
+  background: #edf2f6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.settingsPage .content form .imgSec .inputImg .icon {
+  position: absolute;
+  z-index: 1;
+  background: #edf2f6;
+}
+.settingsPage .content form .imgSec .inputImg input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  cursor: pointer;
+}
+.settingsPage .content form .langSwitcher {
+  max-width: 542px;
+  margin: 215px auto;
+}
+.settingsPage .content form h2 {
+  color: #4c535f;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 40px 0;
+}
+.settingsPage .content form p {
+  color: #8d98aa;
+  font-size: 36px;
+  font-weight: 500;
+}
+.settingsPage .content form .buttons {
+  margin-top: 115px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.settingsPage .content form .buttons :is(.buttonS1, .buttonS2) {
+  padding: 12px 80px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-size: 18px;
+}
+.settingsPage .content form .buttons .buttonS1 {
+  color: #4c535f;
+  border: 1px solid transparent;
+  background: transparent;
+  font-weight: 500;
+}
+.settingsPage .content form .buttons .buttonS1:hover {
+  color: #2611e5;
+  border-color: #2611e5;
+}
+.settingsPage .content form .buttons .buttonS2 {
+  color: #fff;
+  border: 1px solid #2611e5;
+  background: #2611e5;
+  font-weight: 700;
+}
+.settingsPage .content form .buttons .buttonS2:hover {
+  color: #2611e5;
+  background: transparent;
+}
+@media (max-width: 500px) {
+  .settingsPage .content form .buttons :is(.buttonS1, .buttonS2) {
+    padding: 12px 50px;
+  }
+}

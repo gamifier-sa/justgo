@@ -69,4 +69,8 @@ class Gym extends Model implements TranslatableContract
             return $isFavorite;
         }
     }
+
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
 }
