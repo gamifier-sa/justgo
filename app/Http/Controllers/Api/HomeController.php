@@ -15,6 +15,7 @@ use App\Http\Resources\SignUpResource;
 use App\Http\Resources\SliderResource;
 use App\Http\Resources\TestimonialResource;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\VisitHistoryResource;
 use App\Models\AboutUs;
 use App\Models\Category;
 use App\Models\Event;
@@ -25,6 +26,7 @@ use App\Models\Package;
 use App\Models\SignUp;
 use App\Models\Slider;
 use App\Models\Testimonial;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -34,11 +36,13 @@ class HomeController extends Controller
         $gifts =GiftUser::orderBy('id', 'DESC')->limit(3)->get();
         $packages =Package::orderBy('id', 'DESC')->limit(3)->get();
         $gyms = Gym::with('packages')->orderBy('id', 'DESC')->limit(5)->get();
+        $uservisits = Visit::where('user_id', '=', auth('api')->user()->id)->get();
 
         return response()->success([
             'gifts' =>  GiftUserResource::collection($gifts),
             'packages' =>  PackageResource::collection($packages),
             'gyms' =>  GymResource::collection($gyms),
+            'VisitHistory' => VisitHistoryResource::collection($uservisits)
 
         ]);
     }

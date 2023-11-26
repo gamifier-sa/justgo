@@ -19,6 +19,7 @@ class VisitHistoryResource extends JsonResource
         return [
             'id'=>$this->id,
             'day'=>__('admin.'.Carbon::parse($this->visit_date)->format('l')),
+            'visit_date'=>$this->visit_date,
             'gym_name'=>$this->gym->name,
             'package'=>new PackageResource($this->user->subscription->package),
         ];

@@ -143,7 +143,7 @@
                 <form action="">
                     <div class="content">
                         <div class="gymSlug">
-                            <h5> </h5>
+                            <h5> الصورة الشخصية</h5>
                             <div class="addGallary">
                                 <img src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg" alt="" />
                                 <p>رفع الصورة</p>
@@ -164,9 +164,10 @@
                             </div>
                         </div>
                         <div>
-                            <label for="username">الاسم الاول</label>
-                            <div class="inputS1">
+                            <label for="username">رقم الجوال</label>
+                            <div class="inputS1 phone">
                                 <input type="text" />
+                                <span>+966</span>
                             </div>
                         </div>
                         <div>

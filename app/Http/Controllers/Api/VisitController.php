@@ -26,7 +26,7 @@ class VisitController extends Controller
         $data['user_id'] = auth('api')->user()->id;
         $data['visit_date'] = Carbon::now()->format('Y-m-d');
         $today = now()->format('Y-m-d');
-
+        
         $existingVisit = auth('api')->user()->visits->where('visit_date', $today)->first();
         if ($existingVisit) {
             $existingVisit->update($data);
