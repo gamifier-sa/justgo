@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignIdFor(Gym::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('visit_date');
+            $table->string('device_token')->nullable();
             $table->timestamps();
         });
     }
