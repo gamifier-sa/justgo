@@ -25,12 +25,11 @@ class GymDetailsResource extends JsonResource
             'images'=>GymImageResource::collection($this->images),
             'packages'=> PackageResource::collection($this->packagesGym),
             'description'=>$this->description,
-            'Worktime'=> GymTimeResource::collection($this->times),
+            'Worktime'=> new GymTimeResource($this->times),
             'Reviews'=>ReviewResource::collection($this->reviews),
             'UserFavourites'=>$this->isUserFavourites,
             'numbers_package'=> $this->packages->count() == 1 ? $this->packages->first()->package->name :  $this->packages->count(),
             'AvgReviews'=>$this->AvgReviews,
-
         ];
     }
 }
