@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Users\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Users\Auth\UserLoginController;
 use App\Http\Controllers\Api\Users\Auth\UserRegisterController;
 use App\Http\Controllers\Api\Users\Auth\UserProfileController;
+use App\Http\Controllers\Api\Users\NotificationController;
 use App\Http\Controllers\Api\VisitController;
 use App\Models\Package;
 use Illuminate\Http\Request;
@@ -53,6 +54,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('home',[HomeController::class,'index']);
     Route::get('setting',[SettingController::class,'setting']);
     Route::get('cities',[CityController::class,'cities']);
+    Route::get('notification',[NotificationController::class,'index']);
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('myprofile',[UserProfileController::class,'myprofile']);
         Route::post('updateProfile',[UserProfileController::class,'updateProfile']);
