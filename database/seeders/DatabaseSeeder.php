@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             GymImageSeeder::class,
             GiftUserSeeder::class,
             PackageGymSeeder::class,
+            SettingSeeder::class
 
         ]);
     }

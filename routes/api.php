@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FavouriteGymController;
 use App\Http\Controllers\Api\GymController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\Users\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\Users\Auth\ResetPasswordController;
@@ -44,6 +46,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('packages/{id}',[PackageController::class,'show']);
 
     Route::get('home',[HomeController::class,'index']);
+    Route::get('setting',[SettingController::class,'setting']);
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('myprofile',[UserProfileController::class,'myprofile']);
         Route::post('updateProfile',[UserProfileController::class,'updateProfile']);
@@ -54,6 +57,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('uservisits',[VisitController::class,'index']);
         Route::post('visit/store',[VisitController::class,'store']);
         Route::get('mypackage',[UserProfileController::class,'mypackage']);
+        Route::post('contactus',[ContactUsController::class,'contactus']);
 
     });
 });
