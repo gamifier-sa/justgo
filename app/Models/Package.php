@@ -31,4 +31,8 @@ class Package extends Model implements TranslatableContract
     public function cities(){
         return $this->belongsToMany(City::class);
     }
+
+    public function offers(){
+        return $this->hasMany(Offer::class);
+    }
 }

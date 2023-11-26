@@ -37,7 +37,9 @@
                   @foreach ($packages as $package)
                     <div class="col-sm-12 col-lg-4">
                         <div class="pakageCard">
-                            <div class="padge d-none">خصم 20%</div>
+                          @if($package->offers->count())
+                            <div class="padge">خصم {{ $package->offers()->latest()->first()->percentage }}%</div>
+                          @endif
                             <h2> {{ $package->name }} </h2>
                             <ul>
                                 <li>
@@ -46,15 +48,11 @@
                                 </li>
                                 <li>
                                     <h5>الأندية المدعومة:</h5>
-                                    @foreach ($package->gym as $gym)
-                                      <p>{{ $gym->name }}</p>
-                                    @endforeach
+                                    <p>{{ $package->gym()->count() }} نادي</p>
                                 </li>
                                 <li>
                                     <h5>المدن :</h5>
-                                    @foreach ($package->cities as $city)
-                                      <p>{{ $city->name }}</p>
-                                    @endforeach
+                                      <p>{{$package->cities()->count() }} مدينة</p>
                                 </li>
                             </ul>
                             <div class="info">
@@ -74,8 +72,8 @@
                 <button class="updateOffers">
                     تعديل العرض الحالي <img src="{{ asset('dashboard/') }}/assets/icons/editPakage.svg" alt="edit" />
                 </button>
-                <button class="addNewPartnerBtn">اضافة باقة جديدة <img src="{{ asset('dashboard/') }}/assets/icons/plusIcon.svg" alt="plusIcon" /></button>
-                <button class="addNewOffer">أضافة عرض وخصومات <img src="{{ asset('dashboard/') }}/assets/icons/plusIcon.svg" alt="plusIcon" /></button>
+                <a href="{{ route('dashboard.packages.create') }}" class="addNewPartnerBtn">اضافة باقة جديدة <img src="{{ asset('dashboard/') }}/assets/icons/plusIcon.svg" alt="plusIcon" /></a>
+                <a href="{{ route('dashboard.offers.create') }}" class="addNewOffer">أضافة عرض وخصومات <img src="{{ asset('dashboard/') }}/assets/icons/plusIcon.svg" alt="plusIcon" /></a>
             </div>
 
           </div>

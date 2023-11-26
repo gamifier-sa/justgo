@@ -55,7 +55,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('dashboard.packages.index') }}" class="{{ prefixActive('users') }}">
+          <a href="{{ route('dashboard.packages.index') }}" class="{{ prefixActive('packages') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/subscriptions.svg" alt="" />
             </div>
