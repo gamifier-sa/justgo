@@ -10,18 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class UserLoginController extends Controller
 {
-  
+
 
     public function login(Request $request)
     {
         $request->validate([
             'phone' => 'required|numeric',
             'password' => 'required|min:6|max:60',
-            'device_token'=>'sometimes|nullable'
+            'device_token' => 'sometimes|nullable'
 
 
         ]);
-       $data = $this->getDataForLogin($request);
+        $data = $this->getDataForLogin($request);
 
         if ($token = auth('api')->attempt(array_merge($data, ['status' => 'active']))) {
 
@@ -33,39 +33,34 @@ class UserLoginController extends Controller
                 'user' =>  new  UserResource($user)
 
             ]);
-
-
-         }elseif($token = auth('api')->attempt(array_merge($data, ['status' => 'inactive']))){
+        } elseif ($token = auth('api')->attempt(array_merge($data, ['status' => 'inactive']))) {
             $user = Auth::guard('api')->user();
-    
+
             return response()->success([
                 'user' =>  new  UserResource($user)
 
             ]);
-
-        }elseif($token = auth('api')->attempt(array_merge($data, ['admin_active' => 0]))){
+        } elseif ($token = auth('api')->attempt(array_merge($data, ['admin_active' => 0]))) {
             return response()->fail([
                 'message' =>  __('admin.active_admin'),
             ]);
-
-        }else{
+        } else {
             return response()->fail([
                 'message' =>   __('admin.wrong_username_password')
             ]);
-
         }
     }
-    public function getDataForLogin ($request) {
-        if(is_numeric($request->get('phone'))){
-            return ['phone' => $request->get('phone'),'password' => $request->password];
-
+    public function getDataForLogin($request)
+    {
+        if (is_numeric($request->get('phone'))) {
+            return ['phone' => $request->get('phone'), 'password' => $request->password];
         } elseif (filter_var($request->get('phone'), FILTER_VALIDATE_EMAIL)) {
-            return ['email' => $request->get('phone'),'password' => $request->password];
+            return ['email' => $request->get('phone'), 'password' => $request->password];
         }
         return [];
     }
-    
-  
+
+
 
 
     public function updateToken(Request $request)

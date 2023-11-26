@@ -31,6 +31,8 @@ class RegisterRequest extends FormRequest
             'whatsapp_number'    => ['sometimes','nullable','numeric', 'unique:users'],
             'gender'=>['required','in:male,female'],
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'device_token'=>'sometimes|nullable'
+
         ];
     }
 }

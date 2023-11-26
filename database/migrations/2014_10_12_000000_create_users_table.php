@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('admin_active')->default('active');
             $table->string('email_verification_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('device_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
