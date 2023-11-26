@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\subscriptionResource;
+use App\Http\Resources\SubscriptionResource;
 use App\Models\Package;
 use App\Models\Subscription;
 use Carbon\Carbon;
@@ -38,7 +38,7 @@ class SubscriptionController extends Controller
             'EndDate' => $data['EndDate'],
         ]);
         return response()->success([
-            'subscription' => new subscriptionResource($subscription)
+            'subscription' => new SubscriptionResource($subscription)
         ]);
     }
 }
