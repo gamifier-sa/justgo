@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('title');
             $table->text('data');
             $table->foreignIdFor(Gym::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();

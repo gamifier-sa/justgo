@@ -15,9 +15,12 @@ class NotificationSeeder extends Seeder
     {
         $notifications = [
             [
+                'id'=>1,
                 'title' => 'New gift',
                 'data' => 'A new gift has been added'
             ], [
+                'id'=>2,
+
                 'title' => 'New Gym',
                 'data' => 'A new Gym has been added'
             ]
