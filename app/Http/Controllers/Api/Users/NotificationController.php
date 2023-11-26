@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class NotificationController extends Controller
 {
     public function index()  {
-        $employee = auth()->guard('employee')->user();
+        $user = auth()->guard('api')->user();
 
-        $notifications = $employee->notifications;
+        $notifications = $user->notifications;
         return response()->success([
             'Notification'=>NotificationResource::collection($notifications),
         ]);

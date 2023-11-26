@@ -24,7 +24,7 @@ class ResetPasswordController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
             return response()->success([
-                'message' => __('admin.your_password_had_been_reset')
+                'message' => __('passwords.reset')
             ]);
         }
     }
@@ -32,7 +32,7 @@ class ResetPasswordController extends Controller
     protected function sendResetResponse()
     {
         return response()->success([
-            'message' => __('admin.your_password_had_been_reset')
+            'message' => __('passwords.reset')
         ]);
     }
 

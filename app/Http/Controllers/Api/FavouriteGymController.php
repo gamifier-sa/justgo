@@ -16,7 +16,6 @@ class FavouriteGymController extends Controller
         $user_id = auth('api')->user()->id;
         $Favourites = FavouriteGym::with('gyms')->where('user_id', '=', $user_id)->get();
 
-        // Iterate over each FavouriteGym to access the related gym
         $gyms = $Favourites->map(function ($favourite) {
             return $favourite->gyms;
         })->flatten();

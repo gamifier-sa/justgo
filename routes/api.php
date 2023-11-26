@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\ContactUsController;
 use App\Http\Controllers\Api\FavouriteGymController;
 use App\Http\Controllers\Api\GymController;
@@ -31,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api'], function () {
-    // Payment webhook 
+    // Payment webhook
     Route::controller(TransactionController::class)->group(function () {
         Route::get('transaction/webhook', 'webhook');
     });
@@ -51,6 +52,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('home',[HomeController::class,'index']);
     Route::get('setting',[SettingController::class,'setting']);
+    Route::get('cities',[CityController::class,'cities']);
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('myprofile',[UserProfileController::class,'myprofile']);
         Route::post('updateProfile',[UserProfileController::class,'updateProfile']);
