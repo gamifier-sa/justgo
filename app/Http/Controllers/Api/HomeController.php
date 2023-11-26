@@ -36,13 +36,15 @@ class HomeController extends Controller
         $gifts =GiftUser::orderBy('id', 'DESC')->limit(3)->get();
         $packages =Package::orderBy('id', 'DESC')->limit(3)->get();
         $gyms = Gym::with('packages')->orderBy('id', 'DESC')->limit(5)->get();
-        $uservisits = Visit::where('user_id', '=', auth('api')->user()->id)->get();
+        if (auth('api')->check()) {
+            $uservisits = Visit::where('user_id', '=', auth('api')->user()->id)->get();
+        } 
 
         return response()->success([
             'gifts' =>  GiftUserResource::collection($gifts),
             'packages' =>  PackageResource::collection($packages),
             'gyms' =>  GymResource::collection($gyms),
-            'VisitHistory' => VisitHistoryResource::collection($uservisits)
+            'VisitHistory' =>isset($uservisits) ? VisitHistoryResource::collection($uservisits) : []
 
         ]);
     }
