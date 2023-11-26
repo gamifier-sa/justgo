@@ -37,10 +37,8 @@ class UserService{
         if (isset($request['password'])) {
             $request['password'] = Hash::make($request['password']);
         }
-        $categories = $request['categories'];
-        unset($request['categories']);
+
         $user =  $this->userRepository->update($request, $id);
-        $user->categories()->sync($categories);
         return $user;
     }
     public function destroy($id)

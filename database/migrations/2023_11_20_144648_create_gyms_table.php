@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('cover_image')->nullable();
             $table->string('logo')->nullable();
             $table->integer('subscription_rate')->default(0);
-            $table->integer('expected_number_customers')->default(0);
-            $table->foreignIdFor(City::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->decimal('expected_number_customers', 9, 6)->default(0);
+            $table->foreignIdFor(City::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
