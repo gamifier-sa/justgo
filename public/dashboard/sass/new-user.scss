@@ -1,0 +1,75 @@
+.newUserPage {
+  form {
+    .content {
+      padding: 40px 20px 80px;
+
+      & > div {
+        max-width: 542px;
+        margin: 0 auto;
+      }
+
+      label {
+        color: #4c535f;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 12px;
+        display: block;
+      }
+
+      .inputS1 {
+        height: 52px;
+        border-radius: 8px;
+        border: 1px solid #e0e4ec;
+        background: linear-gradient(0deg, #edf2f6 0%, #edf2f6 100%), #fff;
+
+        input,
+        select {
+          height: 100%;
+          width: 100%;
+          background: transparent;
+          border: none;
+          padding: 5px 15px;
+          color: #4c535f;
+          font-size: 16px;
+          font-weight: 500;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        select {
+          text-align: center;
+          background-image: url(/assets/icons/arrow.svg);
+          background-repeat: no-repeat;
+          background-position: 60px center;
+          appearance: none;
+        }
+
+        &.phone {
+          display: flex;
+          align-items: center;
+
+          span {
+            padding: 5px 15px;
+            color: #8d98aa;
+            font-weight: 500;
+            border-inline-start: 2px solid #e0e4ec;
+          }
+        }
+      }
+    }
+
+    .addNewBtn {
+      margin: 56px auto 0;
+    }
+  }
+
+  @media (max-width: 991px) {
+    form {
+      .addNewBtn {
+        margin: 22px auto 0;
+      }
+    }
+  }
+}

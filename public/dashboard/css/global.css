@@ -1,0 +1,422 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap");
+@import "/css/bootstrap.min.css";
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+  overflow-x: hidden;
+  font-family: "Mulish", sans-serif;
+  /* width */
+  /* Track */
+  /* Handle */
+}
+body ::-webkit-scrollbar {
+  width: 8px;
+}
+body ::-webkit-scrollbar-track {
+  background: transparent;
+}
+body ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.layout {
+  display: flex;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sidebarApp {
+  width: 310px;
+  background: #2611e5;
+  flex-shrink: 0;
+  position: fixed;
+  height: 100%;
+  /* width */
+  /* Track */
+  /* Handle */
+}
+.sidebarApp ::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebarApp ::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebarApp ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.sidebarApp .head {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebarApp .head img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.sidebarApp .head button {
+  border: none;
+  background: transparent;
+  display: none;
+}
+.sidebarApp .menu {
+  overflow-y: auto;
+  height: calc(100% - 110px);
+}
+.sidebarApp .menu .menu-links:first-of-type {
+  margin-bottom: 40px;
+}
+.sidebarApp .menu .menu-links:last-of-type li a {
+  display: block;
+  padding-inline-start: 45px;
+}
+.sidebarApp .menu .menu-links:last-of-type li a span {
+  display: block;
+  margin-inline-start: -12px;
+  margin-top: 10px;
+}
+.sidebarApp .menu .menu-links:last-of-type li:last-of-type a span {
+  margin-inline-start: -18px;
+}
+.sidebarApp .menu .menu-links li {
+  padding: 0;
+}
+.sidebarApp .menu .menu-links li:not(:last-of-type) {
+  margin-bottom: 10px;
+}
+.sidebarApp .menu .menu-links li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+.sidebarApp .menu .menu-links li a img {
+  width: 35px;
+  height: 35px;
+}
+.sidebarApp .menu .menu-links li a.active {
+  background: #4820fc;
+}
+.sidebarApp .close {
+  position: absolute;
+  top: 70px;
+  left: -12px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border: 1px solid #f00;
+  border-radius: 50%;
+  color: #f00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.sidebarApp .close span {
+  display: block;
+  margin-top: -3px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+main {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  padding: 30px;
+  flex: 1;
+  background: #f3f6fd;
+  margin-inline-start: 310px;
+}
+@media (max-width: 992px) {
+  main {
+    margin-inline-start: 0;
+  }
+}
+main section .content {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 10px 20px 0px rgba(194, 194, 194, 0.16), 0px 0px 30px 0px rgba(170, 170, 170, 0.16);
+}
+
+.sectionS1 {
+  background-color: #fff;
+  border: 1px solid #dddfe5;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+.sectionS1 .sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+@media (max-width: 576px) {
+  .sectionS1 .sectionHead {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+.sectionS1 .sectionHead h2 {
+  color: #252733;
+  font-size: 20px;
+  font-weight: bold;
+}
+.sectionS1 .sectionHead .searchInput {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 32px;
+  border: 1px solid #eaecee;
+  background: #fff;
+  padding: 10px 16px;
+}
+.sectionS1 .sectionHead .searchInput input {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.tableS1 {
+  margin: 0;
+  min-width: 900px;
+  overflow: auto;
+}
+.tableS1 thead {
+  border: none;
+}
+.tableS1 thead tr {
+  border: none;
+}
+.tableS1 thead tr th {
+  color: #4c4c4c;
+  font-weight: 600;
+  border: none;
+  padding-bottom: 15px;
+  text-align: center;
+}
+.tableS1 tbody {
+  border-top: none !important;
+}
+.tableS1 tbody tr {
+  border: none;
+}
+.tableS1 tbody tr:last-child th,
+.tableS1 tbody tr:last-child td {
+  border: none;
+}
+.tableS1 tbody tr th {
+  border-bottom: 1px solid #f2f2f2;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  vertical-align: middle;
+}
+.tableS1 tbody tr th .user {
+  display: flex;
+  gap: 12px;
+}
+.tableS1 tbody tr th .user img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+.tableS1 tbody tr th .user .info {
+  display: flex;
+  flex-direction: column;
+}
+.tableS1 tbody tr th .user .info h5 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #252733;
+}
+.tableS1 tbody tr th .user .info p {
+  color: #929292;
+  margin: 0;
+}
+.tableS1 tbody tr td {
+  color: #808080;
+  text-align: center;
+  border-bottom: 1px solid #f2f2f2;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  vertical-align: middle;
+}
+.tableS1 tbody tr td .tdProgress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4c4c4c;
+}
+.tableS1 tbody tr td .tdProgress .progressStatus {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  background: #deede5;
+  padding: 4px;
+}
+.tableS1 tbody tr td .tdProgress .progress {
+  flex: 1;
+  height: 4px;
+}
+.tableS1 tbody tr td .tdProgress .progress .progress-bar {
+  background: #4c4c4c;
+}
+.tableS1 tbody tr td .subscribeStatus {
+  width: fit-content;
+  margin: auto;
+  padding: 0 8px;
+  border-radius: 8px;
+  background: #d1ffde;
+  color: #1e1919;
+}
+.tableS1 tbody tr td .subscribeStatus.upToend {
+  background: #ffd8d8;
+}
+.tableS1 tbody tr td .subscribeStatus.specialClient {
+  background: #fbffd1;
+}
+.tableS1 tbody .contentS2 {
+  border-radius: 24px;
+  background: #fff;
+  padding: 24px;
+  border: 1px dashed #4820fc;
+}
+
+.headerOptions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 50px;
+}
+.headerOptions .open-sidebar {
+  border: none;
+  background: transparent;
+  display: none;
+}
+.headerOptions .open-sidebar:lang(en) img {
+  transform: rotateY(180deg);
+}
+.headerOptions .headerActions {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 8px;
+}
+.headerOptions .headerActions .notifacationAndSearchBtn {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #eaecee;
+  cursor: pointer;
+}
+.headerOptions .headerActions .userImage {
+  width: 45px;
+  height: 45px;
+  border: 2px solid #d8d8fe;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.headerOptions .headerActions .userImage img {
+  width: 100%;
+  height: 100%;
+}
+
+.addNewBtn {
+  border-radius: 32px;
+  background: #4040f2;
+  border: 1px solid #4040f2;
+  color: #fff;
+  padding: 5px 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.addNewBtn:hover {
+  background: #fff;
+  color: #4040f2;
+}
+.addNewBtn span {
+  font-size: 20px;
+}
+
+.cardS1 {
+  border-radius: 12px;
+  border: 1px solid #eaecee;
+  background: #fff;
+  padding: 22px;
+}
+
+@media (max-width: 991px) {
+  .layout {
+    display: block;
+  }
+  .layout .sidebarApp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    transform: translateX(100%);
+    transition: 0.3s;
+    height: 100%;
+  }
+  .layout .sidebarApp:lang(en) {
+    right: auto;
+    left: 0;
+    transform: translateX(-100%);
+  }
+  .layout .sidebarApp:lang(en) .close {
+    left: auto;
+    right: -12px;
+  }
+  .layout .sidebarApp .menu .menu-links:first-of-type {
+    margin-bottom: 35px;
+  }
+  .layout .sidebarApp.active {
+    transform: none;
+  }
+  .layout .sidebarApp.active .close {
+    display: block;
+  }
+  .layout main {
+    width: 100%;
+    padding: 15px;
+  }
+  .layout main .headerOptions {
+    justify-content: space-between;
+  }
+  .layout main .headerOptions .open-sidebar {
+    display: block;
+  }
+}

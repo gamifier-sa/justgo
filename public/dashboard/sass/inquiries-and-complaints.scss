@@ -1,0 +1,29 @@
+.tableS1 {
+  .textofComplaintStatus {
+    border-radius: 4px;
+    background: #d1ffde;
+    color: #1e1919;
+    padding: 10px;
+
+    &.complationFinished {
+      background: #fbffd1;
+    }
+  }
+
+  .inquireStatus {
+    width: fit-content;
+    margin: auto;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: #ffd8d8;
+    color: #1e1919;
+
+    &.notAnswer {
+      background: #fbffd1;
+    }
+
+    &.finised {
+      background: #d1ffde;
+    }
+  }
+}

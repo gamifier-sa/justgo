@@ -1,0 +1,86 @@
+.allPakages {
+  background: #fff;
+  border: 1px dashed #4820fc;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 0;
+  .pakageCard {
+    border-radius: 12px;
+    border: 1px solid #eaecee;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+
+    .padge {
+      position: absolute;
+      color: #242d35;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 15px;
+      background: #ffd8d8;
+      transform: rotate(-50deg);
+      left: -43px;
+      top: 20px;
+      padding: 6px 20px;
+      width: 147px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #373f47;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    ul {
+      width: 90%;
+      li {
+        h5 {
+          color: #242d35;
+          font-size: 18px;
+          font-weight: 400;
+          margin-bottom: 15px;
+        }
+        p {
+          padding: 5px 10px;
+          font-weight: bold;
+          border-radius: 9px;
+          background: #e3e1f5;
+          text-align: center;
+        }
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      span {
+        font-weight: bolder;
+        font-size: 28px;
+        line-height: 1;
+      }
+      p {
+        margin: 0;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.optionsButtons {
+  margin-top: auto;
+  .updateOffers {
+    background: #ffd8d8;
+    color: #808080;
+  }
+
+  .addNewOffer {
+    background: #ffd8d8;
+    color: #808080;
+  }
+}

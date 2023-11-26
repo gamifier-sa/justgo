@@ -19,9 +19,16 @@ class Package extends Model implements TranslatableContract
             ->as('pivot');
     }
 
+    public function gym(){
+        return $this->belongsToMany(Gym::class,'package_gyms');
+    }
     public function gymssubcription()
     {
         return $this->belongsToMany(Gym::class, 'package_gyms', 'gym_id', 'package_id')
             ->as('pivot');
+    }
+
+    public function cities(){
+        return $this->belongsToMany(City::class);
     }
 }
