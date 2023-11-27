@@ -7,7 +7,6 @@ use Throwable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Support\Str;
 
 class Handler extends ExceptionHandler
 {
