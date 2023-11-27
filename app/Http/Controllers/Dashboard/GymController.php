@@ -35,10 +35,10 @@ class GymController extends Controller
         unset($data['images']);
 
         $gym= Gym::create($data);
-        $images = $data['images'];
+        $images = $request->images;
         foreach ($images as $image) {
-            $data['image']  = storeImage('Gyms', $image);
-            $gym->images()->create(['image' => $image]);
+            $newImageName = storeImage('Gyms', $image);
+            $gym->images()->create(['image' => $newImageName]);
         }
         return redirect()->route('dashboard.gyms.index');
     }
