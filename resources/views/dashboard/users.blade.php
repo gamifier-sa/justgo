@@ -41,42 +41,70 @@
                                 <th scope="col">الباقة</th>
                                 <th scope="col">المتبقي من الباقة</th>
                                 <th scope="col">حالة المشترك</th>
+                                <th scope="col"> إجراءات</th>
+
                             </tr>
                         </thead>
                         <tbody>
+                            @if(isset($users))
                             @foreach ($users as $user)
-                                <tr>
-                                    <th scope="row">
-                                        <div class="user">
-                                            <img src="{{ asset('dashboard/') }}/assets/images/tableUser.png"
-                                                alt="" />
-                                            <div class="info">
-                                                <h5>{{ $user->name }}</h5>
-                                                <p>{{ $user->email }}</p>
-                                            </div>
+                            <tr>
+                                <th scope="row">
+                                    <div class="user">
+                                        @if (!$user->profile_image)
+                                        <img src="{{ asset('dashboard/') }}/assets/images/tableUser.png"  alt="">
+
+                                        @else
+                                        <img src="{{ getImage('Users', $user->profile_image) }}" alt=""
+                                        style="width: 50px;height:50px" />
+
+                                        @endif
+
+                                        <div class="info">
+                                            <h5>{{ $user->name }}</h5>
+                                            <p>{{ $user->email }}</p>
                                         </div>
-                                    </th>
-                                    <td>
-                                        <div class="td">{{ $user->subscription()->count() }} مرات</div>
-                                    </td>
-                                    <td>{{ $user->subscription->package->name }}</td>
-                                    <td>
-                                        <div class="tdProgress">
-                                            <div class="progressStatus">4%<img
-                                                    src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
-                                                    alt="" /></div>
-                                            <span>40%</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width: 25%"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="td">{{ $user->subscription()->count() }} مرات</div>
+                                </td>
+                                <td>{{ isset($user->subscription) ? $user->subscription->package->name :'-' }}</td>
+                                <td>
+                                    <div class="tdProgress">
+                                        <div class="progressStatus">4%<img
+                                                src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
+                                                alt="" /></div>
+                                        <span>40%</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 25%"
+                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <div class="subscribeStatus">مشترك جديد</div>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="subscribeStatus">مشترك جديد</div>
+                                </td>
+
+                                <td>
+                                    <form action="{{route('dashboard.users.delete',$user->id)}}"
+                                        method="post"
+                                        style="display: inline-block">
+                                      @csrf
+                                      @method('delete')
+                                      <button type="submit"
+                                              class="btn btn-danger btn-sm delete-btn">
+                                          <i class="fa fa-trash"></i></button>
+
+                                          <a href="{{route('dashboard.users.edit', $user->id )}}"
+                                            class="btn btn-primary  btn-sm"><i
+                                                 class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                            @endif
+
                         </tbody>
                     </table>
                 </div>

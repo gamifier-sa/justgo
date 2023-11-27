@@ -47,6 +47,7 @@ class UserController extends Controller
         // $this->authorize('create_users');
 
         $this->userService->store($request->validated());
+        return redirect()->route('dashboard.users.index');
     }
     /**
      * Display the specified resource.
@@ -71,9 +72,8 @@ class UserController extends Controller
         // $this->authorize('update_users');
 
         $user = $this->userService->show($id);
-        $categories = $this->categoryService->findByType('users');
 
-        return view(checkView('dashboard.users.edit'), get_defined_vars());
+        return view(checkView('dashboard.edit-user'), compact('user'));
     }
 
     /**
@@ -84,7 +84,8 @@ class UserController extends Controller
     {
         // $this->authorize('update_users');
 
-        return $this->userService->update($request->validated(), $id);
+         $this->userService->update($request->validated(), $id);
+        return redirect()->route('dashboard.users.index');
     }
 
     /**
@@ -95,5 +96,6 @@ class UserController extends Controller
         // $this->authorize('delete_users');
 
         $this->userService->destroy($id);
+        return redirect()->route('dashboard.users.index');
     }
 }

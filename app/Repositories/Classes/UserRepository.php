@@ -60,16 +60,14 @@ class UserRepository extends BasicRepository implements IAdminRepository, IMainR
      */
     public function store($data)
     {
-        if (isset($data['image'])) {
-            $data['image']  = storeImage('Users', $data['image']);
+        if (isset($data['profile_image'])) {
+            $data['profile_image']  = storeImage('Users', $data['profile_image']);
         }
-        $data['active']= 'active';
+        $data['status']= 'active';
         $data['password'] = Hash::make($data['password']);
-        $categories = $data['categories'];
-        unset($data['categories']);
+
         $user=  $this->create($data);
-        $user->categories()->sync($categories);
-        
+
 
     }
     public function list()
@@ -91,11 +89,11 @@ class UserRepository extends BasicRepository implements IAdminRepository, IMainR
     public function update($request, $id = null)
     {
         $user = $this->find($id);
-        if (isset($request['image'])) {
-            $request['image'] = storeImage('Users', $request['image']) ?? $user->image;
-            deleteImage('Users', $user['image']);
+        if (isset($request['profile_image'])) {
+            $request['profile_image'] = storeImage('Users', $request['profile_image']) ?? $user->profile_image;
+            deleteImage('Users', $user['profile_image']);
         }
-    
+
         return $this->save($request, $id);
     }
 
@@ -106,7 +104,7 @@ class UserRepository extends BasicRepository implements IAdminRepository, IMainR
     public function destroy($id): mixed
     {
         $user = $this->find($id);
-        deleteImage('Users', $user['image']);
+        deleteImage('Users', $user['profile_image']);
         return $this->delete($id);
     }
 }

@@ -4,7 +4,22 @@
 <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/partners.css" />
 @endpush
 @section('content')
+<header class="headerOptions">
+    <button class="open-sidebar"><img src="{{ asset('dashboard/') }}/assets/icons/menu.svg" alt="" /></button>
 
+    <div class="headerActions">
+      <a class="addNewBtn" href="{{ route('dashboard.gyms.create') }}"><span>+</span> تسجيل جديد</a>
+      <div class="notifacationAndSearchBtn">
+        <img src="{{ asset('dashboard/') }}/assets/icons/notifications.svg" alt="notifacation icon" />
+      </div>
+      <div class="notifacationAndSearchBtn">
+        <img src="{{ asset('dashboard/') }}/assets/icons/search.svg" alt="search icon" />
+      </div>
+      <div class="userImage">
+        <img src="{{ asset('dashboard/') }}/assets/images/user.png" alt="userImage" />
+      </div>
+    </div>
+  </header>
         <section>
 
           <div class="contentS2">

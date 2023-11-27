@@ -12,6 +12,10 @@
 
     <!-- only for page -->
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/homePage.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/new-user.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/fontawesome-free/css/all.min.css" />
+
+
     @stack('styles')
 
   </head>
