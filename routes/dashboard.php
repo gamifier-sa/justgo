@@ -82,7 +82,11 @@ Route::group(
                     Route::get('/{id}/edit', 'edit')->name('edit');
                     Route::put('/{id}/update', 'update')->name('update');
                     Route::delete('/{id}/', 'destroy')->name('delete');
+                    Route::post('deleteimage/{id}/', 'deleteimage')->name('deleteimage');
+
                 });
+
+
 
                 Route::controller(PackageController::class)->prefix('packages')->name('packages.')->group(function () {
                     Route::get('/', 'index')->name('index');

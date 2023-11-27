@@ -6,8 +6,9 @@
 @section('content')
 
     <section class="newUserPage">
-        <form action="{{ route('dashboard.gyms.update',$gym->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('dashboard.gyms.update', $gym->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT');
             <div class="content">
                 <div class="row">
                     <div class="col-6">
@@ -15,11 +16,11 @@
                             <h5> صورة الشعار </h5>
                             <div class="addGallary">
                                 @if (!isset($gym->logo))
-                                <img id="logo-preview" src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg"
-                                style="width:50px;height:50px" alt="" />
+                                    <img id="logo-preview" src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg"
+                                        style="width:50px;height:50px" alt="" />
                                 @else
-                                <img id="logo-preview" src="{{ getImage('Gyms',$gym->logo) }}"
-                                style="width:50px;height:50px" alt="" />
+                                    <img id="logo-preview" src="{{ getImage('Gyms', $gym->logo) }}"
+                                        style="width:50px;height:50px" alt="" />
                                 @endif
                                 <p>رفع الصورة</p>
                                 <input type="file" onchange="previewImage(this, 'logo-preview')" name="logo" />
@@ -35,11 +36,12 @@
                             <h5> صورة الغلاف</h5>
                             <div class="addGallary">
                                 @if (!isset($gym->cover_image))
-                                <img id="cover_image-preview" src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg"
-                                style="width:50px;height:50px" alt="" />
+                                    <img id="cover_image-preview"
+                                        src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg"
+                                        style="width:50px;height:50px" alt="" />
                                 @else
-                                <img id="cover_image-preview"  src="{{ getImage('Gyms',$gym->cover_image) }}"
-                                style="width:50px;height:50px" alt="" />
+                                    <img id="cover_image-preview" src="{{ getImage('Gyms', $gym->cover_image) }}"
+                                        style="width:50px;height:50px" alt="" />
                                 @endif
 
                                 <p>رفع الصورة</p>
@@ -60,7 +62,8 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control @error($locale . '.name') is-invalid @enderror"
                                     id="{{ $locale }}.name_inp" name="{{ $locale }}[name]"
-                                    value="{{ old($locale . '.name', $gym->translate($locale)->name) }}" autocomplete="off" />
+                                    value="{{ old($locale . '.name', $gym->translate($locale)->name) }}"
+                                    autocomplete="off" />
                             </div>
                             <p class="invalid-feedback" id="{{ $locale }}.name_inp"></p>
                             @error($locale . '.name')
@@ -88,7 +91,7 @@
                     <div class="col-md-12 ml-3 fv-row">
                         <label class="fs-5 fw-bold mb-2 required">العنوان</label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address-input"
-                            name="address" value="{{ old('address',$gym->address) }}" autocomplete="off" />
+                            name="address" value="{{ old('address', $gym->address) }}" autocomplete="off" />
                         <p class="invalid-feedback" id="address-input"></p>
                         @error('address')
                             <span class="text-danger">{{ $message }}</span>
@@ -191,8 +194,8 @@
                 </div>
 
 
-                <input type="hidden" name="lat" id="latitude_map" value="{{ old('lat',$gym->lat) }}">
-                <input type="hidden" name="lng" id="longitude_map" value="{{ old('lng',$gym->lng) }}">
+                <input type="hidden" name="lat" id="latitude_map" value="{{ old('lat', $gym->lat) }}">
+                <input type="hidden" name="lng" id="longitude_map" value="{{ old('lng', $gym->lng) }}">
 
                 <div class="form-group row my-5 mt-10">
                     <div class="col-10 offset-1">
@@ -210,7 +213,7 @@
                 <div>
                     <label for="username">الايميل</label>
                     <div class="inputS1">
-                        <input type="text" name="email" value="{{ old('email',$gym->email) }}" />
+                        <input type="text" name="email" value="{{ old('email', $gym->email) }}" />
                     </div>
                     @error('email')
                         <span class="text-danger">{{ $message }}</span>
@@ -219,7 +222,8 @@
                 <div>
                     <label for="username"> نسبة الاشتراك</label>
                     <div class="inputS1">
-                        <input type="text" name="subscription_rate" value="{{ old('subscription_rate',$gym->subscription_rate) }}" />
+                        <input type="text" name="subscription_rate"
+                            value="{{ old('subscription_rate', $gym->subscription_rate) }}" />
                     </div>
                     @error('subscription_rate')
                         <span class="text-danger">{{ $message }}</span>
@@ -229,7 +233,7 @@
                     <label for="username"> عدد العملاء المتوقع </label>
                     <div class="inputS1">
                         <input type="text" name="expected_number_customers"
-                            value="{{ old('expected_number_customers',$gym->expected_number_customers) }}" />
+                            value="{{ old('expected_number_customers', $gym->expected_number_customers) }}" />
                     </div>
                     @error('expected_number_customers')
                         <span class="text-danger">{{ $message }}</span>
@@ -240,10 +244,10 @@
                     <select name="city_id" id="city_id" class="form-control">
                         <option value="" disabled selected>اختر من القائمة</option>
                         @foreach ($cities as $city)
-                        <option value="{{ $city->id }}" {{ $city->id == $gym->city_id ? 'selected' : '' }}>
-                            {{ $city->name }}
-                        </option>
-                    @endforeach
+                            <option value="{{ $city->id }}" {{ $city->id == $gym->city_id ? 'selected' : '' }}>
+                                {{ $city->name }}
+                            </option>
+                        @endforeach
                     </select>
                     @error('city_id')
                         <span class="text-danger">{{ $message }}</span>
@@ -253,7 +257,23 @@
                     <h5> صور الشريك </h5>
                     <div class="addGallary">
                         <input type="file" name="images[]" id="gallery-photo-add" multiple />
-                        <div class="row  gallery mt-3"></div>
+                        <div class="row  gallery mt-3">
+                            @foreach ($gym->images as $image)
+                                <div class="col-3 ">
+                                    <img src="{{ getImage('Gyms', $image->image) }}" id="image_{{ $image->id }}"
+                                        class="mt-3" style="width: 100px; height: 100px;">
+                                    <button type="button"
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        style=" position: relative;
+                                    top: -126px;
+                                    left: 30px;
+                                    border-radius: 50px"
+                                        onclick="deleteImage('{{ $image->id }}')">
+                                        X
+                                    </button>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                     @error('images')
                         <span class="text-danger">{{ $message }}</span>
@@ -264,7 +284,7 @@
             </div>
 
             <div class="button">
-                <button class="addNewBtn" type="submit"><span>+</span> تسجيل جديد</button>
+                <button class="addNewBtn" type="submit"><span>-</span>  تعديل البيانات </button>
             </div>
         </form>
     </section>
@@ -290,48 +310,33 @@
             $(function() {
                 var map;
                 var userMarker;
-
-                // Initialize the map with a default center
+                var centerLat= {{ $gym->lat }};
+                var centerLng= {{ $gym->lng }};
+                // Initialize the map with a specified center
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
                         center: {
-                            lat: -25.344,
-                            lng: 131.036
+                            lat: centerLat,
+                            lng: centerLng
                         },
                         zoom: 10
                     });
 
-                    // Try to get the user's current location
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function(position) {
-                            var userLocation = {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            };
+                    // Show a marker at the specified location
+                    userMarker = new google.maps.Marker({
+                        position: {
+                            lat: centerLat,
+                            lng: centerLng
+                        },
+                        map: map,
+                        title: 'Your Location',
+                        draggable: true // Make the marker draggable
+                    });
 
-                            // Update the map center to the user's location
-                            map.setCenter(userLocation);
-
-                            // Show a marker at the user's current position
-                            userMarker = new google.maps.Marker({
-                                position: userLocation,
-                                map: map,
-                                title: 'Your Location',
-                                draggable: true // Make the marker draggable
-                            });
-
-                            // Add event listener for marker drag
-                            google.maps.event.addListener(userMarker, 'dragend', function(event) {
-                                updateHiddenInputs(event.latLng.lat(), event.latLng.lng());
-                            });
-                        }, function() {
-                            // Handle errors (optional)
-                            console.error('Error getting user location');
-                        });
-                    } else {
-                        // Browser doesn't support Geolocation (optional)
-                        console.error('Browser does not support Geolocation');
-                    }
+                    // Add event listener for marker drag
+                    google.maps.event.addListener(userMarker, 'dragend', function(event) {
+                        updateHiddenInputs(event.latLng.lat(), event.latLng.lng());
+                    });
                 }
 
                 // Function to update hidden input fields
@@ -340,12 +345,8 @@
                     $('#longitude_map').val(longitude);
                 }
 
-                // Rest of your existing code...
-
-                // Initialize the map
+                // Call initMap with the specific latitude and longitude values from the database
                 initMap();
-
-
             });
         </script>
         <script>
@@ -408,6 +409,25 @@
                 if (file) {
                     reader.readAsDataURL(file);
                 }
+            }
+        </script>
+        <script>
+            function deleteImage(imageId) {
+
+                var csrf = "{{ csrf_token() }}"
+                $.ajax({
+                    url: '{{ route('dashboard.gyms.deleteimage', ['id' => ':id']) }}'.replace(':id', imageId),
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': csrf
+                    },
+                    success: function(response) {
+                        $('#image_' + imageId).parent().remove();
+                    },
+                    error: function(error) {
+                        console.error('Error deleting image:', error);
+                    }
+                });
             }
         </script>
     @endpush
