@@ -14,7 +14,8 @@
     
     <section>
         <div class="container">
-            <div class="mt-5 w-70">
+            <div class="mt-5 w-70" style="width: 500px;margin: 100px auto;">
+            <h2 class="m-5 text-center" style="font-family: cairo;">تسجل دخول الآدمن</h2>
                 <form action="{{ route('dashboard.postLogin') }}"  method="POST">
                   @csrf
                     <div class="form-group">
@@ -30,7 +31,7 @@
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                       <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                   </form>
             </div>
         </div>
