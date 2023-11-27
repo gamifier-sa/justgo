@@ -13,6 +13,13 @@
         <form action="{{ route('dashboard.users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="content">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
                 <div class="gymSlug">
                     <h5> الصورة الشخصية</h5>
                     <div class="addGallary">
