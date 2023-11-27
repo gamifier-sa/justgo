@@ -23,7 +23,7 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
-
+        'as' => 'dashboard.'
     ],
     function () {
 

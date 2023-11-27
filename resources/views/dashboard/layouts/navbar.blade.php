@@ -10,7 +10,7 @@
     <div class="menu">
       <ul class="menu-links">
         <li class="nav-link">
-          <a href="{{ route('index') }}" class="{{ prefixActive('index') }}">
+          <a href="{{ route('dashboard.index') }}" class="{{ prefixActive('index') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/home.svg" alt="" />
             </div>
@@ -19,7 +19,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('sales') }}" class="{{ prefixActive('sales') }}">
+          <a href="{{ route('dashboard.sales') }}" class="{{ prefixActive('sales') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/sales.svg" alt="" />
             </div>
@@ -28,7 +28,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('contactus') }}" class="{{ prefixActive('contactus') }}">
+          <a href="{{ route('dashboard.contactus') }}" class="{{ prefixActive('contactus') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/questions.svg" alt="" />
             </div>
@@ -37,7 +37,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('users.index') }}" class="{{ prefixActive('users') }}">
+          <a href="{{ route('dashboard.users.index') }}" class="{{ prefixActive('users') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/users.svg" alt="" />
             </div>
@@ -46,7 +46,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('gyms.index') }}" class="{{ prefixActive('gyms') }}">
+          <a href="{{ route('dashboard.gyms.index') }}" class="{{ prefixActive('gyms') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/partners.svg" alt="" />
             </div>
@@ -55,7 +55,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('packages.index') }}" class="{{ prefixActive('packages') }}">
+          <a href="{{ route('dashboard.packages.index') }}" class="{{ prefixActive('packages') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/subscriptions.svg" alt="" />
             </div>
@@ -64,7 +64,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('packages.index') }}" class="{{ prefixActive('packages') }}">
+          <a href="{{ route('dashboard.packages.index') }}" class="{{ prefixActive('packages') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/reports.svg" alt="" />
             </div>
@@ -73,7 +73,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('gifts') }}" class="{{ prefixActive('gifts') }}">
+          <a href="{{ route('dashboard.gifts') }}" class="{{ prefixActive('gifts') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/gifts.svg" alt="" />
             </div>
@@ -84,7 +84,7 @@
 
       <ul class="menu-links">
         <li class="nav-link">
-          <a href="{{ route('settings') }}" class="{{ prefixActive('settings') }}">
+          <a href="{{ route('dashboard.settings') }}" class="{{ prefixActive('settings') }}">
             <div class="icon">
               <img src="{{ asset('dashboard/') }}/assets/icons/settings.svg" alt="" />
             </div>
