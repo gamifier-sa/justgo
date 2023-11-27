@@ -41,6 +41,8 @@
                       <th scope="col">المدينة</th>
                       <th scope="col">معدل تكرار الزيارة</th>
                       <th scope="col">حالة الشريك</th>
+                      <th scope="col"> إجراءات</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -76,6 +78,20 @@
                       <td>
                         <div class="subscribeStatus">شريك جديد</div>
                       </td>
+                      <td>
+                        <form action="{{route('dashboard.gyms.delete',$gym->id)}}"
+                            method="post"
+                            style="display: inline-block">
+                          @csrf
+                          @method('delete')
+                          <button type="submit"
+                                  class="btn btn-danger btn-sm delete-btn">
+                              <i class="fa fa-trash"></i></button>
+
+                              <a href="{{route('dashboard.gyms.edit', $gym->id )}}"
+                                class="btn btn-primary  btn-sm"><i
+                                     class="fa fa-edit"></i></a>
+                    </td>
                     </tr>
                     @endforeach
 

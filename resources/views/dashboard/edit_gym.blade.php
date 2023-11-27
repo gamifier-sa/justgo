@@ -6,17 +6,21 @@
 @section('content')
 
     <section class="newUserPage">
-        <form action="{{ route('dashboard.gyms.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('dashboard.gyms.update',$gym->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-
             <div class="content">
                 <div class="row">
                     <div class="col-6">
                         <div class="gymSlug">
                             <h5> صورة الشعار </h5>
                             <div class="addGallary">
+                                @if (!isset($gym->logo))
                                 <img id="logo-preview" src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg"
-                                    style="width:50px;height:50px" alt="" />
+                                style="width:50px;height:50px" alt="" />
+                                @else
+                                <img id="logo-preview" src="{{ getImage('Gyms',$gym->logo) }}"
+                                style="width:50px;height:50px" alt="" />
+                                @endif
                                 <p>رفع الصورة</p>
                                 <input type="file" onchange="previewImage(this, 'logo-preview')" name="logo" />
                             </div>
@@ -30,8 +34,14 @@
                         <div class="gymSlug">
                             <h5> صورة الغلاف</h5>
                             <div class="addGallary">
+                                @if (!isset($gym->cover_image))
                                 <img id="cover_image-preview" src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg"
-                                    style="width:50px;height:50px" alt="" />
+                                style="width:50px;height:50px" alt="" />
+                                @else
+                                <img id="cover_image-preview"  src="{{ getImage('Gyms',$gym->cover_image) }}"
+                                style="width:50px;height:50px" alt="" />
+                                @endif
+
                                 <p>رفع الصورة</p>
                                 <input type="file" onchange="previewImage(this, 'cover_image-preview')"
                                     name="cover_image" />
@@ -50,7 +60,7 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control @error($locale . '.name') is-invalid @enderror"
                                     id="{{ $locale }}.name_inp" name="{{ $locale }}[name]"
-                                    value="{{ old($locale . '.name') }}" autocomplete="off" />
+                                    value="{{ old($locale . '.name', $gym->translate($locale)->name) }}" autocomplete="off" />
                             </div>
                             <p class="invalid-feedback" id="{{ $locale }}.name_inp"></p>
                             @error($locale . '.name')
@@ -66,7 +76,7 @@
                             <label>@lang('admin.' . $locale . '.description')</label>
 
                             <textarea class="form-control form-control-solid" style="resize: none;width:250px;height:150px"
-                                name="{{ $locale }}[description]" id="{{ $locale }}.description_inp"></textarea>
+                                name="{{ $locale }}[description]" id="{{ $locale }}.description_inp">{{ $gym->translate($locale)->description }}</textarea>
                             <p class="invalid-feedback" id="{{ $locale }}.description_inp"></p>
                             @error($locale . '.description')
                                 <div class="text-danger">{{ $message }}</div>
@@ -78,7 +88,7 @@
                     <div class="col-md-12 ml-3 fv-row">
                         <label class="fs-5 fw-bold mb-2 required">العنوان</label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address-input"
-                            name="address" value="{{ old('address') }}" autocomplete="off" />
+                            name="address" value="{{ old('address',$gym->address) }}" autocomplete="off" />
                         <p class="invalid-feedback" id="address-input"></p>
                         @error('address')
                             <span class="text-danger">{{ $message }}</span>
@@ -181,8 +191,8 @@
                 </div>
 
 
-                <input type="hidden" name="lat" id="latitude_map" value="{{ old('lat') }}">
-                <input type="hidden" name="lng" id="longitude_map" value="{{ old('lng') }}">
+                <input type="hidden" name="lat" id="latitude_map" value="{{ old('lat',$gym->lat) }}">
+                <input type="hidden" name="lng" id="longitude_map" value="{{ old('lng',$gym->lng) }}">
 
                 <div class="form-group row my-5 mt-10">
                     <div class="col-10 offset-1">
@@ -200,7 +210,7 @@
                 <div>
                     <label for="username">الايميل</label>
                     <div class="inputS1">
-                        <input type="text" name="email" value="{{ old('email') }}" />
+                        <input type="text" name="email" value="{{ old('email',$gym->email) }}" />
                     </div>
                     @error('email')
                         <span class="text-danger">{{ $message }}</span>
@@ -209,7 +219,7 @@
                 <div>
                     <label for="username"> نسبة الاشتراك</label>
                     <div class="inputS1">
-                        <input type="text" name="subscription_rate" value="{{ old('subscription_rate') }}" />
+                        <input type="text" name="subscription_rate" value="{{ old('subscription_rate',$gym->subscription_rate) }}" />
                     </div>
                     @error('subscription_rate')
                         <span class="text-danger">{{ $message }}</span>
@@ -219,7 +229,7 @@
                     <label for="username"> عدد العملاء المتوقع </label>
                     <div class="inputS1">
                         <input type="text" name="expected_number_customers"
-                            value="{{ old('expected_number_customers') }}" />
+                            value="{{ old('expected_number_customers',$gym->expected_number_customers) }}" />
                     </div>
                     @error('expected_number_customers')
                         <span class="text-danger">{{ $message }}</span>
@@ -230,8 +240,10 @@
                     <select name="city_id" id="city_id" class="form-control">
                         <option value="" disabled selected>اختر من القائمة</option>
                         @foreach ($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->name }}</option>
-                        @endforeach
+                        <option value="{{ $city->id }}" {{ $city->id == $gym->city_id ? 'selected' : '' }}>
+                            {{ $city->name }}
+                        </option>
+                    @endforeach
                     </select>
                     @error('city_id')
                         <span class="text-danger">{{ $message }}</span>

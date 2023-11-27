@@ -24,25 +24,30 @@ class GymController extends Controller
 
     public function store(GymRequest $request)
     {
-        $data =$request->validate();
+        $data =$request->validated();
 
-
-        if (isset($data['cover_image'])) {
-            $data['cover_image']  = storeImage('Gyms', $data['cover_image']);
+        if (isset($data['logo'])) {
+            $data['logo']  = storeImage('Gyms', $data['logo']);
         }
         if (isset($data['cover_image'])) {
             $data['cover_image']  = storeImage('Gyms', $data['cover_image']);
         }
-        $images = $data['images'];
         unset($data['images']);
 
         $gym= Gym::create($data);
+        $images = $data['images'];
         foreach ($images as $image) {
             $data['image']  = storeImage('Gyms', $image);
-            $gym->images()->create(['image' => $data['image']]);
+            $gym->images()->create(['image' => $image]);
         }
-
         return redirect()->route('dashboard.gyms.index');
+    }
+    public function edit($id) {
+        $gym =Gym::findOrfail($id);
+        $cities = City::get();
+
+        return view('dashboard.edit_gym',compact('gym','cities'));
+
     }
     public function update(GymRequest $request,$id)
     {

@@ -31,6 +31,8 @@ class GymRequest extends FormRequest
             'subscription_rate' => ['required', 'numeric'],
             'expected_number_customers' => ['required', 'numeric'],
             'city_id' => ['sometimes','nullable','exists:cities,id'],
+            'images'    => ['sometimes','nullable', 'array'],
+
         ];
         foreach (config('translatable.locales') as $one_lang) {
             $rules[$one_lang . '.name'] = 'required|min:2|max:100';
@@ -57,6 +59,8 @@ class GymRequest extends FormRequest
             'subscription_rate' => ['required', 'numeric'],
             'expected_number_customers' => ['required', 'numeric'],
             'city_id' => ['sometimes','nullable','exists:cities,id'],
+            'images'    => ['sometimes','nullable', 'array'],
+
         ];
         foreach (config('translatable.locales') as $one_lang) {
             $rules[$one_lang . '.name'] = 'required|min:2|max:100';
@@ -73,6 +77,7 @@ class GymRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return request()->isMethod('put') || request()->isMethod('patch') ? $this->update() : $this->store();
     }
 
