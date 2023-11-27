@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                   <div class="salesCard">
-                    <h4>زيارات التطبيق</h4>
+                    <h4>زيارات النوادي</h4>
                     <canvas id="applicationVisits"></canvas>
                   </div>
                 </div>
@@ -198,11 +198,11 @@
   }
 
   const chartData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Agt", "Sep", "Oct", "Nov", "Dec"],
+    labels: {!! json_encode($months) !!},
     datasets: [
       {
-        label: "زبارات التطبيق",
-        data: [10, 11, 2, 63, 50, 40, 100, 90, 20, 63, 3, 40],
+        label: "زبارات النوادي",
+        data: {!! json_encode($visitCounts) !!},
         // backgroundColor: "#2611E5",
         borderColor: "#2611E5",
         borderWidth: 2, // Border width for bars
