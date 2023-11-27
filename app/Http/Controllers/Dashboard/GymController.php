@@ -7,6 +7,8 @@ use App\Http\Requests\GymRequest;
 use App\Models\City;
 use App\Models\Gym;
 use App\Models\GymImage;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GymController extends Controller
@@ -37,6 +39,22 @@ class GymController extends Controller
         unset($data['images']);
 
         $gym = Gym::create($data);
+
+        $title = 'اشعار جديد';
+        $body = [
+            'messsage'=>'تم انشاء صالة رياضية جديدة'
+        ];
+        $users = User::get();
+        foreach ($users as $user) {
+            sendNotification($title, $body, $user->device_token, $gym->id);
+        }
+        Notification::create([
+            'title'=> $title,
+            'data'=>'تم انشاء صالة جديدة',
+            'gym_id' => $gym->id,
+
+        ]);
+
         $images = $request->images;
         foreach ($images as $image) {
             $newImageName = storeImage('Gyms', $image);

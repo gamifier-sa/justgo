@@ -5,6 +5,8 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GiftRequest;
 use App\Models\GiftUser;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GiftController extends Controller
@@ -29,7 +31,21 @@ class GiftController extends Controller
             $data['gift_card_image']  = storeImage('Gifts', $data['gift_card_image']);
         }
 
-        GiftUser::create($data);
+        $gift=GiftUser::create($data);
+        $title = 'اشعار جديد';
+        $body = [
+            'messsage'=>'تم انشاء هدية جديدة'
+        ];
+        $users = User::get();
+        foreach ($users as $user) {
+            sendNotification($title, $body, $user->device_token, $gift->id);
+        }
+        Notification::create([
+            'title'=> $title,
+            'data'=>'تم انشاء هدية جديدة',
+            'gym_id' => null,
+
+        ]);
         return redirect()->route('dashboard.gifts.index');
     }
     public function edit($id)

@@ -124,7 +124,7 @@ if (!function_exists('shortenNumber')) {
     }
 
 
-    function sendNotification($title, $body, $token = null, $event = null)
+    function sendNotification($title, $body, $token = null, $gym = null)
     {
         $firebaseToken = [$token];
         if (!$token) {
@@ -132,19 +132,19 @@ if (!function_exists('shortenNumber')) {
         }
 
 
-        $SERVER_API_KEY = 'AIzaSyDznKCzwITPbiCK4oO6zFFjOchmfpqsaGg';
+        $SERVER_API_KEY = 'AIzaSyAf7xCnpVHdF4lb5WkkggRd7LdGyy4O9KE';
         $data = [
             "registration_ids" => $firebaseToken,
             "notification" => [
                 "title" => $title,
                 "body" => $body,
-                "event_id" => $event
+                "gym_id" => $gym
             ],
             "data" => [
                 "title" => $title,
                 "body" => $body,
-                "event_id" => $event,
-                "click_action" => "FISH_ACTION"
+                "gym_id" => $gym,
+                "click_action" => "GYM_ACTION"
 
             ],
         ];
