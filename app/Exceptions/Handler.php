@@ -53,12 +53,7 @@ class Handler extends ExceptionHandler
                 ],
             ], $statusCode);
         }
-
-        $url = $request->url();
-
-        if (Str::contains($url, 'dashboard')) {
-            return redirect()->route('dashboard.login');
-        } 
+        
         return parent::render($request, $exception);
     }
 
