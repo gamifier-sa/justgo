@@ -16,10 +16,11 @@ class VisitSeeder extends Seeder
         for($i = 1; $i <= 8; $i++){
             $xRandom = rand(10, 100);
             for($x = 1; $x <= $xRandom; $x++){
+              
                 Visit::create([
                     'user_id'=>1,
                     'gym_id'=>rand(1,3),
-                    'visit_date'=>'2023-'.$i.'-'.$x.' 12:01:06'
+                    'visit_date'=>'2023-'.rand(1,12).'-'.rand(1,28).' 12:01:06'
                 ]);
             }
         }

@@ -32,7 +32,7 @@ class GymSeeder extends Seeder
                 'cover_image' => 'logo1.jpg',
                 'logo' => 'logo1.jpg',
                 'subscription_rate' => 10,
-                'expected_number_customers' => 1500,
+                'expected_number_customers' => 500,
                 'city_id'=>1
             ], [
                 'en' => [
@@ -51,7 +51,7 @@ class GymSeeder extends Seeder
                 'cover_image' => 'logo2.jpg',
                 'logo' => 'logo2.jpg',
                 'subscription_rate' => 20,
-                'expected_number_customers' => 2500,
+                'expected_number_customers' => 500,
                 'city_id'=>2
 
             ], [
@@ -71,7 +71,7 @@ class GymSeeder extends Seeder
                 'cover_image' => 'logo3.jpg',
                 'logo' => 'logo3.jpg',
                 'subscription_rate' => 30,
-                'expected_number_customers' => 2900,
+                'expected_number_customers' => 900,
                 'city_id'=>3
 
             ]
