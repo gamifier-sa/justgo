@@ -92,11 +92,16 @@
           </a>
         </li>
         <li class="nav-link">
-          <a href="settings.html">
+          <a href="#">
             <div class="icon">
               <img src="{{ asset('dashboard/') }}/assets/icons/help.svg" alt="" />
             </div>
             <span>مركز المساعدة</span>
+          </a>
+        </li>
+        <li class="nav-link mb-5">
+          <a href="{{ route('dashboard.logout') }}">
+            <span>تسجيل الخروج</span>
           </a>
         </li>
       </ul>

@@ -6,6 +6,8 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Str;
 
 class Handler extends ExceptionHandler
 {
@@ -32,20 +34,40 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof ValidationException) {
-            return $this->convertValidationExceptionToResponse($exception, $request);
+        if ($request->is('api/*')) {
+            // Check if the request is for an API route
+
+            if ($exception instanceof ValidationException) {
+                return $this->convertValidationExceptionToResponse($exception, $request);
+            }
+
+            // Customize this part based on your needs
+            $statusCode = $this->getStatusCode($exception);
+            $errorCode = $exception->getCode() ?: $statusCode;
+            $errorMessage = $exception->getMessage() ?: 'Internal Server Error';
+
+            return response()->json([
+                'error' => [
+                    'code' => $errorCode,
+                    'message' => $errorMessage,
+                ],
+            ], $statusCode);
         }
 
-        // Customize this part based on your needs
-        $statusCode = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;
-        $errorCode = $exception->getCode() ?: $statusCode;
-        $errorMessage = $exception->getMessage() ?: 'Internal Server Error';
+        $url = $request->url();
 
-        return response()->json([
-            'error' => [
-                'code' => $errorCode,
-                'message' => $errorMessage,
-            ],
-        ], $statusCode);
+        if (Str::contains($url, 'dashboard')) {
+            return redirect()->route('dashboard.login');
+        } 
+        return parent::render($request, $exception);
+    }
+
+    protected function getStatusCode(Throwable $exception)
+    {
+        if ($exception instanceof HttpException) {
+            return $exception->getStatusCode();
+        }
+
+        return method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;
     }
 }

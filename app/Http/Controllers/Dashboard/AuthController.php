@@ -30,8 +30,9 @@ class AuthController extends Controller
     {
         Artisan::call("cache:clear");
         $admin = Admin::where('email', $request['email'])->first();
+
         if (!$admin) {
-            return redirect()->back()->withInput()->with(['error' => 'Invalid Email Or Password!']);
+            return redirect()->back()->withInput()->withErrors(['error' => 'Invalid Email Or Password!']);
         }
 
         if (Auth::guard('admins')->attempt($request->only(['email', 'password']))) {
