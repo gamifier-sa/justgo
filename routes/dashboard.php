@@ -23,7 +23,7 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
-        'as' => 'dashboard.'
+
     ],
     function () {
 
@@ -108,7 +108,7 @@ Route::group(
                     Route::get('role/{id}/admins', 'admins');
                 });
 
-          
+
                 Route::get('gifts', function(){
                     return view('dashboard.gifts');
                 })->name('gifts');
@@ -116,7 +116,7 @@ Route::group(
                 Route::get('settings', function(){
                     return view('dashboard.settings');
                 })->name('settings');
-   
+
 
 
 

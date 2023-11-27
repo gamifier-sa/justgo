@@ -31,8 +31,14 @@ class GymController extends Controller
         if (isset($data['cover_image'])) {
             $data['cover_image']  = storeImage('Gyms', $data['cover_image']);
         }
+        $images = $data['images'];
+        unset($data['images']);
 
-        Gym::create($data);
+        $gym= Gym::create($data);
+        foreach ($images as $image) {
+            $data['image']  = storeImage('Gyms', $image);
+            $gym->images()->create(['image' => $data['image']]);
+        }
 
         return redirect()->route('dashboard.gyms.index');
     }
