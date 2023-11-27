@@ -1,6 +1,6 @@
 <nav class="sidebarApp">
     <div class="head">
-      <a href="{{ route('index') }}">
+      <a href="{{ route('dashboard.index') }}">
         <img src="{{ asset('dashboard/') }}/assets/images/logo.svg" alt="logo" />
       </a>
     </div>
