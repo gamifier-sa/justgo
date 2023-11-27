@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\{
     UserController,
     SalesController,
     ContactUsController,
+    GiftController,
     GymController,
     PackageController,
     OfferController
@@ -85,7 +86,15 @@ Route::group(
                     Route::post('deleteimage/{id}/', 'deleteimage')->name('deleteimage');
 
                 });
+                Route::controller(GiftController::class)->prefix('gifts')->name('gifts.')->group(function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::get('/create', 'create')->name('create');
+                    Route::post('/store', 'store')->name('store');
+                    Route::get('/{id}/edit', 'edit')->name('edit');
+                    Route::put('/{id}/update', 'update')->name('update');
+                    Route::delete('/{id}/', 'destroy')->name('delete');
 
+                });
 
 
                 Route::controller(PackageController::class)->prefix('packages')->name('packages.')->group(function () {
@@ -113,9 +122,7 @@ Route::group(
                 });
 
 
-                Route::get('gifts', function(){
-                    return view('dashboard.gifts');
-                })->name('gifts');
+
 
                 Route::get('settings', function(){
                     return view('dashboard.settings');

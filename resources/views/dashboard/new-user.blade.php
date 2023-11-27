@@ -5,9 +5,7 @@
 @endpush
 @section('content')
 
-
-
-    <section class="newUserPage">
+    <section class="newUserPage">>
         <form action="{{ route('dashboard.users.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="content">
@@ -15,9 +13,9 @@
                 <div class="gymSlug">
                     <h5> الصورة الشخصية</h5>
                     <div class="addGallary">
-                        <img src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg" alt="" />
+                        <img id='profile_image-preview' src="{{ asset('dashboard/') }}/assets/icons/addGallary.svg" alt="" />
                         <p>رفع الصورة</p>
-                        <input type="file" name="profile_image" />
+                        <input type="file" name="profile_image" onchange="previewImage(this, 'profile_image-preview')" />
                     </div>
                     @error('profile_image')
                         <span class="text-danger">{{ $message }}</span>
@@ -123,6 +121,22 @@
             </div>
         </form>
     </section>
+    @push('scripts')
+    <script>
+        function previewImage(input, previewId) {
+            var preview = document.getElementById(previewId);
+            var file = input.files[0];
 
+            var reader = new FileReader();
 
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    @endpush
 @endsection

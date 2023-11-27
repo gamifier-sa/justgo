@@ -73,7 +73,7 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('dashboard.gifts') }}" class="{{ prefixActive('gifts') }}">
+          <a href="{{ route('dashboard.gifts.index') }}" class="{{ prefixActive('gifts') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/gifts.svg" alt="" />
             </div>

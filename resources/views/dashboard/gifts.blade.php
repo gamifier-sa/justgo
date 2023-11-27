@@ -1,48 +1,96 @@
 @extends('dashboard.layouts.app')
-@section('page_title', 'Gifts')
+@section('page_title', 'Gifts Page')
 @push('styles')
-<link rel="stylesheet" href="{{ asset('dashboard/') }}/css/gifts.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/members.css" />
 @endpush
 @section('content')
+<header class="headerOptions">
+    <button class="open-sidebar"><img src="{{ asset('dashboard/') }}/assets/icons/menu.svg" alt="" /></button>
 
-        <section class="giftsPage">
-          <form action="">
-            <div class="contentS2">
-              <div class="row">
-                <div class="col-sm-6 col-xl-8"><h1>ارسل الهدايا للعملاء</h1></div>
-                <div class="col-sm-6 col-xl-4">
-                  <div class="cardS1">
-                    <label for="" class="labelS2"> عدد الايام </label>
-                    <input type="text" />
-                  </div>
+    <div class="headerActions">
+      <a class="addNewBtn" href="{{ route('dashboard.gifts.create') }}"><span>+</span> تسجيل جديد</a>
+      <div class="notifacationAndSearchBtn">
+        <img src="{{ asset('dashboard/') }}/assets/icons/notifications.svg" alt="notifacation icon" />
+      </div>
+      <div class="notifacationAndSearchBtn">
+        <img src="{{ asset('dashboard/') }}/assets/icons/search.svg" alt="search icon" />
+      </div>
+      <div class="userImage">
+        <img src="{{ asset('dashboard/') }}/assets/images/user.png" alt="userImage" />
+      </div>
+    </div>
+  </header>
+    <section>
+
+        <div class="contentS2">
+            <!-- الهدايا  -->
+            <div class="sectionS1">
+                <div class="sectionHead">
+                    <h3>الهدايا</h3>
+                    <div class="searchInput">
+                        <input type="text" />
+                        <img src="{{ asset('dashboard/') }}/assets/icons/inputSearch.svg" alt="" />
+                    </div>
                 </div>
-              </div>
+                <div class="table-responsive-xl">
+                    <table class="table tableS1">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">  عدد الايام</th>
+                                <th scope="col">حالة الهدية</th>
+                                <th scope="col"> إجراءات</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(isset($gifts))
+                            @foreach ($gifts as $gift)
+                            <tr>
+                                <th scope="row">
+                                    <div class="user">
+                                        @if (!$gift->gift_card_image)
+                                        <img src="{{ asset('dashboard/') }}/assets/images/tableUser.png"  alt="">
+
+                                        @else
+                                        <img src="{{ getImage('Gifts', $gift->gift_card_image) }}" alt=""
+                                        style="width: 50px;height:50px" />
+
+                                        @endif
+
+                                    </div>
+                                </th>
+
+                                <td> {{ $gift->number_days }}</td>
+
+
+                                <td>
+                                    <div class="subscribeStatus">هدية جديدة</div>
+                                </td>
+
+                                <td>
+                                    <form action="{{route('dashboard.gifts.delete',$gift->id)}}"
+                                        method="post"
+                                        style="display: inline-block">
+                                      @csrf
+                                      @method('delete')
+                                      <button type="submit"
+                                              class="btn btn-danger btn-sm delete-btn">
+                                          <i class="fa fa-trash"></i></button>
+                                    </form>
+                                          <a href="{{route('dashboard.gifts.edit', $gift->id )}}"
+                                            class="btn btn-primary  btn-sm"><i
+                                                 class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                            @endif
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div>
-              <div class="cardS2">
-                <div class="inputImg">
-                  <div class="icon">
-                    <img src="{{ asset('dashboard/') }}/assets/icons/add-image.svg" alt="" />
-                    <span>رفع الصورة</span>
-                  </div>
-                  <input type="file" />
-                </div>
-              </div>
-              <label for="" class="labelS2">اضافة بطاقة هدية</label>
-              <div>
-                <div class="buttons">
-                  <button class="cancel">
-                    <span>الغاء</span>
-                    <img src="{{ asset('dashboard/') }}/assets/icons/edit.svg" alt="" />
-                  </button>
-
-                  <button class="add">
-                    <span>ارسال الهدية</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </section>
-     @endsection
+        </div>
+    </section>
+@endsection

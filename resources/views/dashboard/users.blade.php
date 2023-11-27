@@ -96,7 +96,7 @@
                                       <button type="submit"
                                               class="btn btn-danger btn-sm delete-btn">
                                           <i class="fa fa-trash"></i></button>
-
+                                    </form>
                                           <a href="{{route('dashboard.users.edit', $user->id )}}"
                                             class="btn btn-primary  btn-sm"><i
                                                  class="fa fa-edit"></i></a>
