@@ -37,6 +37,15 @@
         </li>
 
         <li class="nav-link">
+          <a href="{{ route('dashboard.admins.index') }}" class="{{ prefixActive('admins') }}">
+            <div>
+              <img src="{{ asset('dashboard/') }}/assets/icons/users.svg" alt="" />
+            </div>
+            <span class="text nav-text">المديرين</span>
+          </a>
+        </li>
+
+        <li class="nav-link">
           <a href="{{ route('dashboard.users.index') }}" class="{{ prefixActive('users') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/users.svg" alt="" />
@@ -64,15 +73,6 @@
         </li>
 
         <li class="nav-link">
-          <a href="{{ route('dashboard.packages.index') }}" class="{{ prefixActive('packages') }}">
-            <div>
-              <img src="{{ asset('dashboard/') }}/assets/icons/reports.svg" alt="" />
-            </div>
-            <span class="text nav-text">التقارير</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
           <a href="{{ route('dashboard.gifts.index') }}" class="{{ prefixActive('gifts') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/gifts.svg" alt="" />
@@ -83,14 +83,14 @@
       </ul>
 
       <ul class="menu-links">
-        <li class="nav-link">
+        {{-- <li class="nav-link">
           <a href="{{ route('dashboard.settings') }}" class="{{ prefixActive('settings') }}">
             <div class="icon">
               <img src="{{ asset('dashboard/') }}/assets/icons/settings.svg" alt="" />
             </div>
             <span>الاعدادات</span>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-link">
           <a href="#">
             <div class="icon">
