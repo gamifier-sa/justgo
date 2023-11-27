@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -129,7 +128,7 @@ if (!function_exists('shortenNumber')) {
     {
         $firebaseToken = [$token];
         if (!$token) {
-            $firebaseToken = Employee::whereNotNull('device_token')->get()->pluck('device_token');
+            $firebaseToken = User::whereNotNull('device_token')->get()->pluck('device_token');
         }
 
 
@@ -181,7 +180,7 @@ if (!function_exists('contactUsStatus')) {
     {
 
         $className = 'notAnswer';
-        
+
         if($status == 'solved'){
             $className = 'finished';
         }

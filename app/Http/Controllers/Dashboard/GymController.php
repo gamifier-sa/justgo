@@ -17,7 +17,9 @@ class GymController extends Controller
 
     public function create(){
         $cities = City::get();
+
         return view('dashboard.add_new_gym',compact('cities'));
+
     }
 
     public function store(GymRequest $request)
