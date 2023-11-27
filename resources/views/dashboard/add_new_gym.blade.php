@@ -201,7 +201,13 @@
                 <div class="gymSlug mt-2">
                     <h5> صور الشريك </h5>
                     <div class="addGallary">
-                        <input type="file" name="images[]" multiple />
+                        <input type="file" name="images[]" id="gallery-photo-add" multiple />
+                        <div class="row  gallery mt-3">
+
+
+
+                        </div>
+                        <!--end::Dropzone-->
                     </div>
                 </div>
 
@@ -225,6 +231,47 @@
     <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaUvx2ThoZrlbDjfm3FyA3gnljkVh6RjU&callback=initMap&v=weekly"
     defer></script>
+    <script>
+        $(function() {
+            // Multiple images preview in browser
+            var imagesPreview = function(input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    var filesAmount = input.files.length;
+
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(event) {
+                            var image = $($.parseHTML('<img>')).attr('src', event.target.result);
+                            image.css('width', '200px'); // Set the desired width
+                            image.css('height', 'auto'); // Set the height to auto to maintain aspect ratio
+                            image.addClass('mt-3');
+                            var deleteButton = $(
+                                '<button class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow">X</button>'
+                            );
+                            deleteButton.css('position', 'absolute')
+                            deleteButton.click(function() {
+                                image.parent().remove()
+                                deleteButton.remove();
+                            });
+
+                            var container = $('<div class="col-3 "></div>');
+                            container.append(image);
+                            container.append(deleteButton);
+                            container.appendTo(placeToInsertImagePreview);
+                        }
+
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+
+            };
+            $('#gallery-photo-add').on('change', function() {
+                imagesPreview(this, 'div.gallery');
+            });
+        });
+    </script>
     @endpush
 @endsection
 @push('scripts')
