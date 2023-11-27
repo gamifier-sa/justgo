@@ -77,3 +77,12 @@
   background: #ffd8d8;
   color: #808080;
 }
+
+.delete-package{
+  position: absolute;
+  left: 12px;
+  bottom: 7px;
+  border: none;
+  background: none;
+  color: #99000050;
+}
