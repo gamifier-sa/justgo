@@ -84,7 +84,7 @@
 
       <ul class="menu-links">
         <li class="nav-link">
-          <a href="{{ route('dashboard.settings') }}" class="{{ prefixActive('settings') }}">
+          <a href="{{ route('dashboard.settings',1) }}" class="{{ prefixActive('settings') }}">
             <div class="icon">
               <img src="{{ asset('dashboard/') }}/assets/icons/settings.svg" alt="" />
             </div>

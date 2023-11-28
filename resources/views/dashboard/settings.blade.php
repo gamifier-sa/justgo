@@ -1,148 +1,133 @@
 @extends('dashboard.layouts.app')
 @section('page_title', 'Settings')
 @push('styles')
-<link rel="stylesheet" href="{{ asset('dashboard/') }}/css/settings.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/settings.css" />
 @endpush
 @section('content')
-        <section class="settingsPage">
-          <div class="content">
+    <section class="settingsPage">
+        <div class="content">
             <nav>
-              <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button
-                  class="nav-link active"
-                  id="nav-settings-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#nav-settings"
-                  type="button"
-                  role="tab"
-                  aria-controls="nav-settings"
-                  aria-selected="true"
-                >
-                  اعدادات الحساب
-                </button>
-                <button
-                  class="nav-link"
-                  id="nav-laguage-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#nav-laguage"
-                  type="button"
-                  role="tab"
-                  aria-controls="nav-laguage"
-                  aria-selected="false"
-                >
-                  اعدادات اللغة
-                </button>
-                <button
-                  class="nav-link"
-                  id="nav-policy-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#nav-policy"
-                  type="button"
-                  role="tab"
-                  aria-controls="nav-policy"
-                  aria-selected="false"
-                >
-                  السياسة و الاحكام
-                </button>
-                <button
-                  class="nav-link"
-                  id="nav-cities-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#nav-cities"
-                  type="button"
-                  role="tab"
-                  aria-controls="nav-cities"
-                  aria-selected="false"
-                >
-                  المدن
-                </button>
-              </div>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings"
+                        type="button" role="tab" aria-controls="nav-settings" aria-selected="true">
+                        اعدادات الحساب
+                    </button>
+
+                </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-              <div
-                class="tab-pane fade show active"
-                id="nav-settings"
-                role="tabpanel"
-                aria-labelledby="nav-settings-tab"
-              >
-                <form action="">
-                  <div class="imgSec">
-                    <label for="image">الصورة</label>
-                    <div class="inputImg">
-                      <div class="icon"><img src="{{ asset('dashboard/') }}/assets/icons/add-image.svg" alt="" /></div>
-                      <input type="file" />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <label for="username">اسم المستخدم</label>
-                      <div class="inputS1">
-                        <input type="text" />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <label for="username">الاسم الاول</label>
-                      <div class="inputS1">
-                        <input type="text" />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <label for="username">رقم الجوال</label>
-                      <div class="inputS1 phone">
-                        <input type="text" />
-                        <span>+966</span>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <label for="username">الايميل</label>
-                      <div class="inputS1">
-                        <input type="text" />
-                      </div>
-                    </div>
+                <div class="tab-pane fade show active" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                    <form action="{{ route('dashboard.settings.update', $setting->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        <div class="row">
 
-                    <div class="col-12">
-                      <div class="buttons">
-                        <button class="buttonS1">الغاء</button>
-                        <button class="buttonS2">تغيير</button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="tab-pane fade" id="nav-laguage" role="tabpanel" aria-labelledby="nav-laguage-tab">
-                <form action="">
-                  <div class="langSwitcher">
-                    <label for="lang">اختيار اللغة</label>
-                    <div class="inputS1">
-                      <select name="" id="">
-                        <option value="">اللغة العربية</option>
-                        <option value="">اللغة الانجليزية</option>
-                      </select>
-                    </div>
-                  </div>
+                            <div class="col-lg-6">
+                                <label for="username">رقم الجوال</label>
+                                <div class="inputS1 phone">
+                                    <input type="text" name="phone" value="{{ old('phone', $setting->phone) }}" />
+                                    <span>+966</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="username">رقم الجوال واتس اب </label>
+                                <div class="inputS1 phone">
+                                    <input type="text" name="whatsapp_number"
+                                        value="{{ old('whatsapp_number', $setting->whatsapp_number) }}" />
+                                    <span>+966</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="username">الايميل</label>
+                                <div class="inputS1">
+                                    <input type="text" name="email" value="{{ old('email', $setting->email) }}" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                @foreach (config('translatable.locales') as $locale)
+                                    <!-- begin :: Column -->
+                                    <div class="col-md-6 fv-row mt-3">
+                                        <label>@lang('admin.' . $locale . '.contact_us')</label>
 
-                  <div class="buttons">
-                    <button class="buttonS1">الغاء</button>
-                    <button class="buttonS2">تغيير</button>
-                  </div>
-                </form>
-              </div>
-              <div class="tab-pane fade" id="nav-policy" role="tabpanel" aria-labelledby="nav-policy-tab">
-                <form action="">
-                  <h2>السياسة والاحكام</h2>
-                  <p>
-                    --------------------------------------------------------------------------------------------
-                    ----------------------------------------------------------------------------------
-                    ----------------------------------------------------------------------------------------
-                  </p>
-                  <div class="buttons">
-                    <button class="buttonS1">الغاء</button>
-                    <button class="buttonS2">تغيير</button>
-                  </div>
-                </form>
-              </div>
-              <div class="tab-pane fade" id="nav-cities" role="tabpanel" aria-labelledby="nav-cities-tab">...</div>
+                                        <textarea class="form-control form-control-solid" style="resize: none;height:250px"
+                                            name="{{ $locale }}[contact_us]" id="{{ $locale }}.contact_us_inp">{{ $setting->translate($locale)->contact_us }}</textarea>
+                                        <p class="invalid-feedback" id="{{ $locale }}.contact_us_inp"></p>
+                                        @error($locale . '.contact_us')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div><!-- end   :: Column -->
+                                @endforeach
+                                @foreach (config('translatable.locales') as $locale)
+                                    <!-- begin :: Column -->
+                                    <div class="col-md-6 fv-row mt-3">
+                                        <label>@lang('admin.' . $locale . '.terms_conditions')</label>
+
+                                        <textarea class="form-control form-control-solid" style="resize: none;height:250px"
+                                            name="{{ $locale }}[terms_conditions]" id="{{ $locale }}.terms_conditions_inp">{{ $setting->translate($locale)->terms_conditions }}</textarea>
+                                        <p class="invalid-feedback" id="{{ $locale }}.terms_conditions_inp"></p>
+                                        @error($locale . '.terms_conditions')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div><!-- end   :: Column -->
+                                @endforeach
+                            </div>
+                            <div class="col-12">
+                                <div class="buttons">
+                                    <button class="buttonS1">الغاء</button>
+                                    <button class="buttonS2" type="submit">تغيير</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-laguage" role="tabpanel" aria-labelledby="nav-laguage-tab">
+                    <form action="">
+                        <div class="langSwitcher">
+                            <label for="lang">اختيار اللغة</label>
+                            <div class="inputS1">
+                                <select name="" id="">
+                                    <option value="">اللغة العربية</option>
+                                    <option value="">اللغة الانجليزية</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="buttons">
+                            <button class="buttonS1">الغاء</button>
+                            <button class="buttonS2">تغيير</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-policy" role="tabpanel" aria-labelledby="nav-policy-tab">
+                    <form action="">
+                        <h2>السياسة والاحكام</h2>
+                        <p>
+                            --------------------------------------------------------------------------------------------
+                            ----------------------------------------------------------------------------------
+                            ----------------------------------------------------------------------------------------
+                        </p>
+                        <div class="buttons">
+                            <button class="buttonS1">الغاء</button>
+                            <button class="buttonS2">تغيير</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-cities" role="tabpanel" aria-labelledby="nav-cities-tab">...</div>
             </div>
-          </div>
-        </section>
-     @endsection
+        </div>
+    </section>
+@endsection

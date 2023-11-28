@@ -9,9 +9,13 @@ class Subscription extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function users()
+    {
+        return $this->hasMany(User::class,'id','user_id');
+    }
 
     public function package()
     {
         return $this->belongsTo(Package::class,'package_id','id');
     }
-}  
+}

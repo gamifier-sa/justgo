@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/new-user.css" />
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/fontawesome-free/css/all.min.css" />
 
-
     @stack('styles')
 
   </head>
@@ -35,6 +34,7 @@
     <script src="{{ asset('dashboard/') }}/js/bootstrap.bundle.min.js.map"></script>
     <script src="{{ asset('dashboard/') }}/js/jquery.min.js"></script>
     <script src="{{ asset('dashboard/') }}/js/scripts.js"></script>
+  
     @stack('scripts')
   </body>
 </html>

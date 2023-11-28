@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\{
     ContactUsController,
     GiftController,
     GymController,
+    NotificationController,
     PackageController,
     OfferController
 };
@@ -122,11 +123,12 @@ Route::group(
                 });
 
 
+                Route::post('pushendSubscription',[NotificationController::class,'endSubscription'])->name('endSubscription');
+                Route::post('pushToAllusers',[NotificationController::class,'pushToAllusers'])->name('pushToAllusers');
 
+                Route::get('settings/{id}',[SettingController::class,'index'])->name('settings');
+                Route::put('settings/uodate/{id}',[SettingController::class,'update'])->name('settings.update');
 
-                Route::get('settings', function(){
-                    return view('dashboard.settings');
-                })->name('settings');
 
 
 
