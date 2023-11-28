@@ -43,4 +43,46 @@ class PackageController extends Controller
         $package->gym()->sync($gyms);
         return redirect()->route('dashboard.packages.index');
     }
+
+    public function edit($id){
+        $package = Package::findOrFail($id);
+        $gyms = Gym::all();
+        return view('dashboard.edit_package', get_defined_vars());
+    }
+
+    public function update(Request $request, $id){
+        $package = Package::findOrFail($id);
+        $rules = [
+            'icon' => ['nullable','mimes:jpeg,png,jpg,gifsvg','max:4096'],
+            'daily_price' => ['required', 'min:0', 'numeric'],
+            'monthly_price' => ['required', 'min:0', 'numeric'],
+            'quarterly_price' => ['required', 'min:0', 'numeric'],
+            'annual_price' => ['required', 'min:0', 'numeric'],
+            'visits_no' => ['required', 'min:0', 'numeric'],
+            'gyms' => ['required'],
+        ];
+        foreach (config('translatable.locales') as $one_lang) {
+            $rules[$one_lang . '.name'] = 'required|min:2|max:255';
+            $rules[$one_lang . '.description'] = 'required|min:2|max:255';
+        }
+        $data = $request->validate($rules);
+        $gyms = $data['gyms'];
+        unset($data['gyms']);
+        $data['icon'] = $package->icon;
+        if($request->hasFile('icon')){
+            $data['icon'] = storeImage('Packages', $request->icon);
+        }
+        $data['midterm_price'] = 0;
+        $package->update($data);
+        $package->gym()->sync($gyms);
+        return redirect()->route('dashboard.packages.index');
+    }
+
+    public function destroy($id)
+    {
+        $package = Package::findOrFail($id);
+        $package->delete();
+        return redirect()->route('dashboard.packages.index');
+    }
 }
+

@@ -57,10 +57,10 @@ class AdminRepository extends BasicRepository implements IAdminRepository, IMain
     public function store($request)
     {
         $request['password'] = Hash::make($request['password']);
-        $roles = $request['roles'];
-        unset($request['roles']);
+        // $roles = $request['roles'];
+        // unset($request['roles']);
         $admin = $this->create($request);
-        $admin->roles()->sync($roles);
+        // $admin->roles()->sync($roles);
     }
 
 

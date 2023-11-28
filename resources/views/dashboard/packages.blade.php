@@ -2,6 +2,16 @@
 @section('page_title', 'Packages')
 @push('styles')
 <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/pakages.css" />
+<style>
+  .delete-package{
+    position: absolute;
+    left: 12px;
+    bottom: 7px;
+    border: none;
+    background: none;
+    color: #99000050;
+  }
+</style>
 @endpush
 @section('content')
         <section>
@@ -59,9 +69,19 @@
                                 <span>{{ $package->gymssubcription()->count() }}</span>
                                 <p>معدل الاشتراكات</p>
                             </div>
-                            <a href="">
+                            <a href="{{ route('dashboard.packages.edit', $package->id) }}">
                                 <img src="{{ asset('dashboard/') }}/assets/icons/editPakage.svg" alt="edit icon">
                             </a>
+
+                            <form action="{{route('dashboard.packages.delete',$package->id)}}"
+                              method="post"
+                              style="display: inline-block">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"
+                                    class="delete-package">
+                                <i class="fa fa-trash"></i></button>
+                            </form>
                         </div>
                     </div>
                   @endforeach
