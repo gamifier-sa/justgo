@@ -125,6 +125,7 @@ Route::group(
 
                 Route::post('pushendSubscription',[NotificationController::class,'endSubscription'])->name('endSubscription');
                 Route::post('pushToAllusers',[NotificationController::class,'pushToAllusers'])->name('pushToAllusers');
+                Route::post('seletedUsers',[NotificationController::class,'seletedUsers'])->name('seletedUsers');
 
                 Route::get('settings/{id}',[SettingController::class,'index'])->name('settings');
                 Route::put('settings/uodate/{id}',[SettingController::class,'update'])->name('settings.update');
