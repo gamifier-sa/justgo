@@ -41,9 +41,9 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">مرات الاشتراك</th>
+                                <th scope="col"> عدد الزيارات</th>
                                 <th scope="col">الباقة</th>
-                                <th scope="col">المتبقي من الباقة</th>
+                                <th scope="col">المتبقي من الزيارات</th>
                                 <th scope="col">حالة المشترك</th>
                                 <th scope="col"> إجراءات</th>
 
@@ -76,14 +76,42 @@
                                         </td>
                                         <td>
                                             <div class="tdProgress">
-                                                <div class="progressStatus">4%<img
-                                                        src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
-                                                        alt="" /></div>
-                                                <span>40%</span>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" style="width: 25%"
-                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
+
+
+                                                @if ($user->subscription()->count() > 0 && $user->subscription->package)
+                                                    <div class="progressStatus">
+                                                        {{ $user->subscription->package->visits_no - $user->subscription()->count() }}
+                                                        <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
+                                                            alt="" />
+                                                    </div>
+                                                @else
+                                                    <div class="progressStatus">
+                                                        0
+                                                        <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
+                                                            alt="" />
+                                                    </div>
+                                                @endif
+                                                @if ($user->subscription && $user->subscription->package)
+                                                    @php
+                                                        $remainingVisits = $user->subscription->package->visits_no - $user->subscription()->count();
+                                                        $percentage = ($remainingVisits / $user->subscription->package->visits_no) * 100;
+                                                    @endphp
+
+                                                    <span>{{ $percentage }}%</span>
+
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar"
+                                                            style="width: {{ $percentage }}%"
+                                                            aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                @else
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar" style="width:0%"
+                                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                @endif
+
                                             </div>
                                         </td>
 
@@ -305,7 +333,7 @@
                         data: {
                             title: title,
                             message: messageUsers,
-                            users:selectedUserIds
+                            users: selectedUserIds
 
                         },
                         headers: {

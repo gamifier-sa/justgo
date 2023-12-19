@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Gym;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
@@ -30,11 +30,11 @@ class DashboardController extends Controller
             ->whereYear('created_at', Carbon::now()->year)
             ->sum('price');
         $totalSales = Subscription::sum('price');
-        return view('dashboard.index', get_defined_vars());
+        return view('gyms.index', get_defined_vars());
     }
 
     public function dashboard()
     {
-        return view('dashboard.dashboard');
+        return view('gyms.dashboard');
     }
 }

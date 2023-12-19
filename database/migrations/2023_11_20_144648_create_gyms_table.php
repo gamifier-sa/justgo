@@ -22,6 +22,8 @@ return new class extends Migration
             $table->integer('subscription_rate')->default(0);
             $table->decimal('expected_number_customers', 12, 6)->default(0);
             $table->foreignIdFor(City::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('password');
+            $table->string('admin_active')->default('active');
             $table->timestamps();
         });
     }

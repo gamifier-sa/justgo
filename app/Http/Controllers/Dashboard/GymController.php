@@ -10,6 +10,7 @@ use App\Models\GymImage;
 use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class GymController extends Controller
 {
@@ -36,21 +37,22 @@ class GymController extends Controller
         if (isset($data['cover_image'])) {
             $data['cover_image']  = storeImage('Gyms', $data['cover_image']);
         }
+        $data['password'] = Hash::make($data['password']);
         unset($data['images']);
 
         $gym = Gym::create($data);
 
         $title = 'اشعار جديد';
         $body = [
-            'messsage'=>'تم انشاء صالة رياضية جديدة'
+            'messsage' => 'تم انشاء صالة رياضية جديدة'
         ];
         $users = User::get();
         foreach ($users as $user) {
             sendNotification($title, $body, $user->device_token, $gym->id);
         }
         Notification::create([
-            'title'=> $title,
-            'data'=>'تم انشاء صالة جديدة',
+            'title' => $title,
+            'data' => 'تم انشاء صالة جديدة',
             'gym_id' => $gym->id,
 
         ]);
@@ -116,6 +118,6 @@ class GymController extends Controller
         $gymImage = GymImage::findOrfail($id);
         deleteImage('Gyms', $gymImage->image);
         $gymImage->delete();
-        return response()->json(['status'=>true]);
+        return response()->json(['status' => true]);
     }
 }

@@ -118,7 +118,6 @@ Route::group(
                     Route::post('/store', 'store')->name('store');
                     Route::get('/{id}/', 'show')->name('show');
                     Route::put('/{id}/', 'update')->name('update');
-                    /** ajax routes **/
                     Route::get('role/{id}/admins', 'admins');
                 });
 

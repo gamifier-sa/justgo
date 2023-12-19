@@ -57,7 +57,7 @@
                                     style="visibility:hidden;height:0;width:0;"></progress>
                             </div>
                             <div class="cardContnent">
-                                <h4>   المبيعات الكلية</h4>
+                                <h4> المبيعات</h4>
                                 <span>{{ $totalSales }}</span>
                             </div>
                         </div>

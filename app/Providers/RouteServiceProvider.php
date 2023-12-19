@@ -48,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapAdminRoutes();
+        $this->mapGymRoutes();
 
 
         //
@@ -80,7 +81,12 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/dashboard.php'));
     }
-
+    protected function mapGymRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/gym.php'));
+    }
     /**
      * Define the "VendorApi" routes for the application.
      *

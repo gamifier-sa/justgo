@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Gym;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class GymSeeder extends Seeder
 {
@@ -33,7 +34,9 @@ class GymSeeder extends Seeder
                 'logo' => 'logo1.jpg',
                 'subscription_rate' => 10,
                 'expected_number_customers' => 500,
-                'city_id'=>1
+                'city_id'=>1,
+                'password'   => Hash::make(12345678),
+
             ], [
                 'en' => [
                     'name' => 'Max Fitness Gym',
@@ -52,7 +55,9 @@ class GymSeeder extends Seeder
                 'logo' => 'logo2.jpg',
                 'subscription_rate' => 20,
                 'expected_number_customers' => 500,
-                'city_id'=>2
+                'city_id'=>2,
+                'password'   => Hash::make(12345678),
+
 
             ], [
                 'en' => [
@@ -72,7 +77,9 @@ class GymSeeder extends Seeder
                 'logo' => 'logo3.jpg',
                 'subscription_rate' => 30,
                 'expected_number_customers' => 900,
-                'city_id'=>3
+                'city_id'=>3,
+                'password'   => Hash::make(12345678),
+
 
             ]
         ];

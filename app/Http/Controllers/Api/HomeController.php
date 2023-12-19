@@ -35,10 +35,10 @@ class HomeController extends Controller
     {
         $gifts =GiftUser::orderBy('id', 'DESC')->limit(3)->get();
         $packages =Package::orderBy('id', 'DESC')->limit(3)->get();
-        $gyms = Gym::with('packages')->orderBy('id', 'DESC')->limit(5)->get();
+        $gyms = Gym::where('admin_active','=','active')->with('packages')->orderBy('id', 'DESC')->limit(5)->get();
         if (auth('api')->check()) {
             $uservisits = Visit::where('user_id', '=', auth('api')->user()->id)->get();
-        } 
+        }
 
         return response()->success([
             'gifts' =>  GiftUserResource::collection($gifts),

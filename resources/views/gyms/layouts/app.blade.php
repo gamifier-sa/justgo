@@ -7,11 +7,8 @@
 
     <!-- global  -->
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/sections.css" />
-    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/roles.css" />
-
-    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/bootstrap.rtl.min.css" />
-    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/bootstrap.rtl.min.css.map" />
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/global.css" />
+
 
     <!-- only for page -->
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/homePage.css" />
@@ -23,9 +20,9 @@
   </head>
  <body dir="rtl">
     <div class="layout">
-      @include('dashboard.layouts.navbar')
+      @include('gyms.layouts.navbar')
       <main>
-         {{-- @include('dashboard.layouts.header') --}}
+         {{-- @include('gyms.layouts.header') --}}
 
          @yield('content')
 
@@ -37,7 +34,6 @@
     <script src="{{ asset('dashboard/') }}/js/bootstrap.bundle.min.js.map"></script>
     <script src="{{ asset('dashboard/') }}/js/jquery.min.js"></script>
     <script src="{{ asset('dashboard/') }}/js/scripts.js"></script>
-    <script src="{{ asset('dashboard/') }}/js/roles/common.js"></script>
 
     @stack('scripts')
   </body>

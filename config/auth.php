@@ -49,6 +49,10 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'gyms' => [
+            'driver' => 'session',
+            'provider' => 'gyms',
+        ],
 
     ],
 
@@ -78,7 +82,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-
+        'gyms' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Gym::class,
+        ],
 
     ],
 

@@ -41,7 +41,7 @@ class RoleController extends Controller
 
         $roles = $this->roleService->findBy();
         $permissions = $this->permissionRepository->findBy($request);
-        return view('dashboard.roles.index',compact('roles','permissions'),['modules' => $this->modules]);
+        return view('dashboard.roles.index', compact('roles', 'permissions'), ['modules' => $this->modules]);
     }
 
     /**
@@ -53,7 +53,7 @@ class RoleController extends Controller
         $this->authorize('create_roles');
 
         $this->roleService->store($request->validated());
-        return response()->json(['status', 'success']);
+        return redirect()->back();
     }
 
     /**
@@ -69,9 +69,9 @@ class RoleController extends Controller
         $permissions = $this->permissionRepository->findBy(request());
         $modules     = $this->modules;
         if (!$request->ajax())
-            return view('dashboard.roles.show',compact('role', 'permissions', 'modules'));
+            return view('dashboard.roles.show', compact('role', 'permissions', 'modules'));
         else
-            return response()->json(['name' => $role['name'] ,'role_permissions' => $role['permissions'] ]);
+            return response()->json(['name' => $role['name'], 'role_permissions' => $role['permissions']]);
     }
 
     /**
@@ -81,9 +81,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, $id)
     {
         $this->authorize('update_roles');
-
         $this->roleService->update($request->validated(), $id);
-        return response()->json(['status', 'success']);
-
+        return redirect()->back();
     }
 }

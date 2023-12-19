@@ -14,11 +14,10 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request): ?string
     {
         if (!$request->expectsJson()) {
-            $url = $request->url();
-
-            if (Str::contains($url, 'dashboard')) {
-                return route('dashboard.login');
-            } 
+            if ($request->is('dashboard/*')) {
+                return route('login');
+            }
+            return route('gyms.login');
         }
 
         return null; // Return null if the request expects JSON

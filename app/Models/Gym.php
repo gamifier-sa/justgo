@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
-class Gym extends Model implements TranslatableContract
+class Gym extends Authenticatable implements TranslatableContract
 {
 
     use HasFactory, Translatable;
@@ -70,7 +70,8 @@ class Gym extends Model implements TranslatableContract
         }
     }
 
-    public function city(){
+    public function city()
+    {
         return $this->belongsTo(City::class);
     }
 }

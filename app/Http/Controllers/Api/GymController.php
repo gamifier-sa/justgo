@@ -13,11 +13,10 @@ class GymController extends Controller
 {
     public function index(Request $request)
     {
-        $latitude = $request->input('latitude'); // Assuming you pass latitude in the request
-        $longitude = $request->input('longitude'); // Assuming you pass longitude in the request
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
 
-        $query = Gym::with('packages');
-        // dd($latitude , $longitude);
+        $query = Gym::where('admin_active','=','active')->with('packages');
 
         if ($latitude && $longitude) {
             $query->whereRaw("6371 * acos(cos(radians($latitude)) * cos(radians(gyms.lat)) * cos(radians(gyms.lng) - radians($longitude)) + sin(radians($latitude)) * sin(radians(gyms.lat))) < 5")
@@ -34,7 +33,7 @@ class GymController extends Controller
     public function show(Request $request)
     {
 
-        $gym = Gym::with('packagesGym', 'times', 'images')->findOrFail($request->id);
+        $gym = Gym::where('admin_active','=','active')->with('packagesGym', 'times', 'images')->findOrFail($request->id);
         return response()->success([
             'gym' => new GymDetailsResource($gym),
 
@@ -46,7 +45,7 @@ class GymController extends Controller
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
 
-        $query = Gym::with('packages');
+        $query = Gym::where('admin_active','=','active')->with('packages');
 
 
         if ($latitude && $longitude) {
