@@ -30,7 +30,7 @@ class SubscriptionController extends Controller
         if ($request->type_subscription == 'day') {
             $data['EndDate'] = Carbon::now()->addDay()->format('Y-m-d');
         } elseif ($request->type_subscription == 'month') {
-            $data['EndDate'] = Carbon::Znow()->addMonth()->format('Y-m-d');
+            $data['EndDate'] = Carbon::now()->addMonth()->format('Y-m-d');
         } elseif ($request->type_subscription == 'quarter') {
             $data['EndDate'] = Carbon::now()->addMonths(3)->format('Y-m-d');
         } else {
