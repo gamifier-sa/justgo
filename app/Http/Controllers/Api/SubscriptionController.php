@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SubscriptionResource;
 use App\Models\Package;
 use App\Models\Subscription;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,7 @@ class SubscriptionController extends Controller
         } else {
             $data['EndDate'] = Carbon::now()->addYear()->format('Y-m-d');
         }
+        
         $subscription = Subscription::create([
             'user_id' => auth('api')->user()->id,
             'package_id' => $request->package_id,
@@ -43,6 +45,18 @@ class SubscriptionController extends Controller
             'EndDate' => $data['EndDate'],
             'type_subscription' => $data['type_subscription']
         ]);
+        
+        $transaction  = Transaction::create([
+            'transaction_id' => $request->id,
+            'package_id' => $request->package_id,
+            'status' => $request->status,
+            'amount' => $request->amount/100,
+            'message' => $request->message,
+            'type_price' => $request->type_price,
+            'type_subscription' => $request->type_subscription,
+            'user_id' => $request->user_id,
+        ]);
+
         return response()->success([
             'subscription' => new SubscriptionResource($subscription)
         ]);
