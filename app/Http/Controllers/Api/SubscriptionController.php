@@ -45,17 +45,6 @@ class SubscriptionController extends Controller
             'EndDate' => $data['EndDate'],
             'type_subscription' => $data['type_subscription']
         ]);
-        
-        $transaction  = Transaction::create([
-            'transaction_id' => $request->id,
-            'package_id' => $request->package_id,
-            'status' => $request->status,
-            'amount' => $request->amount/100,
-            'message' => $request->message,
-            'type_price' => $request->type_price,
-            'type_subscription' => $request->type_subscription,
-            'user_id' => $request->user_id,
-        ]);
 
         return response()->success([
             'subscription' => new SubscriptionResource($subscription)
