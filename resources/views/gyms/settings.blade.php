@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('gyms.layouts.app')
 @section('page_title', 'Settings')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/settings.css" />

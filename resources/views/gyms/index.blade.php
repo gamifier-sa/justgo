@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('gyms.layouts.app')
 @section('page_title', 'Home Page')
 @section('content')
     <section>
@@ -30,7 +30,8 @@
                             </div>
                             <div class="cardContnent">
                                 <h4>الهدف الشهري</h4>
-                                <span>12000</span>
+                                <span>{{ number_format(auth('gyms')->user()->expected_number_customers, 2) }}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -43,7 +44,7 @@
                                     style="visibility:hidden;height:0;width:0;"></progress>
                             </div>
                             <div class="cardContnent">
-                                <h4>  مبيعات اليوم </h4>
+                                <h4> مبيعات اليوم </h4>
                                 <span>{{ $currentDailySales }}</span>
                             </div>
                         </div>
@@ -57,7 +58,7 @@
                                     style="visibility:hidden;height:0;width:0;"></progress>
                             </div>
                             <div class="cardContnent">
-                                <h4> المبيعات</h4>
+                                <h4> المبيعات الكلية</h4>
                                 <span>{{ $totalSales }}</span>
                             </div>
                         </div>
@@ -105,91 +106,57 @@
                                 <td>{{ $user->subscription ? $user->subscription->package->name : 'لا يوجد' }}</td>
                                 <td>
                                     <div class="tdProgress">
-                                        <div class="progressStatus">4%<img
-                                                src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg" alt="">
-                                        </div>
-                                        <span>{{ $user->subscription ? ($user->visits()->count() / $user->subscription->package->visits_no) * 100 : '0' }}%</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: 25%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="subscribeStatus">مشترك جديد</div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
-        <!-- الشركاء -->
-        <div class="sectionS1">
-            <div class="sectionHead">
-                <h3>الشركاء </h3>
-                <div class="searchInput">
-                    <input type="text" />
-                    <img src="{{ asset('dashboard/') }}/assets/icons/inputSearch.svg" alt="">
-                </div>
-            </div>
-            <div class="table-responsive-xl">
-                <table class="table tableS1">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">عدد العملاء</th>
-                            <th scope="col">المدينة</th>
-                            <th scope="col">معدل تكرار الزيارة</th>
-                            <th scope="col">حالة الشريك </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($gyms as $gym)
-                            <tr>
-                                <th scope="row">
-                                    <div class="user">
-                                        @if (!isset($gym->logo))
-                                            <img src="{{ asset('dashboard/') }}/assets/images/tableUser.png"
-                                                alt="" />
+                                         @if ($user->subscription()->count() > 0 && $user->subscription->package)
+                                            <div class="progressStatus">
+                                                {{ $user->subscription->package->visits_no - $user->subscription()->count() }}
+                                                <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
+                                                    alt="" />
+                                            </div>
                                         @else
-                                            <img src="{{ getImage('Gyms', $gym->logo) }}" alt="" />
-                                        @endif
-                                        <div class="info">
-                                            <h5>{{ $gym->name }}</h5>
-                                            <p>{{ $gym->email }}</p>
-                                        </div>
-                                    </div>
-                                </th>
-                                <td>
-                                    <div class="td"> 1080 عميل</div>
-                                </td>
-                                <td>{{ $gym->city->name }}</td>
-                                <td>
-                                    <div class="tdProgress">
-                                        <div class="progressStatus">4%<img
-                                                src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg" alt="">
-                                        </div>
-                                        <span>40%</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: 25%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="subscribeStatus">شريك جديد</div>
-                                </td>
-                            </tr>
-                        @endforeach
+                                            <div class="progressStatus">
+                                                0
+                                                <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
+                                                    alt="" />
+                                            </div>
+                        @endif
+                        @if ($user->subscription && $user->subscription->package)
+                            @php
+                                $remainingVisits = $user->subscription->package->visits_no - $user->subscription()->count();
+                                $percentage = ($remainingVisits / $user->subscription->package->visits_no) * 100;
+                            @endphp
 
-                    </tbody>
-                </table>
+                            <span>{{ $percentage }}%</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{ $percentage }}%"
+                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        @else
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        @endif
+
             </div>
+            </td>
+            <td>
+                @if ($user->subscription->created_at->diffInDays(now()) <= 2)
+                    <div class="subscribeStatus">مشترك جديد</div>
+                @else
+                    <div class="subscribeStatus">مشترك قديم</div>
+                @endif
+
+            </td>
+            </tr>
+            @endforeach
+            </tbody>
+            </table>
         </div>
+
+        </div>
+
+
 
         </div>
     </section>

@@ -48,14 +48,24 @@ Route::group(
 
 
                 Route::controller(DashboardController::class)->group(function () {
-                    Route::get('/', 'index')->name('index');
+                    Route::get('/', 'index')->name('gyms.index');
                     Route::get('/dashboard', 'dashboard')->name('gyms.dashboard');
                 });
 
 
+                Route::controller(UserController::class)->prefix('users')->name('users.')->group(function () {
+                    Route::get('/', 'index')->name('gyms.index');
+                    Route::get('/create', 'create')->name('gyms.create');
+                    Route::post('/store', 'store')->name('gyms.store');
+                    Route::get('/{id}/edit', 'edit')->name('gyms.edit');
+                    Route::put('/{id}/update', 'update')->name('gyms.update');
+                    Route::delete('/{id}/', 'destroy')->name('gyms.delete');
+                });
 
 
-
+                Route::post('pushendSubscription',[NotificationController::class,'endSubscription'])->name('gyms.endSubscription');
+                Route::post('pushToAllusers',[NotificationController::class,'pushToAllusers'])->name('gyms.pushToAllusers');
+                Route::post('seletedUsers',[NotificationController::class,'seletedUsers'])->name('gyms.seletedUsers');
 
 
 

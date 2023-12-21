@@ -18,35 +18,28 @@
           </a>
         </li>
 
-        <li class="nav-link">
+        {{-- <li class="nav-link">
           <a href="{{ route('gyms.sales') }}" class="{{ prefixActive('sales') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/sales.svg" alt="" />
             </div>
             <span class="text nav-text">المبيعات</span>
           </a>
-        </li>
+        </li> --}}
 
-        <li class="nav-link">
+        {{-- <li class="nav-link">
           <a href="{{ route('gyms.contactus') }}" class="{{ prefixActive('contactus') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/questions.svg" alt="" />
             </div>
             <span class="text nav-text">الاستفسارات والشكاوى</span>
           </a>
-        </li>
+        </li> --}}
+
+
 
         <li class="nav-link">
-          <a href="{{ route('gyms.admins.index') }}" class="{{ prefixActive('admins') }}">
-            <div>
-              <img src="{{ asset('dashboard/') }}/assets/icons/users.svg" alt="" />
-            </div>
-            <span class="text nav-text">المديرين</span>
-          </a>
-        </li>
-
-        <li class="nav-link">
-          <a href="{{ route('gyms.users.index') }}" class="{{ prefixActive('users') }}">
+          <a href="{{ route('users.gyms.index') }}" class="{{ prefixActive('users') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/users.svg" alt="" />
             </div>
@@ -54,37 +47,23 @@
           </a>
         </li>
 
-        <li class="nav-link">
-          <a href="{{ route('gyms.gyms.index') }}" class="{{ prefixActive('gyms') }}">
-            <div>
-              <img src="{{ asset('dashboard/') }}/assets/icons/partners.svg" alt="" />
-            </div>
-            <span class="text nav-text">الشركاء</span>
-          </a>
-        </li>
 
-        <li class="nav-link">
-          <a href="{{ route('gyms.packages.index') }}" class="{{ prefixActive('packages') }}">
-            <div>
-              <img src="{{ asset('dashboard/') }}/assets/icons/subscriptions.svg" alt="" />
-            </div>
-            <span class="text nav-text">الباقات والاشتراكات</span>
-          </a>
-        </li>
 
-        <li class="nav-link">
+
+        {{-- <li class="nav-link">
           <a href="{{ route('gyms.gifts.index') }}" class="{{ prefixActive('gifts') }}">
             <div>
               <img src="{{ asset('dashboard/') }}/assets/icons/gifts.svg" alt="" />
             </div>
             <span class="text nav-text">اسعاد العملاء</span>
           </a>
-        </li>
+        </li> --}}
       </ul>
 
       <ul class="menu-links">
         <li class="nav-link">
-          <a href="{{ route('gyms.settings',1) }}" class="{{ prefixActive('settings') }}">
+          <a href="#" class="{{ prefixActive('settings') }}">
+            {{-- {{ route('gyms.settings',1) }} --}}
             <div class="icon">
               <img src="{{ asset('dashboard/') }}/assets/icons/settings.svg" alt="" />
             </div>

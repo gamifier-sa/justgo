@@ -19,7 +19,7 @@ class AuthController extends Controller
     public function loginForm()
     {
         if (Auth::guard('gyms')->user()) {
-            return redirect()->route('index');
+            return redirect()->route('gyms.index');
         }
         return view('gyms.login');
     }
@@ -55,7 +55,7 @@ class AuthController extends Controller
 
             if ($user && $user->admin_active === 'active') {
                 $request->session()->regenerate();
-                return redirect()->intended(route('index'));
+                return redirect()->intended(route('gyms.index'));
             } else {
                 // User is not active, display a message and redirect back
                 Auth::guard('gyms')->logout();

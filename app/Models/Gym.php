@@ -74,4 +74,8 @@ class Gym extends Authenticatable implements TranslatableContract
     {
         return $this->belongsTo(City::class);
     }
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }
