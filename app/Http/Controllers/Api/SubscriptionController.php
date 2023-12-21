@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
             'quarter' => 'quarterly_price',
             'annual' => 'annual_price',
         ];
-        $package = Package::select($data['type_price'])->find($request->package_id);
+        $package = Package::select($type_price[$data['type_subscription']])->find($request->package_id);
         $data['StartDate'] = Carbon::now()->format('Y-m-d');
 
         if ($request->type_subscription == 'day') {
