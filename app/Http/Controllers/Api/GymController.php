@@ -15,25 +15,35 @@ class GymController extends Controller
     {
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
+        $cityId = $request->input('city_id');
+        $gender = $request->input('gender'); // Assuming 'male' or 'female'
 
-        $query = Gym::where('admin_active','=','active')->with('packages');
+        $query = Gym::where('admin_active', '=', 'active')->with('packages');
 
         if ($latitude && $longitude) {
-            $query->whereRaw("6371 * acos(cos(radians($latitude)) * cos(radians(gyms.lat)) * cos(radians(gyms.lng) - radians($longitude)) + sin(radians($latitude)) * sin(radians(gyms.lat))) < 5")
-                ->get();
+            $query->whereRaw("6371 * acos(cos(radians($latitude)) * cos(radians(gyms.lat)) * cos(radians(gyms.lng) - radians($longitude)) + sin(radians($latitude)) * sin(radians(gyms.lat))) < 5");
+        }
+
+        if ($cityId) {
+            $query->where('city_id', '=', $cityId);
+        }
+
+        if ($gender) {
+            $query->where('gender', '=', $gender);
         }
 
         $gyms = $query->orderBy('id', 'DESC')->paginate();
-        return response()->success([
-            'gyms' =>  GymResource::collection($gyms),
 
+        return response()->success([
+            'gyms' => GymResource::collection($gyms),
         ]);
     }
+
 
     public function show(Request $request)
     {
 
-        $gym = Gym::where('admin_active','=','active')->with('packagesGym', 'times', 'images')->findOrFail($request->id);
+        $gym = Gym::where('admin_active', '=', 'active')->with('packagesGym', 'times', 'images')->findOrFail($request->id);
         return response()->success([
             'gym' => new GymDetailsResource($gym),
 
@@ -45,7 +55,7 @@ class GymController extends Controller
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
 
-        $query = Gym::where('admin_active','=','active')->with('packages');
+        $query = Gym::where('admin_active', '=', 'active')->with('packages');
 
 
         if ($latitude && $longitude) {

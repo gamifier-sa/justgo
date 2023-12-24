@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignIdFor(City::class)->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('password');
             $table->string('admin_active')->default('active');
+            $table->enum('gender',['men','womens','both']);
             $table->timestamps();
         });
     }
