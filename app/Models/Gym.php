@@ -9,11 +9,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Notifications\Notifiable;
 
 class Gym extends Authenticatable implements TranslatableContract
 {
 
-    use HasFactory, Translatable;
+    use HasFactory, Notifiable,Translatable;
     protected $guarded = [];
     public $translatedAttributes = ['name', 'description'];
 

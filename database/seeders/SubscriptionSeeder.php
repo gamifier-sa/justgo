@@ -13,14 +13,20 @@ class SubscriptionSeeder extends Seeder
      */
     public function run(): void
     {
-        Subscription::create([
-            'package_id'=>1,
-            'user_id'=>1,
-            'StartDate'=>'2023-11-26',
-            'EndDate'=>'2023-12-26',
-            'price'=>10,
-            'type_subscription'=>'month'
 
-        ]);
+
+        for ($i = 1; $i <= 8; $i++) {
+            $xRandom = rand(10, 100);
+            for ($x = 1; $x <= $xRandom; $x++) {
+                Subscription::create([
+                    'user_id' => 1,
+                    'package_id' => rand(1, 3),
+                    'StartDate' =>'2023-'.rand(1,12).'-'.rand(1,28),
+                    'EndDate' =>'2024-'.rand(1,12).'-'.rand(1,28),
+                    'price'=>rand(10, 100),
+                    'type_subscription'=>'month'
+                ]);
+            }
+        }
     }
 }

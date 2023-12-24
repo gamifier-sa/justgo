@@ -27,7 +27,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        // $this->authorize('view_admins');
+        $this->authorize('view_admins');
 
         $admins = $this->adminService->findBy($request);
 
@@ -39,7 +39,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        // $this->authorize('create_admins');
+        $this->authorize('create_admins');
 
         $roles = $this->roleService->findBy(request());
         return view(checkView('dashboard.admins.create'),compact('roles'));
@@ -51,7 +51,7 @@ class AdminController extends Controller
      */
     public function store(AdminRequest $request)
     {
-        // $this->authorize('create_admins');
+      $this->authorize('create_admins');
         $this->adminService->store($request->validated());
         return redirect()->route('dashboard.admins.index');
 
@@ -71,7 +71,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        // $this->authorize('update_admins');
+         $this->authorize('update_admins');
 
         $admin = $this->adminService->show($id);
         $roles = $this->roleService->findBy(request());
@@ -85,7 +85,7 @@ class AdminController extends Controller
      */
     public function update(AdminRequest $request, $id)
     {
-        // $this->authorize('update_admins');
+       $this->authorize('update_admins');
 
          $this->adminService->update($request->validated(), $id);
         return redirect()->route('dashboard.admins.index');
@@ -97,7 +97,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        // $this->authorize('delete_admins');
+        $this->authorize('delete_admins');
 
          $this->adminService->destroy($id);
         return redirect()->route('dashboard.admins.index');

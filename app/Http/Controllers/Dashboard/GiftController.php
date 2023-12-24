@@ -13,18 +13,23 @@ class GiftController extends Controller
 {
     public function index()
     {
+        $this->authorize('view_gifts');
+
         $gifts = GiftUser::limit(5)->get();
         return view('dashboard.gifts', get_defined_vars());
     }
 
     public function create()
     {
+        $this->authorize('create_gifts');
 
         return view('dashboard.add-new-gift');
     }
 
     public function store(GiftRequest $request)
     {
+        $this->authorize('create_gifts');
+
         $data = $request->validated();
 
         if (isset($data['gift_card_image'])) {
@@ -50,12 +55,16 @@ class GiftController extends Controller
     }
     public function edit($id)
     {
+        $this->authorize('update_gifts');
+
         $gift = GiftUser::findOrfail($id);
 
         return view('dashboard.edit-gift', compact('gift'));
     }
     public function update(GiftRequest $request, $id)
     {
+        $this->authorize('update_gifts');
+
         $data = $request->validated();
         $gift = GiftUser::findOrfail($id);
         if ($request->hasFile('gift_card_image')) {
@@ -74,6 +83,8 @@ class GiftController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete_gifts');
+
         $gift = GiftUser::findOrfail($id);
         deleteImage('Gifts', $gift['gift_card_image']);
 

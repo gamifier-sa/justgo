@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
             NotificationSeeder::class,
             SubscriptionSeeder::class,
             VisitSeeder::class,
-            ReviewSeeder::class
-
+            ReviewSeeder::class,
+            ContactUsSeeder::class
 
         ]);
     }

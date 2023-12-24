@@ -18,8 +18,14 @@ class RoleController extends Controller
         'admins',
         'roles',
         'users',
-        'categories',
         'settings',
+        'contactus',
+        'gifts',
+        'gyms',
+        'notifications',
+        'offers',
+        'packages',
+        'sales',
 
     ];
 

@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index(Request $request): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Contracts\Foundation\Application
     {
-        // $this->authorize('view_users');
+         $this->authorize('view_users');
         $users = $this->userService->findBy($request);
         return view(checkView('dashboard.users'), get_defined_vars());
     }
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        // $this->authorize('create_users');
+        $this->authorize('create_users');
         return view(checkView('dashboard.new-user'));
     }
     /**
@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        // $this->authorize('create_users');
+        $this->authorize('create_users');
 
         $this->userService->store($request->validated());
         return redirect()->route('dashboard.users.index');
@@ -54,7 +54,7 @@ class UserController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // $this->authorize('show_users');
+         $this->authorize('show_users');
 
         $user = $this->userService->find($id);
         if ($request->ajax())
@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // $this->authorize('update_users');
+        $this->authorize('update_users');
 
         $user = $this->userService->show($id);
 
@@ -82,7 +82,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        // $this->authorize('update_users');
+         $this->authorize('update_users');
 
          $this->userService->update($request->validated(), $id);
         return redirect()->route('dashboard.users.index');
@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // $this->authorize('delete_users');
+        $this->authorize('delete_users');
 
         $this->userService->destroy($id);
         return redirect()->route('dashboard.users.index');

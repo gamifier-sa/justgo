@@ -21,7 +21,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $gym = Gym::first();
+        $gym = Gym::where('id','=',auth('gyms')->user()->id)->first();
         $gymPackagesIds = $gym->packages()->pluck('id')->toArray();
         $users = User::whereHas('subscriptions', function ($query) use ($gymPackagesIds) {
             return $query->whereIn('id', $gymPackagesIds);

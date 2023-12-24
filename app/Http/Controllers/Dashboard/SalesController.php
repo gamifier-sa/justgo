@@ -13,6 +13,8 @@ class SalesController extends Controller
 {
     public function sales()
     {
+        $this->authorize('view_sales');
+
         $currentMonthleySales = Subscription::whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
             ->sum('price');

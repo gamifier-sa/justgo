@@ -272,6 +272,38 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="row">
+                    <div class="col-12" style="display: flex; align-items: center;">
+                        <div class="col-3">
+                            <label>
+                                <input type="radio" class="option-input radio" name="gender" value="men"
+                                    {{ old('gender', $gym->gender) == 'men' ? 'checked' : '' }}>
+                                رجالى
+
+                            </label>
+
+                        </div>
+                        <div class="col-3">
+
+                            <label>
+                                <input type="radio" class="option-input radio" name="gender" value="womens"
+                                    {{ old('gender', $gym->gender) == 'womens' ? 'checked' : '' }}>
+                                نسائى
+                            </label>
+                        </div>
+                        <div class="col-3">
+
+                            <label>
+                                <input type="radio" class="option-input radio" name="gender" value="both"
+                                    {{ old('gender', $gym->gender) == 'both' ? 'checked' : '' }}>
+                                كلاهما
+                            </label>
+                        </div>
+                        @error('gender')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
                 <div class="gymSlug mt-2">
                     <h5> صور الشريك </h5>
                     <div class="addGallary">
@@ -303,7 +335,7 @@
             </div>
 
             <div class="button">
-                <button class="addNewBtn" type="submit"><span>-</span>  تعديل البيانات </button>
+                <button class="addNewBtn" type="submit"><span>-</span> تعديل البيانات </button>
             </div>
         </form>
     </section>
@@ -329,8 +361,8 @@
             $(function() {
                 var map;
                 var userMarker;
-                var centerLat= {{ $gym->lat }};
-                var centerLng= {{ $gym->lng }};
+                var centerLat = {{ $gym->lat }};
+                var centerLng = {{ $gym->lng }};
                 // Initialize the map with a specified center
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {

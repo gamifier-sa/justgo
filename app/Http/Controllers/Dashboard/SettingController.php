@@ -16,6 +16,7 @@ class SettingController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('view_settings');
 
         $setting = Setting::findOrfail($request->id);
         return view(checkView('dashboard.settings'), get_defined_vars());
@@ -27,6 +28,8 @@ class SettingController extends Controller
      */
     public function update(Request $request,$id)
     {
+        $this->authorize('update_settings');
+
         $setting = Setting::findOrfail($id);
 
 

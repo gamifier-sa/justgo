@@ -21,6 +21,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $this->authorize('view_dashboard');
+
         $users = User::limit(5)->get();
         $gyms = Gym::limit(5)->get();
         $currentMonthleySales = Subscription::whereMonth('created_at', Carbon::now()->month)
@@ -35,6 +37,8 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        $this->authorize('view_dashboard');
+
         return view('dashboard.dashboard');
     }
 }

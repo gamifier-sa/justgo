@@ -13,6 +13,8 @@ class NotificationController extends Controller
 {
     public function endSubscription()
     {
+        $this->authorize('create_notifications');
+
         $users = User::whereHas('subscriptions', function ($query) {
             $query->where('EndDate', '<=', Carbon::now()->addDays(7));
         })->get();
@@ -36,6 +38,8 @@ class NotificationController extends Controller
 
     public function pushToAllusers(Request $request)
     {
+        $this->authorize('create_notifications');
+
         $request->validate([
             'title' => 'required|string|min:2|max:50',
             'messsage' => 'required|string|min:2|max:100',
@@ -61,6 +65,8 @@ class NotificationController extends Controller
 
     public function seletedUsers(Request $request)
     {
+        $this->authorize('create_notifications');
+
 
         $request->validate([
             'title' => 'required|string|min:2|max:50',

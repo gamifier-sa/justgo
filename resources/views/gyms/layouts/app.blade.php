@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="ar">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ __('Dashboard') }} - @yield('page_title', 'Index') </title>
 
-    <!-- global  -->
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/sections.css" />
-    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/global.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/roles.css" />
 
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/bootstrap.rtl.min.css.map" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/global.css" />
 
     <!-- only for page -->
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/homePage.css" />
@@ -17,16 +20,16 @@
 
     @stack('styles')
 
-  </head>
- <body dir="rtl">
+</head>
+
+<body dir="rtl">
     <div class="layout">
-      @include('gyms.layouts.navbar')
-      <main>
-         {{-- @include('gyms.layouts.header') --}}
+        @include('gyms.layouts.navbar')
+        <main>
 
-         @yield('content')
+            @yield('content')
 
-      </main>
+        </main>
 
     </div>
 
@@ -36,5 +39,6 @@
     <script src="{{ asset('dashboard/') }}/js/scripts.js"></script>
 
     @stack('scripts')
-  </body>
+</body>
+
 </html>

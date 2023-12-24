@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 class ContactUsController extends Controller
 {
     public function contactus(){
+        $this->authorize('view_contactus');
+
         $contacts = ContactUs::get();
         return view('dashboard.contactus', get_defined_vars());
     }

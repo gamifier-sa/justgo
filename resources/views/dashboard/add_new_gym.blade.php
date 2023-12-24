@@ -66,7 +66,7 @@
                             <label>@lang('admin.' . $locale . '.description')</label>
 
                             <textarea class="form-control form-control-solid" style="resize: none;width:250px;height:150px"
-                                name="{{ $locale }}[description]" id="{{ $locale }}.description_inp">{{ old($locale.'.description') }}</textarea>
+                                name="{{ $locale }}[description]" id="{{ $locale }}.description_inp">{{ old($locale . '.description') }}</textarea>
                             <p class="invalid-feedback" id="{{ $locale }}.description_inp"></p>
                             @error($locale . '.description')
                                 <div class="text-danger">{{ $message }}</div>
@@ -255,6 +255,38 @@
                     @error('city_id')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
+                </div>
+                <div class="row">
+                    <div class="col-12" style="display: flex; align-items: center;">
+                        <div class="col-3">
+                            <label>
+                                <input type="radio" class="option-input radio" name="gender" value="men"
+                                    {{ old('gender', 'men') == 'men' ? 'checked' : '' }}>
+                                رجالى
+
+                            </label>
+
+                        </div>
+                        <div class="col-3">
+
+                            <label>
+                                <input type="radio" class="option-input radio" name="gender" value="womens"
+                                    {{ old('gender') == 'womens' ? 'checked' : '' }}>
+                                نسائى
+                            </label>
+                        </div>
+                        <div class="col-3">
+
+                            <label>
+                                <input type="radio" class="option-input radio" name="gender" value="both"
+                                    {{ old('gender') == 'both' ? 'checked' : '' }}>
+                                كلاهما
+                            </label>
+                        </div>
+                        @error('gender')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
                 <div class="gymSlug mt-2">
                     <h5> صور الشريك </h5>

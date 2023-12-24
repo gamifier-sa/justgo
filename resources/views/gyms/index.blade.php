@@ -106,7 +106,7 @@
                                 <td>{{ $user->subscription ? $user->subscription->package->name : 'لا يوجد' }}</td>
                                 <td>
                                     <div class="tdProgress">
-                                         @if ($user->subscription()->count() > 0 && $user->subscription->package)
+                                        @if ($user->subscription()->count() > 0 && $user->subscription->package)
                                             <div class="progressStatus">
                                                 {{ $user->subscription->package->visits_no - $user->subscription()->count() }}
                                                 <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
@@ -118,41 +118,43 @@
                                                 <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
                                                     alt="" />
                                             </div>
-                        @endif
-                        @if ($user->subscription && $user->subscription->package)
-                            @php
-                                $remainingVisits = $user->subscription->package->visits_no - $user->subscription()->count();
-                                $percentage = ($remainingVisits / $user->subscription->package->visits_no) * 100;
-                            @endphp
+                                        @endif
+                                        @if ($user->subscription && $user->subscription->package)
+                                            @php
+                                                $remainingVisits = $user->subscription->package->visits_no - $user->subscription()->count();
+                                                $percentage = ($remainingVisits / $user->subscription->package->visits_no) * 100;
+                                            @endphp
 
-                            <span>{{ $percentage }}%</span>
+                                            <span>{{ $percentage }}%</span>
 
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: {{ $percentage }}%"
-                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        @else
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0"
-                                    aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        @endif
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar"
+                                                    style="width: {{ $percentage }}%"
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                        @else
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width:0%"
+                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        @endif
 
+                                    </div>
+                                </td>
+                                <td>
+                                    @if ($user->subscription->created_at->diffInDays(now()) <= 2)
+                                        <div class="subscribeStatus">مشترك جديد</div>
+                                    @else
+                                        <div class="subscribeStatus">مشترك قديم</div>
+                                    @endif
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            </td>
-            <td>
-                @if ($user->subscription->created_at->diffInDays(now()) <= 2)
-                    <div class="subscribeStatus">مشترك جديد</div>
-                @else
-                    <div class="subscribeStatus">مشترك قديم</div>
-                @endif
-
-            </td>
-            </tr>
-            @endforeach
-            </tbody>
-            </table>
-        </div>
 
         </div>
 

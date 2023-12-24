@@ -19,21 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12  col-lg-4">
-                        <div class="detailsCard">
-                            <div class="progress-bar"
-                                style="background:  radial-gradient(closest-side, white 79%, transparent 80% 100%),conic-gradient(#4040F2 60%, #D8D8FE 0);">
-                                <div><img src="{{ asset('dashboard/') }}/assets/icons/trendingFlat.svg" alt="">
-                                </div>
-                                <progress min="0" max="100"
-                                    style="visibility:hidden;height:0;width:0;"></progress>
-                            </div>
-                            <div class="cardContnent">
-                                <h4>الهدف الشهري</h4>
-                                <span>12000</span>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-sm-12  col-lg-4">
                         <div class="detailsCard">
                             <div class="progress-bar"
@@ -43,7 +29,7 @@
                                     style="visibility:hidden;height:0;width:0;"></progress>
                             </div>
                             <div class="cardContnent">
-                                <h4>  مبيعات اليوم </h4>
+                                <h4> مبيعات اليوم </h4>
                                 <span>{{ $currentDailySales }}</span>
                             </div>
                         </div>
@@ -57,7 +43,7 @@
                                     style="visibility:hidden;height:0;width:0;"></progress>
                             </div>
                             <div class="cardContnent">
-                                <h4>   المبيعات الكلية</h4>
+                                <h4> المبيعات الكلية</h4>
                                 <span>{{ $totalSales }}</span>
                             </div>
                         </div>
@@ -103,21 +89,54 @@
                                     <div class="td">{{ $user->subscription()->count() }} مرات</div>
                                 </td>
                                 <td>{{ $user->subscription ? $user->subscription->package->name : 'لا يوجد' }}</td>
+
+
                                 <td>
                                     <div class="tdProgress">
-                                        <div class="progressStatus">4%<img
-                                                src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg" alt="">
-                                        </div>
-                                        <span>{{ $user->subscription ? ($user->visits()->count() / $user->subscription->package->visits_no) * 100 : '0' }}%</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" style="width: 25%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+
+
+                                        @if ($user->subscription()->count() > 0 && $user->subscription->package)
+                                            <div class="progressStatus">
+                                                {{ $user->subscription->package->visits_no - $user->subscription()->count() }}
+                                                <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
+                                                    alt="" />
+                                            </div>
+                                        @else
+                                            <div class="progressStatus">
+                                                0
+                                                <img src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
+                                                    alt="" />
+                                            </div>
+                                        @endif
+                                        @if ($user->subscription && $user->subscription->package)
+                                            @php
+                                                $remainingVisits = $user->subscription->package->visits_no - $user->subscription()->count();
+                                                $percentage = ($remainingVisits / $user->subscription->package->visits_no) * 100;
+                                            @endphp
+
+                                            <span>{{ $percentage }}%</span>
+
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar"
+                                                    style="width: {{ $percentage }}%"
+                                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0"
+                                                    aria-valuemax="100"></div>
+                                            </div>
+                                        @else
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width:0%"
+                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        @endif
 
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="subscribeStatus">مشترك جديد</div>
+                                    @if ($user->created_at->diffInDays(now()) <= 2)
+                                        <div class="subscribeStatus">مشترك جديد</div>
+                                    @else
+                                        <div class="subscribeStatus">مشترك قديم</div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -164,16 +183,16 @@
                                         </div>
                                     </div>
                                 </th>
-                                <td>
-                                    <div class="td"> 1080 عميل</div>
-                                </td>
+
+                                <td>{{ $gym->client_count }} عميل</td>
                                 <td>{{ $gym->city->name }}</td>
                                 <td>
+
                                     <div class="tdProgress">
-                                        <div class="progressStatus">4%<img
-                                                src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg" alt="">
+                                        <div class="progressStatus">{{ $gym->visit_percentage }}%<img
+                                                src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg" alt="" />
                                         </div>
-                                        <span>40%</span>
+                                        <span>{{ $gym->visit_percentage }}%</span>
                                         <div class="progress">
                                             <div class="progress-bar" role="progressbar" style="width: 25%"
                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -181,7 +200,11 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="subscribeStatus">شريك جديد</div>
+                                    @if ($gym->created_at->diffInDays(now()) <= 2)
+                                        <div class="subscribeStatus">شريك جديد</div>
+                                    @else
+                                        <div class="subscribeStatus">شريك قديم</div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

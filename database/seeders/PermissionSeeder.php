@@ -16,32 +16,17 @@ class PermissionSeeder extends Seeder
     {
         $superAdmin = Role::get()->first();
 
-        $models = [
-            'admins',
-            'roles',
-            'users',
-            'categories',
-            'settings',
+        $models = ['admins', 'roles', 'users', 'settings', 'contactus', 'gifts', 'gyms', 'notifications', 'offers', 'packages', 'sales'];
 
-
-        ];
-
-        $names =
-            [
-                ['label' => "view", 'name' => 'view'],
-                ['label' => "show", 'name' => 'show'],
-                ['label' => "create", 'name' => 'create'],
-                ['label' => "update", 'name' => 'update'],
-                ['label' => "delete", 'name' => 'delete'],
-            ];
+        $names = [['label' => 'view', 'name' => 'view'], ['label' => 'show', 'name' => 'show'], ['label' => 'create', 'name' => 'create'], ['label' => 'update', 'name' => 'update'], ['label' => 'delete', 'name' => 'delete']];
 
         foreach ($models as $model) {
             foreach ($names as $name) {
-                $permission =  Permission::firstOrCreate([
-                    'name'  => $name['name'] . '_' . $model,
+                $permission = Permission::firstOrCreate([
+                    'name' => $name['name'] . '_' . $model,
                     'label' => $name['label'] . ' ' . strtolower(trim(str_replace('_', ' ', trim($model)))),
                     'action' => $name['name'],
-                    'category' => $model
+                    'category' => $model,
                 ]);
                 if ($permission->wasRecentlyCreated) {
                     $superAdmin->allowTo($permission);
@@ -50,23 +35,17 @@ class PermissionSeeder extends Seeder
         }
 
         // Special Apilities
-        $models = [
-            'reports',
-            'dashboard'
-        ];
+        $models = ['reports', 'dashboard'];
 
-        $names =
-            [
-                ['label' => "view", 'name' => 'view'],
-            ];
+        $names = [['label' => 'view', 'name' => 'view']];
 
         foreach ($models as $model) {
             foreach ($names as $name) {
-                $permission =  Permission::firstOrCreate([
-                    'name'  => $name['name'] . '_' . $model,
+                $permission = Permission::firstOrCreate([
+                    'name' => $name['name'] . '_' . $model,
                     'label' => $name['label'] . ' ' . strtolower(trim(str_replace('_', ' ', trim($model)))),
                     'action' => $name['name'],
-                    'category' => $model
+                    'category' => $model,
                 ]);
                 if ($permission->wasRecentlyCreated) {
                     $superAdmin->allowTo($permission);

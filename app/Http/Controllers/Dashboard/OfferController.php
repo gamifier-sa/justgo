@@ -10,11 +10,15 @@ use Illuminate\Http\Request;
 class OfferController extends Controller
 {
     public function create(){
+        $this->authorize('create_offers');
+
         $packages = Package::get();
         return view('dashboard.add_offer', get_defined_vars());
     }
 
     public function store(Request $request){
+        $this->authorize('create_offers');
+
         $data = $request->validate([
             'image' => ['required','mimes:jpeg,png,jpg,gifsvg','max:4096'],
             'type' => 'required|in:cache_back',
@@ -24,6 +28,6 @@ class OfferController extends Controller
         ]);
         $offer = Offer::create($data);
         return redirect()->route('dashboard.packages.index');
-        
+
     }
 }

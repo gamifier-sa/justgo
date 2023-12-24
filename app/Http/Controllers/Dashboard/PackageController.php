@@ -10,16 +10,23 @@ use Illuminate\Http\Request;
 class PackageController extends Controller
 {
     public function index(){
-        $packages = Package::all();
+
+        $this->authorize('view_packages');
+
+        $packages = Package::get();
         return view('dashboard.packages', get_defined_vars());
     }
 
     public function create(){
-        $gyms = Gym::all();
+        $this->authorize('create_packages');
+
+        $gyms = Gym::get();
         return view('dashboard.add_new_package', get_defined_vars());
     }
 
     public function store(Request $request){
+        $this->authorize('create_packages');
+
         $rules = [
             'icon' => ['required','mimes:jpeg,png,jpg,gifsvg','max:4096'],
             'daily_price' => ['required', 'min:0', 'numeric'],
@@ -45,12 +52,16 @@ class PackageController extends Controller
     }
 
     public function edit($id){
+        $this->authorize('update_packages');
+
         $package = Package::findOrFail($id);
-        $gyms = Gym::all();
+        $gyms = Gym::get();
         return view('dashboard.edit_package', get_defined_vars());
     }
 
     public function update(Request $request, $id){
+        $this->authorize('update_packages');
+
         $package = Package::findOrFail($id);
         $rules = [
             'icon' => ['nullable','mimes:jpeg,png,jpg,gifsvg','max:4096'],
@@ -80,6 +91,8 @@ class PackageController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete_packages');
+
         $package = Package::findOrFail($id);
         $package->delete();
         return redirect()->route('dashboard.packages.index');
