@@ -16,7 +16,7 @@ class GymController extends Controller
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
         $cityId = $request->input('city_id');
-        $gender = $request->input('gender'); // Assuming 'male' or 'female'
+        $gender = $request->input('gender');
 
         $query = Gym::where('admin_active', '=', 'active')->with('packages');
 
@@ -27,10 +27,11 @@ class GymController extends Controller
         if ($cityId) {
             $query->where('city_id', '=', $cityId);
         }
-
         if ($gender) {
-            $query->where('gender', '=', $gender);
+
+            $query->whereIn('gender', [$gender, 'both']);
         }
+
 
         $gyms = $query->orderBy('id', 'DESC')->paginate();
 
@@ -54,7 +55,8 @@ class GymController extends Controller
         $packageId = $request->package_id;
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
-
+        $cityId = $request->input('city_id');
+        $gender = $request->input('gender');
         $query = Gym::where('admin_active', '=', 'active')->with('packages');
 
 
@@ -64,6 +66,12 @@ class GymController extends Controller
                 ->get();
         }
 
+        if ($cityId) {
+            $query->where('city_id', '=', $cityId);
+        }
+        if ($gender) {
+            $query->whereIn('gender', [$gender, 'both']);
+        }
 
 
         $gyms = $query->whereHas('packages', function ($query) use ($packageId) {

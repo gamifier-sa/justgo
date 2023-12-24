@@ -36,6 +36,7 @@ class GymSeeder extends Seeder
                 'expected_number_customers' => 500,
                 'city_id'=>1,
                 'password'   => Hash::make(12345678),
+                'gender'=>'men'
 
             ], [
                 'en' => [
@@ -57,6 +58,7 @@ class GymSeeder extends Seeder
                 'expected_number_customers' => 500,
                 'city_id'=>2,
                 'password'   => Hash::make(12345678),
+                'gender'=>'womens'
 
 
             ], [
@@ -79,7 +81,7 @@ class GymSeeder extends Seeder
                 'expected_number_customers' => 900,
                 'city_id'=>3,
                 'password'   => Hash::make(12345678),
-
+                'gender'=>'both'
 
             ]
         ];
