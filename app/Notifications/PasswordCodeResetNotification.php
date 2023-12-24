@@ -48,7 +48,7 @@ class PasswordCodeResetNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->from('mail@gmail.com')
+            ->from('elmarsid@gamifiersa.com')
             ->subject(trans('Confirmation Code Notification'))
             ->line(trans('You are receiving this email because we received a confirmation code request for your account.'))
             ->line(trans('admin.your_activation_code',['code' => $this->token]))
