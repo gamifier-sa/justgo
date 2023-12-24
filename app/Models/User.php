@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\PasswordCodeResetNotification;
+use App\Services\Classes\UserConfirmation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +14,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, UserConfirmation;
 
     /**
      * The attributes that are mass assignable.
@@ -59,7 +62,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordCodeResetNotification($token));
+    }
     public function subscription()
     {
         return $this->hasOne(Subscription::class);
@@ -74,5 +80,4 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Visit::class);
     }
-    
 }

@@ -97,6 +97,13 @@ return [
     'delete-from-favourit'=>'تم الحذف من المفضله بنجاح',
     'add-to-favourit'=>'تم الإضافة بنجاح إلى المفضلة',
     'complaint_suggestion'=>'تم تسجيل الشكوى والمقترح لديك بنجاح وسيتم الرد فى اقرب وقت',
+    'your_new_password_had_been_send' => 'تم ارسال رمز التأكيد الي بريدك الالكتروني.',
+    'your_password_had_been_reset' => 'تم أستعاده كلمه السر بنجاح.',
+    'given_data_invalid' => 'البيانات المدخله خاطئه.',
+    "wrong_confirmation_code" => 'رمز التـأكيد خطأ',
+    'confirmation_code_expired' => 'انتهت صلاحية رمز التفعيل الخاص بك',
+
+
     'ar' => [
         'Title'=> 'العنوان باللغه العربيه',
         'name'   => 'الاسم باللغه العربيه',

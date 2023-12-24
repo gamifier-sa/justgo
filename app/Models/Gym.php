@@ -78,4 +78,34 @@ class Gym extends Authenticatable implements TranslatableContract
     {
         return $this->hasMany(Subscription::class);
     }
+
+    public function getClientCountAttribute()
+    {
+        $gymPackagesIds = $this->packages()->pluck('id')->toArray();
+
+        $userCount = User::whereHas('subscriptions', function ($query) use ($gymPackagesIds) {
+            $query->whereIn('id', $gymPackagesIds);
+        })->count();
+
+
+        return $userCount;
+    }
+    // Gym.php
+    public function getVisitPercentageAttribute()
+    {
+        $gymPackagesIds = $this->packages()->pluck('id')->toArray();
+
+        $userCount = User::whereHas('subscriptions', function ($query) use ($gymPackagesIds) {
+            $query->whereIn('id', $gymPackagesIds);
+        })->count();
+
+        $totalVisits = Visit::where('gym_id', $this->id)->count();
+
+        if ($totalVisits > 0) {
+            $percentage = ($userCount / $totalVisits) * 100;
+            return round($percentage, 2);
+        } else {
+            return 0;
+        }
+    }
 }

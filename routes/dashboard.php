@@ -83,6 +83,7 @@ Route::group(
                     Route::post('/store', 'store')->name('store');
                     Route::get('/{id}/edit', 'edit')->name('edit');
                     Route::put('/{id}/update', 'update')->name('update');
+                    Route::patch('/update-gym-admin-active/{gym}', 'updateAdminActive')->name('updateAdminActive');
                     Route::delete('/{id}/', 'destroy')->name('delete');
                     Route::post('deleteimage/{id}/', 'deleteimage')->name('deleteimage');
 

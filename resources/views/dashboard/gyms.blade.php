@@ -62,14 +62,16 @@
                                             </div>
                                         </div>
                                     </th>
-                                    <td>1080 عميل</td>
+
+                                    <td>{{ $gym->client_count }} عميل</td>
                                     <td>{{ $gym->city->name }}</td>
                                     <td>
+
                                         <div class="tdProgress">
-                                            <div class="progressStatus">4%<img
+                                            <div class="progressStatus">{{ $gym->visit_percentage }}%<img
                                                     src="{{ asset('dashboard/') }}/assets/icons/arrowUp.svg"
                                                     alt="" /></div>
-                                            <span>40%</span>
+                                            <span>{{ $gym->visit_percentage }}%</span>
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar" style="width: 25%"
                                                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -77,7 +79,14 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="subscribeStatus">شريك جديد</div>
+                                        @if ($gym->admin_active == 'active')
+                                            <button class="btn btn-success update-gym-admin-active-btn"
+                                                 onclick="updateAdminActive({{ $gym->id }}, 'notactive')">مفعل</button>
+                                        @else
+                                            <button class="btn btn-danger update-gym-admin-active-btn"
+                                                 onclick="updateAdminActive({{ $gym->id }}, 'active')">غير مفعل </button>
+                                        @endif
+
                                     </td>
                                     <td>
                                         <form action="{{ route('dashboard.gyms.delete', $gym->id) }}" method="post"
@@ -104,3 +113,38 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script>
+        function updateAdminActive(gymId, status) {
+            var csrf = "{{ csrf_token() }}";
+
+            $.ajax({
+                type: 'PATCH',
+                url: '{{ route('dashboard.gyms.updateAdminActive', ['gym' => ':gymId']) }}'.replace(':gymId',
+                    gymId),
+                dataType: 'json',
+                data: {
+                    status: status
+                },
+                headers: {
+                    'X-CSRF-TOKEN': csrf
+                },
+                success: function(response) {
+                    location.reload()
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('.update-gym-admin-active-btn').click(function() {
+                var gymId = $(this).data('gym-id');
+                var status = $(this).data('status');
+
+                updateAdminActive(gymId, status);
+            });
+        });
+    </script>
+@endpush

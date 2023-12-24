@@ -32,6 +32,7 @@ class GymRequest extends FormRequest
             'expected_number_customers' => ['required', 'numeric'],
             'city_id' => ['sometimes','nullable','exists:cities,id'],
             'images'    => ['sometimes','nullable', 'array'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
 
         ];
         foreach (config('translatable.locales') as $one_lang) {
@@ -60,6 +61,8 @@ class GymRequest extends FormRequest
             'expected_number_customers' => ['required', 'numeric'],
             'city_id' => ['sometimes','nullable','exists:cities,id'],
             'images'    => ['sometimes','nullable', 'array'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+
 
         ];
         foreach (config('translatable.locales') as $one_lang) {

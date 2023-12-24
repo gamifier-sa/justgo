@@ -239,6 +239,25 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div>
+                    <label for="username">كلمة السر </label>
+                    <div class="inputS1">
+                        <input type="password" name="password" value="{{ old('password') }}" autocomplete="off" />
+                    </div>
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <label for="username">تأكيد كلمه السر </label>
+                    <div class="inputS1">
+                        <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}"
+                            autocomplete="off" />
+                    </div>
+                    @error('password_confirmation')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
                 <div class="partnerDetail">
                     <label for="city_id">المدن</label>
                     <select name="city_id" id="city_id" class="form-control">

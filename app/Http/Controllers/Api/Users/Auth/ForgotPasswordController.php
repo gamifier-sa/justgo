@@ -15,25 +15,60 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class ForgotPasswordController extends Controller
 {
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest:api');
+    }
 
-
-
-    public function forgotpassword(Request $request)
+    public function sendResetPasswordCode(Request $request)
     {
         $request->validate([
-            'phone' => 'required'
+            'email' => 'required|exists:users,email'
         ]);
-        $user = User::where('phone', $request->phone)
-            ->orWhere('email', $request->phone)
-            ->first();
-        if ($user) {
-            return response()->success([
-                'user' =>  new  UserResource($user)
+        $user = User::where('email', $request->email)->first();
 
+        $user->send_reset_code();
+        return response()->success([
+            'message' => trans('admin.your_new_password_had_been_send')
+
+        ]);
+    }
+
+    public function checkConfirmationCode(Request $request)
+    {
+        $request->validate([
+            'confirmation_code' => 'required|digits:4',
+            'email' => 'required|exists:users,email'
+        ]);
+        $user = User::where([
+            ['email', '=', $request->email],
+            ['confirmation_code', '=', $request->confirmation_code],
+        ])->first();
+
+
+
+        if (!$user ||  $user->is_expired_code()) {
+            return response()->fail([
+                'message' =>  __('admin.given_data_invalid'),
+                'errors' => ['confirmation_code' => __('admin.wrong_confirmation_code')]
             ]);
         } else {
-            return response()->fail([
-                'message' =>   __('admin.wrong_user_account')
+
+            $user->update([
+                'active' => 1
+            ]);
+            $token = JWTAuth::fromUser($user);
+
+            return response()->success([
+                'token' => $token,
+                'user' =>  new  UserResource($user),
+
+
             ]);
         }
     }

@@ -66,7 +66,7 @@
                             <label>@lang('admin.' . $locale . '.description')</label>
 
                             <textarea class="form-control form-control-solid" style="resize: none;width:250px;height:150px"
-                                name="{{ $locale }}[description]" id="{{ $locale }}.description_inp"></textarea>
+                                name="{{ $locale }}[description]" id="{{ $locale }}.description_inp">{{ old($locale.'.description') }}</textarea>
                             <p class="invalid-feedback" id="{{ $locale }}.description_inp"></p>
                             @error($locale . '.description')
                                 <div class="text-danger">{{ $message }}</div>
@@ -222,6 +222,25 @@
                             value="{{ old('expected_number_customers') }}" />
                     </div>
                     @error('expected_number_customers')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <label for="username">كلمة السر </label>
+                    <div class="inputS1">
+                        <input type="password" name="password" value="{{ old('password') }}" autocomplete="off" />
+                    </div>
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div>
+                    <label for="username">تأكيد كلمه السر </label>
+                    <div class="inputS1">
+                        <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}"
+                            autocomplete="off" />
+                    </div>
+                    @error('password_confirmation')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

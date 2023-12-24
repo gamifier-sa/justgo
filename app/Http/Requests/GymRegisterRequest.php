@@ -26,6 +26,8 @@ class GymRegisterRequest extends FormRequest
             'subscription_rate' => ['required', 'numeric'],
             'expected_number_customers' => ['required', 'numeric'],
             'city_id' => ['sometimes', 'nullable', 'exists:cities,id'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+
         ];
     }
 }

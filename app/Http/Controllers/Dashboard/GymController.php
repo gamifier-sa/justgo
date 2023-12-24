@@ -17,6 +17,8 @@ class GymController extends Controller
     public function index()
     {
         $gyms = Gym::limit(5)->get();
+
+
         return view('dashboard.gyms', get_defined_vars());
     }
 
@@ -84,6 +86,7 @@ class GymController extends Controller
             deleteImage('Gyms', $gym->logo);
         }
         unset($data['images']);
+        $data['password'] = Hash::make($data['password']);
 
         $gym->update($data);
         $images = $request->images;
@@ -120,4 +123,13 @@ class GymController extends Controller
         $gymImage->delete();
         return response()->json(['status' => true]);
     }
+
+    public function updateAdminActive(Gym $gym)
+    {
+        $newStatus = request()->status;
+        $gym->update(['admin_active' => $newStatus]);
+
+        return response()->json(['message' => "Gym admin status updated to $newStatus successfully"]);
+    }
+
 }

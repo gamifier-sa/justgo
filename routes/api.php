@@ -40,7 +40,8 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('register',[UserRegisterController::class,'register']);
     Route::post('login', [UserLoginController::class, 'login']);
 
-    Route::post('forgotpassword',[ForgotPasswordController::class,'forgotpassword']);
+    Route::post('password/request',[ForgotPasswordController::class,'sendResetPasswordCode']);
+    Route::post('password/code/check',[ForgotPasswordController::class,'checkConfirmationCode']);
     Route::post('password/reset', [ResetPasswordController::class,'resetUserPassword']);
     // GymRoute
     Route::get('gyms',[GymController::class,'index']);

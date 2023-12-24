@@ -13,39 +13,71 @@ class ResetPasswordController extends Controller
 
 
 
+    /**
+     * Where to redirect users after resetting their password.
+     *
+     * @var string
+     */
+    //    protected $redirectTo = '/home';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest:api');
+    }
+
     public function resetUserPassword(Request $request)
     {
-
         $request->validate($this->rules());
-        $user = User::where('phone', $request->phone)
-        ->orWhere('email', $request->phone)
-        ->first();
+        $user = User::where([['email', '=', $request->email], ['confirmation_code', '=', $request->confirmation_code]])->first();
         if ($user) {
+            if (!$user->check_confirmation_code()) {
+
+                return $this->sendResetExpiredResponse();
+            }
             $user->password = bcrypt($request->password);
             $user->save();
-            return response()->success([
-                'message' => __('passwords.reset')
-            ]);
+            return $this->sendResetResponse();
         }
+        return $this->sendResetFailedResponse();
     }
 
     protected function sendResetResponse()
     {
         return response()->success([
-            'message' => __('passwords.reset')
+            'message' => __('admin.your_password_had_been_reset')
         ]);
     }
 
+    protected function sendResetExpiredResponse()
+    {
+        return response()->success([
+            'message' => __('admin.your_password_had_been_reset')
+        ]);
+        return response()->fail([
+            'message' =>  __('admin.given_data_invalid'),
+            'errors' => "['confirmation_code' =>" .' '. __('admin.confirmation_code_expired').''."]"
+        ]);
+    }
 
-
-
+    protected function sendResetFailedResponse()
+    {
+        return response()->fail([
+            'message' =>  __('admin.given_data_invalid'),
+            'errors' => "['confirmation_code' =>" .' '. __('admin.wrong_confirmation_code').''."]"
+        ]);
+    }
 
     protected function rules()
     {
         return [
-            'phone' => 'required',
+            'confirmation_code' => 'required',
+            'email' => 'required|email|min:4|max:120|exists:users,email',
             'password' => 'required|confirmed|min:6|max:60',
         ];
     }
-
 }
