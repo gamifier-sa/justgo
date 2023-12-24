@@ -61,6 +61,7 @@ Route::group(
             });
             Route::controller(ContactUsController::class)->group(function () {
                 Route::get('contactus', 'contactus')->name('gyms.contactus');
+                Route::get('search' ,'search')->name('gyms.contactus.search');
             });
             Route::get('settings',[SettingController::class,'settings'])->name('gyms.settings');
             Route::put('settings/uodate/{id}',[SettingController::class,'update'])->name('gyms.settings.update');

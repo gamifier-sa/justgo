@@ -118,7 +118,7 @@
                                         <td>
                                             <div class="subscribeStatus">مشترك جديد</div>
                                         </td>
-{{--
+                                        {{--
                                         <td>
                                             <form action="{{ route('users.gyms.delete', $user->id) }}" method="post"
                                                 style="display: inline-block">
@@ -136,6 +136,8 @@
 
                         </tbody>
                     </table>
+                    {!! $users->links('gyms.pagination') !!}
+
                 </div>
             </div>
             {{-- <div class="modal fade" dir="ltr" id="exampleModal" tabindex="-1" role="dialog"

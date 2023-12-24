@@ -15,7 +15,7 @@ class UserController extends Controller
         $gymPackagesIds = $gym->packages()->pluck('id')->toArray();
         $users = User::whereHas('subscriptions', function ($query) use ($gymPackagesIds) {
             return $query->whereIn('id', $gymPackagesIds);
-        })->orderBy('id','DESC')->get();
+        })->orderBy('id','DESC')->paginate(10);
 
         return view(checkView('gyms.users'), get_defined_vars());
     }

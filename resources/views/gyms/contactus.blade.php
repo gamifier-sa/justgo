@@ -13,7 +13,7 @@
                 <div class="sectionHead">
                     <h3>الاستفسارات والشكاوى</h3>
                     <div class="searchInput">
-                        <input type="text" />
+                        <input type="text" id="searchInput" />
                         <img src="{{ asset('dashboard/') }}/assets/icons/inputSearch.svg" alt="" />
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                                 <th scope="col">حالة الشكوى</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="searchResults">
                             @foreach ($contacts as $contact)
                                 <tr>
                                     <th scope="row">
@@ -51,11 +51,35 @@
                                     </td>
                                 </tr>
                             @endforeach
+
                         </tbody>
+
                     </table>
                     {!! $contacts->links('gyms.pagination') !!}
+
                 </div>
             </div>
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script>
+        $('#searchInput').on('input', function() {
+            var searchValue = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '{{ route('gyms.contactus.search') }}',
+                data: {
+                    search: searchValue
+                },
+                success: function(response) {
+
+                    $('#searchResults').html(response);
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    </script>
+@endpush
