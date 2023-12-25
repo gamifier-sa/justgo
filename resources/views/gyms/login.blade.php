@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تسجيل دخول</title>
 
-    <!-- global  -->
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/bootstrap.rtl.min.css.map" />
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/global.css" />
 
     <!-- only for page -->
@@ -20,7 +21,7 @@
         <form action="{{ route('gyms.postLogin') }}" method="POST">
             @csrf
             @if (session('success'))
-                <div class="btn btn-success">
+                <div class="alart alert-success">
                     <p>{{ session('success') }}</p>
                 </div>
             @endif
