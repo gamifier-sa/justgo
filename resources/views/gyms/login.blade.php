@@ -20,7 +20,7 @@
         <form action="{{ route('gyms.postLogin') }}" method="POST">
             @csrf
             @if (session('success'))
-                <div class="alert alert-success">
+                <div class="btn btn-success">
                     <p>{{ session('success') }}</p>
                 </div>
             @endif
@@ -67,4 +67,5 @@
         }
     });
 </script>
+
 </html>

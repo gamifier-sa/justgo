@@ -16,8 +16,8 @@ return new class extends Migration
             $table->biginteger('gym_id', false, true);
             $table->string('locale')->index();
             $table->string('name');
-            $table->text('description');
-            $table->unique(['gym_id','locale']);
+            $table->text('description')->nullable();
+            $table->unique(['gym_id', 'locale']);
             $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('cascade');
             $table->timestamps();
         });

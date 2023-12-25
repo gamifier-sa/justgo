@@ -21,7 +21,7 @@ class GymRegisterRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules =  [
             'email'    => ['required', 'string', 'max:125', 'min:9', "email:rfc,dns", 'unique:gyms'],
             'subscription_rate' => ['required', 'numeric'],
             'expected_number_customers' => ['required', 'numeric'],
@@ -29,5 +29,9 @@ class GymRegisterRequest extends FormRequest
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
 
         ];
+        foreach (config('translatable.locales') as $one_lang) {
+            $rules[$one_lang . '.name'] = 'required|min:2|max:100';
+        }
+        return $rules;
     }
 }

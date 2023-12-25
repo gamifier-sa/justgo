@@ -27,7 +27,23 @@
                         @endforeach
                     </div>
                 @endif
-
+                <div class="row">
+                    @foreach (config('translatable.locales') as $locale)
+                        <!-- begin :: Column -->
+                        <div class="col-md-6 fv-row">
+                            <label>@lang('admin.' . $locale . '.name')</label>
+                            <div class="inputS1">
+                                <input type="text" class="@error($locale . '.name') is-invalid @enderror"
+                                    id="{{ $locale }}.name_inp" name="{{ $locale }}[name]"
+                                    value="{{ old($locale . '.name') }}" autocomplete="off" />
+                            </div>
+                            <p class="invalid-feedback" id="{{ $locale }}.name_inp"></p>
+                            @error($locale . '.name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div><!-- end   :: Column -->
+                    @endforeach
+                </div>
                 <div>
                     <label for="username">البريد الالكتروني </label>
                     <div class="inputS1">
@@ -39,7 +55,8 @@
                 </div>
                 <div class="partnerDetail">
                     <label for="city_id">المدن</label>
-                    <select name="city_id" id="city_id" class="form-control inputS1" autocomplete="off">
+                    <select name="city_id" id="city_id" class="form-control inputS1" style="width: 100%"
+                        autocomplete="off">
                         <option value="" disabled selected>اختر من القائمة</option>
                         @foreach ($cities as $city)
                             <option value="{{ $city->id }}" {{ old('city_id') == $city->id ? 'seleted' : '' }}>
