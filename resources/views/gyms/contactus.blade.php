@@ -2,7 +2,6 @@
 @section('page_title', 'Home Page')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/inquiries-and-complaints.css" />
-    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/pagination.css" />
 @endpush
 @section('content')
     <section>

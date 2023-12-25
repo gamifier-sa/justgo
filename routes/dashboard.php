@@ -52,6 +52,7 @@ Route::group(
 
                 Route::controller(ContactUsController::class)->group(function () {
                     Route::get('contactus', 'contactus')->name('contactus');
+                    Route::get('search', 'search')->name('contactus.search');
                 });
 
                 Route::controller(DashboardController::class)->group(function () {
@@ -66,6 +67,7 @@ Route::group(
                     Route::get('/{id}/edit', 'edit')->name('edit');
                     Route::put('/{id}/update', 'update')->name('update');
                     Route::delete('/{id}/', 'destroy')->name('delete');
+                    Route::get('search', 'search')->name('search');
                 });
 
                 Route::controller(UserController::class)->prefix('users')->name('users.')->group(function () {
@@ -75,6 +77,7 @@ Route::group(
                     Route::get('/{id}/edit', 'edit')->name('edit');
                     Route::put('/{id}/update', 'update')->name('update');
                     Route::delete('/{id}/', 'destroy')->name('delete');
+                    Route::get('search', 'search')->name('search');
                 });
 
                 Route::controller(GymController::class)->prefix('gyms')->name('gyms.')->group(function () {
@@ -86,7 +89,7 @@ Route::group(
                     Route::patch('/update-gym-admin-active/{gym}', 'updateAdminActive')->name('updateAdminActive');
                     Route::delete('/{id}/', 'destroy')->name('delete');
                     Route::post('deleteimage/{id}/', 'deleteimage')->name('deleteimage');
-
+                    Route::get('search', 'search')->name('search');
                 });
                 Route::controller(GiftController::class)->prefix('gifts')->name('gifts.')->group(function () {
                     Route::get('/', 'index')->name('index');
@@ -95,7 +98,6 @@ Route::group(
                     Route::get('/{id}/edit', 'edit')->name('edit');
                     Route::put('/{id}/update', 'update')->name('update');
                     Route::delete('/{id}/', 'destroy')->name('delete');
-
                 });
 
 
@@ -123,17 +125,12 @@ Route::group(
                 });
 
 
-                Route::post('pushendSubscription',[NotificationController::class,'endSubscription'])->name('endSubscription');
-                Route::post('pushToAllusers',[NotificationController::class,'pushToAllusers'])->name('pushToAllusers');
-                Route::post('seletedUsers',[NotificationController::class,'seletedUsers'])->name('seletedUsers');
+                Route::post('pushendSubscription', [NotificationController::class, 'endSubscription'])->name('endSubscription');
+                Route::post('pushToAllusers', [NotificationController::class, 'pushToAllusers'])->name('pushToAllusers');
+                Route::post('seletedUsers', [NotificationController::class, 'seletedUsers'])->name('seletedUsers');
 
-                Route::get('settings/{id}',[SettingController::class,'index'])->name('settings');
-                Route::put('settings/uodate/{id}',[SettingController::class,'update'])->name('settings.update');
-
-
-
-
-
+                Route::get('settings/{id}', [SettingController::class, 'index'])->name('settings');
+                Route::put('settings/uodate/{id}', [SettingController::class, 'update'])->name('settings.update');
             });
         });
     }

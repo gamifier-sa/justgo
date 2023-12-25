@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
+use App\Models\Admin;
 use App\Models\Role;
 use App\Services\Classes\AdminService;
 use App\Services\Classes\RoleService;
@@ -29,7 +30,7 @@ class AdminController extends Controller
     {
         $this->authorize('view_admins');
 
-        $admins = $this->adminService->findBy($request);
+        $admins = Admin::paginate(10);
 
         return view(checkView('dashboard.admins.index'), get_defined_vars());
     }
@@ -102,5 +103,13 @@ class AdminController extends Controller
          $this->adminService->destroy($id);
         return redirect()->route('dashboard.admins.index');
 
+    }
+    public function search(Request $request)
+    {
+        $searchValue = $request->input('search');
+        $users = Admin::where('email', 'like', '%' . $searchValue . '%')
+        ->orWhere('name', 'like', '%' . $searchValue . '%')->get();
+
+        return view('dashboard.admin-search-results', compact('users'));
     }
 }

@@ -20,7 +20,7 @@ class GymController extends Controller
     {
         $this->authorize('view_gyms');
 
-        $gyms = Gym::limit(5)->get();
+        $gyms = Gym::paginate(10);
         return view('dashboard.gyms', get_defined_vars());
     }
 
@@ -167,6 +167,16 @@ class GymController extends Controller
         }
 
         return response()->json(['message' => "Gym admin status updated to $newStatus successfully"]);
+    }
+
+    public function search(Request $request)
+    {
+        $searchValue = $request->input('search');
+        $gyms = Gym::whereHas('Translation', function ($q) use ($searchValue) {
+            $q->where('name', 'like', "%$searchValue%");
+        })->get();
+
+        return view('dashboard.gym-search-results', compact('gyms'));
     }
 
 }

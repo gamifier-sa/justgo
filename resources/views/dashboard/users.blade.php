@@ -32,7 +32,7 @@
                 <div class="sectionHead">
                     <h3>العملاء</h3>
                     <div class="searchInput">
-                        <input type="text" />
+                        <input type="text" id="searchInput" />
                         <img src="{{ asset('dashboard/') }}/assets/icons/inputSearch.svg" alt="" />
                     </div>
                 </div>
@@ -49,7 +49,7 @@
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="searchResults">
                             @if (isset($users))
                                 @foreach ($users as $user)
                                     <tr>
@@ -136,6 +136,8 @@
 
                         </tbody>
                     </table>
+                    {!! $users->links('dashboard.pagination') !!}
+
                 </div>
             </div>
             <div class="modal fade" dir="ltr" id="exampleModal" tabindex="-1" role="dialog"
@@ -364,6 +366,27 @@
                     $('#titleError').text(errors.title ? errors.title[0] : '');
                     $('#messageError').text(errors.message ? errors.message[0] : '');
                 }
+            });
+        </script>
+        <script>
+            $('#searchInput').on('input', function() {
+                var searchValue = $(this).val();
+                $.ajax({
+                    type: 'get',
+                    url: '{{ route('dashboard.users.search') }}',
+                    data: {
+                        search: searchValue
+                    },
+                    success: function(response) {
+
+                        $('#searchResults').html(response);
+
+
+                    },
+                    error: function(error) {
+                        console.log('Error:', error);
+                    }
+                });
             });
         </script>
     @endpush

@@ -32,7 +32,7 @@
                 <div class="sectionHead">
                     <h3>العملاء</h3>
                     <div class="searchInput">
-                        <input type="text" />
+                        <input type="text"  id="searchInput"/>
                         <img src="{{ asset('dashboard/') }}/assets/icons/inputSearch.svg" alt="" />
                     </div>
                 </div>
@@ -49,7 +49,7 @@
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="searchResults">
                             @if (isset($users))
                                 @foreach ($users as $user)
                                     <tr>
@@ -368,5 +368,25 @@
                 }
             });
         </script>
+        <script>
+            $('#searchInput').on('input', function() {
+                var searchValue = $(this).val();
+                $.ajax({
+                    type: 'get',
+                    url: '{{ route('users.gyms.search') }}',
+                    data: {
+                        search: searchValue
+                    },
+                    success: function(response) {
+
+                        $('#searchResults').html(response);
+                    },
+                    error: function(error) {
+                        console.log('Error:', error);
+                    }
+                });
+            });
+        </script>
     @endpush
+
 @endsection

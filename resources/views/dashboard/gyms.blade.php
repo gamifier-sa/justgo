@@ -28,7 +28,7 @@
                 <div class="sectionHead">
                     <h3>الشركاء</h3>
                     <div class="searchInput">
-                        <input type="text" />
+                        <input type="text" id="searchInput" />
                         <img src="{{ asset('dashboard/') }}/assets/icons/inputSearch.svg" alt="" />
                     </div>
                 </div>
@@ -45,7 +45,7 @@
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="searchResults">
                             @foreach ($gyms as $gym)
                                 <tr>
                                     <th scope="row">
@@ -81,10 +81,11 @@
                                     <td>
                                         @if ($gym->admin_active == 'active')
                                             <button class="btn btn-success update-gym-admin-active-btn"
-                                                 onclick="updateAdminActive({{ $gym->id }}, 'notactive')">مفعل</button>
+                                                onclick="updateAdminActive({{ $gym->id }}, 'notactive')">مفعل</button>
                                         @else
                                             <button class="btn btn-danger update-gym-admin-active-btn"
-                                                 onclick="updateAdminActive({{ $gym->id }}, 'active')">غير مفعل </button>
+                                                onclick="updateAdminActive({{ $gym->id }}, 'active')">غير مفعل
+                                            </button>
                                         @endif
 
                                     </td>
@@ -105,6 +106,8 @@
 
                         </tbody>
                     </table>
+                    {!! $gyms->links('dashboard.pagination') !!}
+
                 </div>
             </div>
 
@@ -144,6 +147,27 @@
                 var status = $(this).data('status');
 
                 updateAdminActive(gymId, status);
+            });
+        });
+    </script>
+    <script>
+        $('#searchInput').on('input', function() {
+            var searchValue = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '{{ route('dashboard.gyms.search') }}',
+                data: {
+                    search: searchValue
+                },
+                success: function(response) {
+
+                    $('#searchResults').html(response);
+
+
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
             });
         });
     </script>

@@ -12,10 +12,15 @@ class UserController extends Controller
     public function index()
     {
         $gym = Gym::first();
-        $gymPackagesIds = $gym->packages()->pluck('id')->toArray();
+        $gymPackagesIds = $gym
+            ->packages()
+            ->pluck('id')
+            ->toArray();
         $users = User::whereHas('subscriptions', function ($query) use ($gymPackagesIds) {
             return $query->whereIn('id', $gymPackagesIds);
-        })->orderBy('id','DESC')->paginate(10);
+        })
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
 
         return view(checkView('gyms.users'), get_defined_vars());
     }
@@ -40,8 +45,6 @@ class UserController extends Controller
     {
         // $this->authorize('show_users');
 
-
-
         return view('gyms.users.show', compact('user'));
     }
 
@@ -52,7 +55,6 @@ class UserController extends Controller
     public function edit($id)
     {
         // $this->authorize('update_users');
-
 
         return view(checkView('gyms.edit-user'), compact('user'));
     }
@@ -76,5 +78,25 @@ class UserController extends Controller
         // $this->authorize('delete_users');
 
         return redirect()->route('gyms.users.index');
+    }
+    public function search(Request $request)
+    {
+        $searchValue = $request->input('search');
+        $gym = Gym::first();
+        $gymPackagesIds = $gym
+            ->packages()
+            ->pluck('id')
+            ->toArray();
+
+        $users = User::whereHas('subscriptions', function ($query) use ($gymPackagesIds) {
+            return $query->whereIn('id', $gymPackagesIds);
+        })
+            ->when($searchValue, function ($query, $searchValue) {
+                return $query->where('email', 'like', '%' . $searchValue . '%')->orWhere('name', 'like', '%' . $searchValue . '%');
+            })
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('gyms.users-search-results', compact('users'));
     }
 }

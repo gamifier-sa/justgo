@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Models\User;
 // use App\Models\Category;
 use App\Repositories\Classes\CategoryRepository;
 use App\Services\Classes\CategoryService;
@@ -27,7 +28,7 @@ class UserController extends Controller
     public function index(Request $request): \Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Contracts\Foundation\Application
     {
          $this->authorize('view_users');
-        $users = $this->userService->findBy($request);
+        $users = User::paginate(10);
         return view(checkView('dashboard.users'), get_defined_vars());
     }
 
@@ -97,5 +98,13 @@ class UserController extends Controller
 
         $this->userService->destroy($id);
         return redirect()->route('dashboard.users.index');
+    }
+    public function search(Request $request)
+    {
+        $searchValue = $request->input('search');
+        $users = User::where('email', 'like', '%' . $searchValue . '%')
+        ->orWhere('name', 'like', '%' . $searchValue . '%')->get();
+
+        return view('dashboard.users-search-results', compact('users'));
     }
 }

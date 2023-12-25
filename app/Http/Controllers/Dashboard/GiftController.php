@@ -15,7 +15,7 @@ class GiftController extends Controller
     {
         $this->authorize('view_gifts');
 
-        $gifts = GiftUser::limit(5)->get();
+        $gifts = GiftUser::paginate(10);
         return view('dashboard.gifts', get_defined_vars());
     }
 
@@ -33,23 +33,22 @@ class GiftController extends Controller
         $data = $request->validated();
 
         if (isset($data['gift_card_image'])) {
-            $data['gift_card_image']  = storeImage('Gifts', $data['gift_card_image']);
+            $data['gift_card_image'] = storeImage('Gifts', $data['gift_card_image']);
         }
 
-        $gift=GiftUser::create($data);
+        $gift = GiftUser::create($data);
         $title = 'اشعار جديد';
         $body = [
-            'messsage'=>'تم انشاء هدية جديدة'
+            'messsage' => 'تم انشاء هدية جديدة',
         ];
         $users = User::get();
         foreach ($users as $user) {
             sendNotification($title, $body, $user->device_token, $gift->id);
         }
         Notification::create([
-            'title'=> $title,
-            'data'=>'تم انشاء هدية جديدة',
+            'title' => $title,
+            'data' => 'تم انشاء هدية جديدة',
             'gym_id' => null,
-
         ]);
         return redirect()->route('dashboard.gifts.index');
     }
@@ -72,14 +71,10 @@ class GiftController extends Controller
             deleteImage('Gifts', $gift->gift_card_image);
         }
 
-
-
         $gift->update($data);
-
 
         return redirect()->route('dashboard.gifts.index');
     }
-
 
     public function destroy($id)
     {

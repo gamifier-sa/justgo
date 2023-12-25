@@ -55,6 +55,8 @@ Route::group(
                 Route::get('/{id}/edit', 'edit')->name('gyms.edit');
                 Route::put('/{id}/update', 'update')->name('gyms.update');
                 Route::delete('/{id}/', 'destroy')->name('gyms.delete');
+                Route::get('search' ,'search')->name('gyms.search');
+
             });
             Route::controller(SalesController::class)->group(function () {
                 Route::get('sales', 'sales')->name('gyms.sales');

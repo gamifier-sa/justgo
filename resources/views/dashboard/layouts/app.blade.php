@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ __('Dashboard') }} - @yield('page_title', 'Index') </title>
@@ -17,19 +18,21 @@
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/homePage.css" />
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/new-user.css" />
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/pagination.css" />
 
     @stack('styles')
 
-  </head>
- <body dir="rtl">
+</head>
+
+<body dir="rtl">
     <div class="layout">
-      @include('dashboard.layouts.navbar')
-      <main>
-         {{-- @include('dashboard.layouts.header') --}}
+        @include('dashboard.layouts.navbar')
+        <main>
+            {{-- @include('dashboard.layouts.header') --}}
 
-         @yield('content')
+            @yield('content')
 
-      </main>
+        </main>
 
     </div>
 
@@ -40,5 +43,6 @@
     <script src="{{ asset('dashboard/') }}/js/roles/common.js"></script>
 
     @stack('scripts')
-  </body>
+</body>
+
 </html>

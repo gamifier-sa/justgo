@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/homePage.css" />
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/new-user.css" />
     <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="{{ asset('dashboard/') }}/css/pagination.css" />
 
     @stack('styles')
 
